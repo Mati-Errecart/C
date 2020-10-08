@@ -14,8 +14,8 @@
 #include <string.h>
 #include <stdlib.h>
 
-int modoant = 0;
-int contador = 0;
+int modoant;
+int Contoff = 0;
 int i,k;
 int indice = 0;
 int cData;
@@ -23,18 +23,13 @@ int DSPI;
 int cen=0;
 int dec=0;
 int uni=0;
-
-long ValorTension;
+int Tension_Deseada;
+int modo;
 int ADC_Pote;
 int ADC_Volt;
 int TENSIONmax = 1;
 
-char local[]="L";
-char remoto[]="R";
-char on_off[]="O";
-char cambio[]="E";
-char modo[5];
-char estado[5];
+int estado; 
 char valor[5];
 char DATO[5];									// String para armar cadena de caracteres
 char datoRX;
@@ -49,16 +44,15 @@ void onoff(void);								// Funicion para mostrar estado PWM
 void SPI_MasterTransmit(int cData);				// Funcion para transimitir al display
 void SPI_initial(void);							// Funcion inicializar display
 uint8_t OnOffSwitch(void);						// Funcion de lectura de PD7 int On_Off_PWM
+uint8_t SwitchModo(void);
 void dato_recibido(char);
 void Mostrar_Tensiones(void);
 
 int main(void)
-{
-	strcpy(modo,local);
-	
+{	
 	DDRD |=(1<<DDD5)|(0<<DDD7)|(0<<DDD6);			// PD5 como salida PWM (OC0B) y PD7(7) como entrada (On/Off_PWM en modo local) y PD6(6) como entrada "MODO_CONTROL"
 	DDRB |=(1<<DDB5)|(1<<DDB3)|(1<<DDB2)|(1<<DDB1)|(1<<DDB0);	// Config como salida PB5(13,CSK), PB3(11,MOSI), PB2(10,SS), PB0(8)semiciclo positivo, PB1(9) semiciclo negativo
-	PORTD |= (1<<PORTD2)|(1<<PORTD3)|(1<<PORTD7);//|(1<<PORTD6);			// Configuro Restistencias pull up INT0, INT1, On_Off_PWM
+	PORTD |= (1<<PORTD2)|(1<<PORTD3)|(1<<PORTD7)|(1<<PORTD6);			// Configuro Restistencias pull up INT0, INT1, On_Off_PWM
 	PORTB |= (1<<PORTB2);									// Resistencia Pull-UP
 
 	TCCR0A= (0<<COM0B1)|(0<<COM0B0)|(0<<WGM01)|(1<<WGM00);	// PWM fase correcta,
@@ -90,82 +84,34 @@ int main(void)
 	sei();
 	
 	while(1)
-	{
-		if(bTX==1)
+	{	
+		if(SwitchModo() == 0)
 		{
-			dato_recibido(datoRX);
+			modo = 0;			//Modo Local
 		}
-	
-		if(PIND6==0)
-		{
-			strcpy(modo,local);		
-		}
-	
-			else
+		if(SwitchModo() == 1)
 			{
-				strcpy(modo,remoto);			
+				modo = 1;		//Modo remoto
 			}											
 	
-		if ((strcmp(modo,local)==0)&&(OnOffSwitch()==1))	//Pregunto por "MODO LOCAL" y si el PIN7 fue pulsado
+		if ((modo==0)&&(OnOffSwitch()==1))					//Pregunto por "MODO LOCAL" y si el PIN7 fue pulsado
 		{
 			TCCR0A ^= (1<<COM0B1);						   //Cambio de estado la salida PWM OC0B (PD5)
 			onoff();
 		}
 	
-		if ((strcmp(modo,remoto)==0)&&(strcmp(estado,on_off)==0))	//Pregunto por "MODO REMOTO" y si estado es "O"
+		if ((modo==1)&&(estado==1))							//Pregunto por "MODO REMOTO" y si estado es "O"
 		{
 			TCCR0A ^= (1<<COM0B1);							//Cambio de estado la salida PWM OC0B (PD5)
-			strcpy(estado,cambio);							//Cambio el estado para que no vuelva a ingresar
+			estado=0;										//Cambio el estado para que no vuelva a ingresar
 			onoff();										//Llama a funcion para mostrar estado por puerto serial y OFF en el MAX
 		}
-	
-		if(contador==0)
-		{
-			PORTB = (0<<PORTB2);				//Indico inicio de transferencia
-			_delay_us(1);
-			DSPI = 0x09;
-			SPI_MasterTransmit(DSPI);
-			_delay_us(1);
-			DSPI = 0x00;						//Sin decodificación
-			SPI_MasterTransmit(DSPI);
-			PORTB = (1<<PORTB2);				//Indico fin de transferencia
-			_delay_us(1);
-		
-			PORTB = (0<<PORTB2);				//Indico inicio de transferencia
-			_delay_us(1);
-			DSPI = 0x01;						//Bit 0
-			SPI_MasterTransmit(DSPI);
-			_delay_us(1);
-			DSPI = 0x47;
-			SPI_MasterTransmit(DSPI);
-			PORTB = (1<<PORTB2);				//Indico fin de transferencia
-			_delay_us(1);
-		
-			PORTB = (0<<PORTB2);				//Indico inicio de transferencia
-			_delay_us(1);
-			DSPI = 0x02;						//Bit 1
-			SPI_MasterTransmit(DSPI);
-			_delay_us(1);
-			DSPI = 0x47;
-			SPI_MasterTransmit(DSPI);
-			PORTB = (1<<PORTB2);				//Indico fin de transferencia
-			_delay_us(1);
-		
-			PORTB = (0<<PORTB2);				//Indico inicio de transferencia
-			_delay_us(1);
-			DSPI = 0x03;						//Bit 2
-			SPI_MasterTransmit(DSPI);
-			_delay_us(1);
-			DSPI =0x7E;
-			SPI_MasterTransmit(DSPI);
-			PORTB = (1<<PORTB2);				//Indico fin de transferencia
-			_delay_us(1);
-		}
-		
+
+	CONTROL(DATO);
+	Mostrar_Tensiones();	
 	_delay_ms(25);
 	}
-}
-
+	}
 //######################################################### FUNCION PARA ESTABLECER CONTROL LOCAL/REMOTO #######################################################################################
 
 void CONTROL(char DATO[])
@@ -174,58 +120,45 @@ void CONTROL(char DATO[])
 	char mlocal[]="Modo Local\n";
 	int dec = 0, uni = 0, decimal = 0, resultado = 0;
 	
-	//<<<<<<<<<<<<<<<<<<<SI EL MODO ES REMOTO>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	if ((strcmp(DATO,on_off)==0)&&(strcmp(modo,remoto)==0))	// Compara dato con "O" y si el modo es remoto
-	{
-		strcpy(estado,DATO);						// guarda el dato en "estado" de PWM
-	}
-	else
-	{
-		strcpy(valor,DATO);			// Si el dato ingresado es un numero desado de tension se guarda en "valor"
-	}
-		
 	//<<<<<<<<<<<<<<<<<SI EL MODO ES REMOTO>>>>>>>>>>>>>>>>>
-	if (strcmp(modo,remoto)==0)		
+	if (modo==1)		
 	{
 		if (modoant!=1)		
 		{
+			ADCSRA = (0<<ADEN)|(0<<ADSC);			//OFF CAD
+			modoant=1;
 			for (i=0;i<=strlen(mremoto);i++)
 			{
 				while ( !(UCSR0A &(1<<UDRE0)));
 				UDR0=mremoto[i];				//Mostramos "MODO REMOTO"
 			}
 		}
-		ADCSRA = (0<<ADEN)|(0<<ADSC);			//OFF CAD
-		modoant=1;
-	}
-	if (strcmp(modo,remoto)==0)
-	{
+		
 		dec = (valor[0] - 48) * 100;
 		uni = (valor[1] - 48) * 10;
 		decimal = (valor[3] - 48);
 		resultado = dec + uni + decimal;
-			
-			if(resultado<=150)					//+++++ ACA HAY QUE VER QUE PUTA PREGUNTAMOS!!!+++ =( =P
+	
+		if(resultado<=150)					//+++++ ACA HAY QUE VER QUE PUTA PREGUNTAMOS!!!+++ =( =P
 			{
-				ValorTension = resultado;
+				Tension_Deseada = resultado;
 			}
 	}
 	
 	//<<<<<<<<<<<<<<SI EL MODO ES LOCAL>>>>>>>>>>>>>>>>>>>>>>
-	if (strcmp(modo,local)==0)
+	if (modo==0)
 	{
 		if (modoant!=2)
 		{
+			ADCSRA = (1<<ADEN)|(0<<ADSC)|(1<<ADPS1)|(1<<ADPS0);	//ON CAD
+			modoant=2;
 			for (i=0;i<=strlen(mlocal);i++)
 			{
 				while ( !(UCSR0A &(1<<UDRE0)));
 				UDR0=mlocal[i];					//Mostramos "MODO LOCAL"
 			}
 		}									
-		ADCSRA = (1<<ADEN)|(0<<ADSC)|(1<<ADPS1)|(1<<ADPS0);	//ON CAD
-		modoant=2;
 	}
-	
 }
 
 //######################################################### FUNCION PARA ENCENDER/APAGAR PWM EN MODO LOCAL ##################################################################################################################
@@ -246,41 +179,43 @@ uint8_t OnOffSwitch(void)
 	}
 }
 
+uint8_t SwitchModo(void)
+{
+	if((PIND & (1<<PIND6)) == 0)					// Si el botón esta presionado.
+	{
+		return 0;								// Si devuelve 1 es modo local
+	}
+	else
+	{
+		return 1;									// Si devuellve 0 es modo remoto
+	}
+}
+
 //######################################################### VECTOR DE INTERRUPCION RECEPCION DE DATOS ##################################################################################################################
 
 ISR(USART_RX_vect)
 {
 	datoRX=UDR0;	// Leemos el buffer de recepcion
-	bTX=1;
-}
-
-//######################################################### EVALUACION DE RECEPCION DE DATOS ##################################################################################################################
 	
-void dato_recibido(char datoRX)
-{
+	if(datoRX=='O')
+	{
+		estado=1;	// si se cumple pone variable indice a 0
+	}
+	
 	if(datoRX=='$')
-	{		
-		bTX=0;
+	{
 		indice=0;	// si se cumple pone variable indice a 0
 	}
-	else
+	
+	if((datoRX>='0') && (datoRX<='9'))		// Si es un numero lo guarda en DATO
 	{
-		if((datoRX>='0') &&  (datoRX<='9'))		// Si es un numero lo guarda en DATO
-		{
-			DATO[indice]=datoRX;
-			indice++;
-		}
-		else
-		{				// Si es una letra pone indice en 0, guarda el dato recibido y limpia lo demas
-			indice=0;
-			DATO[indice]=datoRX;
-			DATO[1]='\0';
-			DATO[2]='\0';
-		}
+		valor[indice]=datoRX;
+		indice++;
 	}
-	CONTROL(DATO);
+		
 	return;
 }
+
 //######################################################### RUTINA DE TRATAMIENTO DE INTERRUPCION EXTERNA ##################################################################################################################
 
 ISR (INT1_vect) // PD3(pin3)
@@ -301,28 +236,29 @@ ISR (INT0_vect) // PD2(pin2)
 
 ISR(ADC_vect)
 {
-	if(ADMUX==0)
-	{
-		ADC_Pote= ADC;
-		ADMUX &= ~ (1<<MUX0);
-	}
-	
-	if(ADMUX==1)
-	{
-		ADC_Volt= ADC;
-		ADMUX &= ~ (0<<MUX0);
-	}
+	ADC_Pote=ADC;
+	//if(ADMUX==0)
+	//{
+		//ADC_Pote= ADC;
+		//ADMUX &= ~ (1<<MUX0);
+	//}
+	//
+	//if(ADMUX==1)
+	//{
+		//ADC_Volt= ADC;
+		//ADMUX &= ~ (0<<MUX0);
+	//}
 }
 //######################################################### RUTINA DE TRATAMIENTO DE INTERRUPCION DEL TIMER1_OVF ##################################################################################################################
 
 ISR(TIMER1_OVF_vect)
 {
-	if (strcmp(modo,local)==0)
+	if (modo==0)
 	{
-		ValorTension = ADC_Pote*100/1023;	 // Guardamos el valor del ADC0 	
+		Tension_Deseada = ADC_Pote*100/1023;	 // Guardamos el valor del ADC0 	
 	}
 	
-	OCR0B = ValorTension*199/100;			// PD5 salida PWM OC0B
+	OCR0B = Tension_Deseada*199/100;			// PD5 salida PWM OC0B
 }
 //######################################################### FUNCION DE MOSTRAR ON/OFF ##################################################################################################################
 
@@ -331,14 +267,14 @@ void onoff ()
 	char on[]="PWM on\n";
 	char off[]="PWM off\n";
 	
-	contador++;
+	Contoff++;
 	
-	if ((contador>1))
+	if ((Contoff>1))
 	{
-		contador=0;
+		Contoff=0;
 	}
 	
-	if ((contador == 1))
+	if ((Contoff == 1))
 	{
 		for (i=0;i<=strlen(on);i++)
 		{
@@ -348,7 +284,7 @@ void onoff ()
 		}
 	}
 	
-	if ((contador == 0))
+	if ((Contoff == 0))
 	{
 		for (i=0;i<=strlen(off);i++)
 		{
@@ -467,8 +403,10 @@ void SPI_initial()
 
 void Mostrar_Tensiones()
 {
-	int Tension_Real = ADC_Volt*(10*TENSIONmax)/1023;
+	//int Tension_Real = ADC_Volt*(10*TENSIONmax)/1023;
+	int Tension_Real = 150;
 	char Medicion_msj[]="Tension Real:";
+	char UDeseada_msj[]="Tension Deseada:";
 	
 	for (i=0;i<=strlen(Medicion_msj);i++)
 	{
@@ -497,12 +435,15 @@ void Mostrar_Tensiones()
 	DSPI = 0x02;						//Bit 1
 	SPI_MasterTransmit(DSPI);
 	_delay_us(1);
-	DSPI = (dec);						//Envio la unidad al MAX
+	DSPI = (0xF0 + dec);						//Envio la unidad al MAX
 	SPI_MasterTransmit(DSPI);
 	PORTB = (1<<PORTB2);				//Indico fin de transferencia
 	_delay_us(1);
 	
 	UDR0 = dec + 48;					//Envio por puerto serie la unidad
+	while(!(UCSR0A & (1<<UDRE0)));
+	
+	UDR0 = 0x2C;						//Envio ","
 	while(!(UCSR0A & (1<<UDRE0)));
 	
 	uni = (Resto%10);
@@ -516,6 +457,29 @@ void Mostrar_Tensiones()
 	PORTB = (1<<PORTB2);				//Indico fin de transferencia
 	_delay_us(1);
 	
+	UDR0 = (uni + 48);					//Envio por puerto serie primer decimal
+	while(!(UCSR0A & (1<<UDRE0)));
+	UDR0 = 10;
+	while(!(UCSR0A & (1<<UDRE0)));
+	
+	for (i=0;i<=strlen(UDeseada_msj);i++)
+	{
+		while ( !(UCSR0A &(1<<UDRE0)));
+		UDR0=UDeseada_msj[i];
+	}
+	
+	cen = (Tension_Deseada/100);
+	UDR0 = cen + 48;					//Envio por puerto serie la decena
+	while(!(UCSR0A & (1<<UDRE0)));		// Espera a que se envíe el dato
+	Resto = (Tension_Deseada%100);
+	dec = (Resto/10);
+	UDR0 = dec + 48;					//Envio por puerto serie la unidad
+	while(!(UCSR0A & (1<<UDRE0)));
+	
+	UDR0 = 0x2C;						//Envio ","
+	while(!(UCSR0A & (1<<UDRE0)));
+	
+	uni = (Resto%10);
 	UDR0 = (uni + 48);					//Envio por puerto serie primer decimal
 	while(!(UCSR0A & (1<<UDRE0)));
 	UDR0 = 10;
