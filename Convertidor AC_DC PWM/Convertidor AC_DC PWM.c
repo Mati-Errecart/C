@@ -20,26 +20,23 @@ int i,k;
 int indice = 0;
 int cData;
 int DSPI;
-int cen=0;
-int dec=0;
-int uni=0;
 int Tension_Deseada;
 int modo;
-int ADC_Pote;
-int ADC_Volt;
+long ADC_Pote;
+long ADC_Volt;
 int TENSIONmax = 1;
-
+int CANAL = 0;
+int CONFIG = 0x40;
 int estado; 
-char valor[5];
-char DATO[5];									// String para armar cadena de caracteres
-char datoRX;
+int numero = 0;
 
-unsigned char Resto;
+char valor[5]="\0\0\0\0\n";;									// String para armar cadena de caracteres
+char datoRX;
 
 volatile unsigned char bPB8=1;					// Bandera estado de PB0
 volatile unsigned char bTX=0;					// Bandera para transmitir dato
 
-void CONTROL(char DATO[]);						// Funcion control PWM por puerto serie
+void CONTROL(void);						// Funcion control PWM por puerto serie
 void onoff(void);								// Funicion para mostrar estado PWM
 void SPI_MasterTransmit(int cData);				// Funcion para transimitir al display
 void SPI_initial(void);							// Funcion inicializar display
@@ -75,7 +72,7 @@ int main(void)
 	UCSR0B=(1<<RXEN0) | (1<<TXEN0) | (1<<RXCIE0);			// Habilito receptor y transceptor, interrupcion recepcion completa
 
 	ADMUX= (1<<REFS0);										// Tension de referencia con capacitor externo
-	ADCSRA=(1<<ADEN)|(0<<ADSC)|(1<<ADPS1)|(1<<ADPS0)|(1<<ADATE)|(1<<ADIE);		// Habilito el ADC, Configuro prescaler en 8
+	ADCSRA=(1<<ADEN)|(1<<ADSC)|(1<<ADPS1)|(1<<ADPS0)|(1<<ADATE)|(1<<ADIE);		// Habilito el ADC, Configuro prescaler en 8
 	ADCSRB=(1<<ADTS2)|(1<<ADTS1);							//Autodisparo por desbordamiento del timer 1
 	
 	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);					// Configuracion del SPI Modo Maestro, frecuencia SCK 1Mhz
@@ -107,25 +104,30 @@ int main(void)
 			onoff();										//Llama a funcion para mostrar estado por puerto serial y OFF en el MAX
 		}
 
-	CONTROL(DATO);
-	Mostrar_Tensiones();	
+	CONTROL();
+		
+		if (numero==5)
+		{	
+			Mostrar_Tensiones();
+			numero=0;				
+		}
+			
 	_delay_ms(25);
 	}
 	}
 //######################################################### FUNCION PARA ESTABLECER CONTROL LOCAL/REMOTO #######################################################################################
 
-void CONTROL(char DATO[])
+void CONTROL(void)
 {
 	char mremoto[]="Modo Remoto\n";
 	char mlocal[]="Modo Local\n";
-	int dec = 0, uni = 0, decimal = 0, resultado = 0;
+	int decena = 0, unidad = 0, decimal = 0, resultado = 0;
 	
 	//<<<<<<<<<<<<<<<<<SI EL MODO ES REMOTO>>>>>>>>>>>>>>>>>
 	if (modo==1)		
 	{
 		if (modoant!=1)		
 		{
-			ADCSRA = (0<<ADEN)|(0<<ADSC);			//OFF CAD
 			modoant=1;
 			for (i=0;i<=strlen(mremoto);i++)
 			{
@@ -134,11 +136,11 @@ void CONTROL(char DATO[])
 			}
 		}
 		
-		dec = (valor[0] - 48) * 100;
-		uni = (valor[1] - 48) * 10;
+		decena = (valor[0] - 48) * 100;
+		unidad = (valor[1] - 48) * 10;
 		decimal = (valor[3] - 48);
-		resultado = dec + uni + decimal;
-	
+		resultado = decena + unidad + decimal;
+		
 		if(resultado<=150)					//+++++ ACA HAY QUE VER QUE PUTA PREGUNTAMOS!!!+++ =( =P
 			{
 				Tension_Deseada = resultado;
@@ -150,7 +152,6 @@ void CONTROL(char DATO[])
 	{
 		if (modoant!=2)
 		{
-			ADCSRA = (1<<ADEN)|(0<<ADSC)|(1<<ADPS1)|(1<<ADPS0);	//ON CAD
 			modoant=2;
 			for (i=0;i<=strlen(mlocal);i++)
 			{
@@ -207,7 +208,7 @@ ISR(USART_RX_vect)
 		indice=0;	// si se cumple pone variable indice a 0
 	}
 	
-	if((datoRX>='0') && (datoRX<='9'))		// Si es un numero lo guarda en DATO
+	if((datoRX>='0') && (datoRX<='9') | (','))		// Si es un numero lo guarda en DATO
 	{
 		valor[indice]=datoRX;
 		indice++;
@@ -235,24 +236,26 @@ ISR (INT0_vect) // PD2(pin2)
 //######################################################### RUTINA DE TRATAMIENTO DE INTERRUPCION DEL CAD ##################################################################################################################
 
 ISR(ADC_vect)
-{
-	ADC_Pote=ADC;
-	//if(ADMUX==0)
-	//{
-		//ADC_Pote= ADC;
-		//ADMUX &= ~ (1<<MUX0);
-	//}
-	//
-	//if(ADMUX==1)
-	//{
-		//ADC_Volt= ADC;
-		//ADMUX &= ~ (0<<MUX0);
-	//}
+{	
+	if(CANAL==0)
+	{
+		ADC_Pote = ADC;
+		ADMUX = CONFIG+1;		//Config para leer ADC1 
+		CANAL = 1;
+	}
+	else 
+	{	
+		ADC_Volt = ADC;
+		ADMUX = CONFIG;		//Config para leer ADC0
+		CANAL = 0;
+	}
 }
 //######################################################### RUTINA DE TRATAMIENTO DE INTERRUPCION DEL TIMER1_OVF ##################################################################################################################
 
 ISR(TIMER1_OVF_vect)
 {
+	numero++;
+	
 	if (modo==0)
 	{
 		Tension_Deseada = ADC_Pote*100/1023;	 // Guardamos el valor del ADC0 	
@@ -403,9 +406,13 @@ void SPI_initial()
 
 void Mostrar_Tensiones()
 {
-	//int Tension_Real = ADC_Volt*(10*TENSIONmax)/1023;
-	int Tension_Real = 150;
-	char Medicion_msj[]="Tension Real:";
+	int cen = 0, dec = 0, uni = 0;
+	int cenD = 0, decD = 0, uniD = 0;
+	unsigned char Resto;
+	unsigned char RestoD;
+	
+	int Tension_Real = ADC_Volt*(10*10)/1023;
+	char Medicion_msj[]="Tension Medida:";
 	char UDeseada_msj[]="Tension Deseada:";
 	
 	for (i=0;i<=strlen(Medicion_msj);i++)
@@ -425,6 +432,7 @@ void Mostrar_Tensiones()
 	PORTB = (1<<PORTB2);				//Indico fin de transferencia
 	_delay_us(1);
 	
+	while(!(UCSR0A & (1<<UDRE0)));		// Espera a que se envíe el dato
 	UDR0 = cen + 48;					//Envio por puerto serie la decena
 	while(!(UCSR0A & (1<<UDRE0)));		// Espera a que se envíe el dato
 	
@@ -468,19 +476,20 @@ void Mostrar_Tensiones()
 		UDR0=UDeseada_msj[i];
 	}
 	
-	cen = (Tension_Deseada/100);
-	UDR0 = cen + 48;					//Envio por puerto serie la decena
 	while(!(UCSR0A & (1<<UDRE0)));		// Espera a que se envíe el dato
-	Resto = (Tension_Deseada%100);
-	dec = (Resto/10);
-	UDR0 = dec + 48;					//Envio por puerto serie la unidad
+	cenD = (Tension_Deseada/100);
+	UDR0 = cenD + 48;					//Envio por puerto serie la decena
+	while(!(UCSR0A & (1<<UDRE0)));		// Espera a que se envíe el dato
+	RestoD = (Tension_Deseada%100);
+	decD = (RestoD/10);
+	UDR0 = decD + 48;					//Envio por puerto serie la unidad
 	while(!(UCSR0A & (1<<UDRE0)));
 	
 	UDR0 = 0x2C;						//Envio ","
 	while(!(UCSR0A & (1<<UDRE0)));
 	
-	uni = (Resto%10);
-	UDR0 = (uni + 48);					//Envio por puerto serie primer decimal
+	uniD = (RestoD%10);
+	UDR0 = (uniD + 48);					//Envio por puerto serie primer decimal
 	while(!(UCSR0A & (1<<UDRE0)));
 	UDR0 = 10;
 	while(!(UCSR0A & (1<<UDRE0)));
