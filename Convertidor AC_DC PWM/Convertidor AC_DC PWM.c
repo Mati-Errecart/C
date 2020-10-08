@@ -135,11 +135,12 @@ void CONTROL(void)
 				UDR0=mremoto[i];				//Mostramos "MODO REMOTO"
 			}
 		}
-		
-		decena = (valor[0] - 48) * 100;
-		unidad = (valor[1] - 48) * 10;
-		decimal = (valor[3] - 48);
+
+		decena = (valor[0]-48) * 100;
+		unidad = (valor[1]-48) * 10;
+		decimal = (valor[2]-48);
 		resultado = decena + unidad + decimal;
+
 		
 		if(resultado<=150)					//+++++ ACA HAY QUE VER QUE PUTA PREGUNTAMOS!!!+++ =( =P
 			{
@@ -208,7 +209,7 @@ ISR(USART_RX_vect)
 		indice=0;	// si se cumple pone variable indice a 0
 	}
 	
-	if((datoRX>='0') && (datoRX<='9') | (','))		// Si es un numero lo guarda en DATO
+	if(((datoRX>='0') && (datoRX<='9')))	// Si es un numero lo guarda en DATO
 	{
 		valor[indice]=datoRX;
 		indice++;
@@ -259,9 +260,14 @@ ISR(TIMER1_OVF_vect)
 	if (modo==0)
 	{
 		Tension_Deseada = ADC_Pote*100/1023;	 // Guardamos el valor del ADC0 	
+		OCR0B = Tension_Deseada*199/100;			// PD5 salida PWM OC0B
+	}
+	if (modo==1)
+	{
+		OCR0B = Tension_Deseada*199/150;			// PD5 salida PWM OC0B
 	}
 	
-	OCR0B = Tension_Deseada*199/100;			// PD5 salida PWM OC0B
+	
 }
 //######################################################### FUNCION DE MOSTRAR ON/OFF ##################################################################################################################
 
@@ -476,21 +482,23 @@ void Mostrar_Tensiones()
 		UDR0=UDeseada_msj[i];
 	}
 	
-	while(!(UCSR0A & (1<<UDRE0)));		// Espera a que se envíe el dato
 	cenD = (Tension_Deseada/100);
-	UDR0 = cenD + 48;					//Envio por puerto serie la decena
 	while(!(UCSR0A & (1<<UDRE0)));		// Espera a que se envíe el dato
+	UDR0 = cenD + 48;					//Envio por puerto serie la decena
+	
 	RestoD = (Tension_Deseada%100);
 	decD = (RestoD/10);
+	while(!(UCSR0A & (1<<UDRE0)));		// Espera a que se envíe el dato
 	UDR0 = decD + 48;					//Envio por puerto serie la unidad
-	while(!(UCSR0A & (1<<UDRE0)));
 	
-	UDR0 = 0x2C;						//Envio ","
 	while(!(UCSR0A & (1<<UDRE0)));
+	UDR0 = 0x2C;						//Envio ","
 	
 	uniD = (RestoD%10);
+	while(!(UCSR0A & (1<<UDRE0)));
 	UDR0 = (uniD + 48);					//Envio por puerto serie primer decimal
+	
 	while(!(UCSR0A & (1<<UDRE0)));
 	UDR0 = 10;
-	while(!(UCSR0A & (1<<UDRE0)));
+	
 }

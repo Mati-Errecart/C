@@ -310,7 +310,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xd00
+.text           0x00000000      0xd20
  *(.vectors)
  .vectors       0x00000000       0x68 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm328p.o
                 0x00000000                __vector_default
@@ -399,60 +399,60 @@ END GROUP
                 0x00000254        0xa Convertidor AC_DC PWM.o
                 0x00000254                SwitchModo
  .text.__vector_18
-                0x0000025e       0x6e Convertidor AC_DC PWM.o
+                0x0000025e       0x72 Convertidor AC_DC PWM.o
                 0x0000025e                __vector_18
  .text.__vector_2
-                0x000002cc       0x2c Convertidor AC_DC PWM.o
-                0x000002cc                __vector_2
+                0x000002d0       0x2c Convertidor AC_DC PWM.o
+                0x000002d0                __vector_2
  .text.__vector_1
-                0x000002f8       0x2c Convertidor AC_DC PWM.o
-                0x000002f8                __vector_1
+                0x000002fc       0x2c Convertidor AC_DC PWM.o
+                0x000002fc                __vector_1
  .text.__vector_21
-                0x00000324       0x90 Convertidor AC_DC PWM.o
-                0x00000324                __vector_21
+                0x00000328       0x90 Convertidor AC_DC PWM.o
+                0x00000328                __vector_21
  .text.__vector_13
-                0x000003b4       0xac Convertidor AC_DC PWM.o
-                0x000003b4                __vector_13
+                0x000003b8       0xce Convertidor AC_DC PWM.o
+                0x000003b8                __vector_13
  .text.SPI_MasterTransmit
-                0x00000460        0xa Convertidor AC_DC PWM.o
-                0x00000460                SPI_MasterTransmit
+                0x00000486        0xa Convertidor AC_DC PWM.o
+                0x00000486                SPI_MasterTransmit
  .text.SPI_initial
-                0x0000046a      0x1f2 Convertidor AC_DC PWM.o
-                0x0000046a                SPI_initial
- .text.onoff    0x0000065c      0x148 Convertidor AC_DC PWM.o
-                0x0000065c                onoff
+                0x00000490      0x1f2 Convertidor AC_DC PWM.o
+                0x00000490                SPI_initial
+ .text.onoff    0x00000682      0x148 Convertidor AC_DC PWM.o
+                0x00000682                onoff
  .text.Mostrar_Tensiones
-                0x000007a4      0x338 Convertidor AC_DC PWM.o
-                0x000007a4                Mostrar_Tensiones
- .text.main     0x00000adc      0x11a Convertidor AC_DC PWM.o
-                0x00000adc                main
+                0x000007ca      0x332 Convertidor AC_DC PWM.o
+                0x000007ca                Mostrar_Tensiones
+ .text.main     0x00000afc      0x11a Convertidor AC_DC PWM.o
+                0x00000afc                main
  .text.libgcc.div
-                0x00000bf6       0x28 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_divmodhi4.o)
-                0x00000bf6                _div
-                0x00000bf6                __divmodhi4
+                0x00000c16       0x28 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_divmodhi4.o)
+                0x00000c16                _div
+                0x00000c16                __divmodhi4
  .text.libgcc.div
-                0x00000c1e       0x2e c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_divmodsi4.o)
-                0x00000c1e                __divmodsi4
+                0x00000c3e       0x2e c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_divmodsi4.o)
+                0x00000c3e                __divmodsi4
  .text.libgcc.div
-                0x00000c4c       0x10 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_negsi2.o)
-                0x00000c4c                __negsi2
+                0x00000c6c       0x10 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_negsi2.o)
+                0x00000c6c                __negsi2
  .text.libgcc.mul
-                0x00000c5c       0x16 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_muluhisi3.o)
-                0x00000c5c                __muluhisi3
+                0x00000c7c       0x16 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_muluhisi3.o)
+                0x00000c7c                __muluhisi3
  .text.libgcc.div
-                0x00000c72       0x28 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_udivmodhi4.o)
-                0x00000c72                __udivmodhi4
+                0x00000c92       0x28 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_udivmodhi4.o)
+                0x00000c92                __udivmodhi4
  .text.libgcc.div
-                0x00000c9a       0x44 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_udivmodsi4.o)
-                0x00000c9a                __udivmodsi4
+                0x00000cba       0x44 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_udivmodsi4.o)
+                0x00000cba                __udivmodsi4
  .text.libgcc.mul
-                0x00000cde       0x1e c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_umulhisi3.o)
-                0x00000cde                __umulhisi3
-                0x00000cfc                . = ALIGN (0x2)
+                0x00000cfe       0x1e c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_umulhisi3.o)
+                0x00000cfe                __umulhisi3
+                0x00000d1c                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000cfc        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
-                0x00000cfc                _exit
-                0x00000cfc                exit
+ .fini9         0x00000d1c        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
+                0x00000d1c                _exit
+                0x00000d1c                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -471,11 +471,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000cfc        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000d1c        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1061/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000d00                _etext = .
+                0x00000d20                _etext = .
 
-.data           0x00800100       0x52 load address 0x00000d00
+.data           0x00800100       0x52 load address 0x00000d20
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -518,8 +518,8 @@ END GROUP
                 0x00800170                datoRX
                 0x00800171                modo
                 0x00800173                PROVIDE (__bss_end, .)
-                0x00000d00                __data_load_start = LOADADDR (.data)
-                0x00000d52                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000d20                __data_load_start = LOADADDR (.data)
+                0x00000d72                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800173        0x0
                 0x00800173                PROVIDE (__noinit_start, .)
@@ -593,17 +593,17 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0xfe3
+.debug_info     0x00000000      0xfe4
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000      0xfe3 Convertidor AC_DC PWM.o
+ .debug_info    0x00000000      0xfe4 Convertidor AC_DC PWM.o
 
-.debug_abbrev   0x00000000      0x26a
+.debug_abbrev   0x00000000      0x282
  *(.debug_abbrev)
- .debug_abbrev  0x00000000      0x26a Convertidor AC_DC PWM.o
+ .debug_abbrev  0x00000000      0x282 Convertidor AC_DC PWM.o
 
-.debug_line     0x00000000      0x4f4
+.debug_line     0x00000000      0x4ee
  *(.debug_line .debug_line.* .debug_line_end)
- .debug_line    0x00000000      0x4f4 Convertidor AC_DC PWM.o
+ .debug_line    0x00000000      0x4ee Convertidor AC_DC PWM.o
 
 .debug_frame    0x00000000      0x1fc
  *(.debug_frame)
@@ -614,9 +614,9 @@ END GROUP
  .debug_str     0x00000000      0x332 Convertidor AC_DC PWM.o
                                 0x36b (size before relaxing)
 
-.debug_loc      0x00000000      0x5be
+.debug_loc      0x00000000      0x5b4
  *(.debug_loc)
- .debug_loc     0x00000000      0x5be Convertidor AC_DC PWM.o
+ .debug_loc     0x00000000      0x5b4 Convertidor AC_DC PWM.o
 
 .debug_macinfo
  *(.debug_macinfo)
