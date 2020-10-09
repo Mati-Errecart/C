@@ -30,7 +30,7 @@ int CONFIG = 0x40;
 int estado; 
 int numero = 0;
 
-char valor[5]="\0\0\0\0\n";;									// String para armar cadena de caracteres
+char valor[5]="0000";									// String para armar cadena de caracteres
 char datoRX;
 
 volatile unsigned char bPB8=1;					// Bandera estado de PB0
@@ -74,6 +74,7 @@ int main(void)
 
 	ADMUX= (1<<REFS0);										// Tension de referencia con capacitor externo
 	ADCSRA=(1<<ADEN)|(1<<ADSC)|(1<<ADPS1)|(1<<ADPS0)|(1<<ADATE)|(1<<ADIE);	// Habilito el ADC, Configuro prescaler en 8, 
+	ADCSRB=(1<<ADTS2)|(1<<ADTS1);
 																			//Fuente de activacion modo libre
 	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);					// Configuracion del SPI Modo Maestro, frecuencia SCK 1Mhz
 	SPI_initial();
@@ -142,7 +143,7 @@ void CONTROL(void)
 		resultado = decena + unidad + decimal;
 
 		
-		if(resultado<=150)					//+++++ ACA HAY QUE VER QUE PUTA PREGUNTAMOS!!!+++ =( =P
+		if(resultado<=150)					
 			{
 				Tension_Deseada = resultado;
 			}
@@ -222,17 +223,17 @@ ISR(USART_RX_vect)
 
 ISR (INT1_vect) // PD3(pin3)
 {
-	PORTB &= ~ (1<<PORTB0); //~ En 0 PINB0
+	PORTB &= ~ (1<<PINB0); //~ En 0 PINB0
 	_delay_us(100);
-	PORTB |= (1<<PORTB1); // En 1 PB1(9) Semiciclo negativo
+	PORTB |= (1<<PINB1); // En 1 PB1(9) Semiciclo negativo
 }
 
 ISR (INT0_vect) // PD2(pin2)
 {	
-	PORTB &= ~ (1<<PORTB1); // En 0 PB1
+	PORTB &= ~ (1<<PINB1); // En 0 PB1
 	_delay_us(100);
-	PORTD^=(1<<PORTD4);
-	PORTB |= (1<<PORTB0); // En 1 PB0(8) Semiciclo positivo
+	PORTD^=(1<<PIND4);
+	PORTB |= (1<<PINB0); // En 1 PB0(8) Semiciclo positivo
 }
 
 //######################################################### RUTINA DE TRATAMIENTO DE INTERRUPCION DEL CAD ##################################################################################################################
@@ -320,94 +321,94 @@ void SPI_initial()
 {
 	////////////////////////////////////////// Intensidad de brillo /////////////////////////////////////////
 	
-	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
+	PORTB = (0<<PINB2);				//Indico inicio de transferencia
 	_delay_us(1);
 	DSPI = 0x0A;						//Intensidad minima
 	SPI_MasterTransmit(DSPI);
 	_delay_us(1);
-	DSPI = 0x00;						//Decodificación de código B para dígitos 7-0
+	DSPI = 0x0F;						//Decodificación de código B para dígitos 7-0
 	SPI_MasterTransmit(DSPI);
-	PORTB = (1<<PORTB2);				//Indico fin de transferencia
+	PORTB = (1<<PINB2);				//Indico fin de transferencia
 	_delay_us(1);
 	
 	//////////////////////////////////////// Modo de decodificacion /////////////////////////////////////////
 	
-	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
+	PORTB = (0<<PINB2);				//Indico inicio de transferencia
 	_delay_us(1);
 	DSPI = 0x09;						//Decodificación de código B para dígitos 7-0
 	SPI_MasterTransmit(DSPI);
 	_delay_us(1);
 	DSPI = 0xFF;						//Decodificación de código B para dígitos 7-0
 	SPI_MasterTransmit(DSPI);
-	PORTB = (1<<PORTB2);				//Indico fin de transferencia
+	PORTB = (1<<PINB2);				//Indico fin de transferencia
 	_delay_us(1);
 	
 	////////////////////////////////////////// Cantidad de digitos /////////////////////////////////////////
 	
-	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
+	PORTB = (0<<PINB2);				//Indico inicio de transferencia
 	_delay_us(1);
 	DSPI = 0x0B;						//Mostrar 3 digitos
 	SPI_MasterTransmit(DSPI);
 	_delay_us(1);
 	DSPI = 0x02;						//Decodificación de código B para dígitos 7-0
 	SPI_MasterTransmit(DSPI);
-	PORTB = (1<<PORTB2);				//Indico fin de transferencia
+	PORTB = (1<<PINB2);				//Indico fin de transferencia
 	_delay_us(1);
 	
 	////////////////////////////////////////// Modo de operacion /////////////////////////////////////////
 	
-	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
+	PORTB = (0<<PINB2);				//Indico inicio de transferencia
 	_delay_us(1);
 	DSPI = 0x0C;						//Opercion normal
 	SPI_MasterTransmit(DSPI);
 	_delay_us(1);
 	DSPI = 0x01;						//Decodificación de código B para dígitos 7-0
 	SPI_MasterTransmit(DSPI);
-	PORTB = (1<<PORTB2);				//Indico fin de transferencia
+	PORTB = (1<<PINB2);				//Indico fin de transferencia
 	_delay_us(1);
 	
 	////////////////////////////////////////// Modo de testeo /////////////////////////////////////////
 	
-	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
+	PORTB = (0<<PINB2);				//Indico inicio de transferencia
 	_delay_us(1);
 	DSPI = 0x0F;						//Opercion normal
 	SPI_MasterTransmit(DSPI);
 	_delay_us(1);
 	DSPI = 0x00;						//Decodificación de código B para dígitos 7-0
 	SPI_MasterTransmit(DSPI);
-	PORTB = (1<<PORTB2);				//Indico fin de transferencia
+	PORTB = (1<<PINB2);				//Indico fin de transferencia
 	_delay_us(1);
 	
 	////////////////////////////////////////// Inician todos apagados /////////////////////////////////////////
 	
-	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
+	PORTB = (0<<PINB2);				//Indico inicio de transferencia
 	_delay_us(1);
 	DSPI = 0x01;						//Bit 0
 	SPI_MasterTransmit(DSPI);
 	_delay_us(1);
 	DSPI = 0xFF;
 	SPI_MasterTransmit(DSPI);
-	PORTB = (1<<PORTB2);				//Indico fin de transferencia
+	PORTB = (1<<PINB2);				//Indico fin de transferencia
 	_delay_us(1);
 	
-	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
+	PORTB = (0<<PINB2);				//Indico inicio de transferencia
 	_delay_us(1);
 	DSPI = 0x02;						//Bit 1
 	SPI_MasterTransmit(DSPI);
 	_delay_us(1);
 	DSPI = 0xFF;
 	SPI_MasterTransmit(DSPI);
-	PORTB = (1<<PORTB2);				//Indico fin de transferencia
+	PORTB = (1<<PINB2);				//Indico fin de transferencia
 	_delay_us(1);
 	
-	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
+	PORTB = (0<<PINB2);				//Indico inicio de transferencia
 	_delay_us(1);
 	DSPI = 0x03;						//Bit 2
 	SPI_MasterTransmit(DSPI);
 	_delay_us(1);
 	DSPI = 0xFF;
 	SPI_MasterTransmit(DSPI);
-	PORTB = (1<<PORTB2);				//Indico fin de transferencia
+	PORTB = (1<<PINB2);				//Indico fin de transferencia
 	_delay_us(1);
 }
 
@@ -418,7 +419,7 @@ void Mostrar_Tensiones()
 	unsigned char Resto;
 	unsigned char RestoD;
 	
-	int Tension_Real = ADC_Volt*(10*10)/1023;
+	int Tension_Real = (ADC_Volt*150)/1023;
 	char Medicion_msj[]="Tension Medida:";
 	char UDeseada_msj[]="Tension Deseada:";
 	
@@ -429,14 +430,14 @@ void Mostrar_Tensiones()
 	}
 	
 	cen = (Tension_Real/100);
-	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
+	PORTB = (0<<PINB2);				//Indico inicio de transferencia
 	_delay_us(1);
 	DSPI = 0x03;						//Bit 2
 	SPI_MasterTransmit(DSPI);
 	_delay_us(1);
 	DSPI = (cen);						//Envio decena al MAX
 	SPI_MasterTransmit(DSPI);
-	PORTB = (1<<PORTB2);				//Indico fin de transferencia
+	PORTB = (1<<PINB2);				//Indico fin de transferencia
 	_delay_us(1);
 	
 	while(!(UCSR0A & (1<<UDRE0)));		// Espera a que se envíe el dato
@@ -445,14 +446,14 @@ void Mostrar_Tensiones()
 	
 	Resto = (Tension_Real%100);
 	dec = (Resto/10);
-	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
+	PORTB = (0<<PINB2);				//Indico inicio de transferencia
 	_delay_us(1);
 	DSPI = 0x02;						//Bit 1
 	SPI_MasterTransmit(DSPI);
 	_delay_us(1);
 	DSPI = (0xF0 + dec);						//Envio la unidad al MAX
 	SPI_MasterTransmit(DSPI);
-	PORTB = (1<<PORTB2);				//Indico fin de transferencia
+	PORTB = (1<<PINB2);				//Indico fin de transferencia
 	_delay_us(1);
 	
 	UDR0 = dec + 48;					//Envio por puerto serie la unidad
@@ -462,14 +463,14 @@ void Mostrar_Tensiones()
 	while(!(UCSR0A & (1<<UDRE0)));
 	
 	uni = (Resto%10);
-	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
+	PORTB = (0<<PINB2);				//Indico inicio de transferencia
 	_delay_us(1);
 	DSPI = 0x01;						//Bit 0
 	SPI_MasterTransmit(DSPI);
 	_delay_us(1);
 	DSPI = (uni);						//Envio primer decimal al MAX
 	SPI_MasterTransmit(DSPI);
-	PORTB = (1<<PORTB2);				//Indico fin de transferencia
+	PORTB = (1<<PINB2);				//Indico fin de transferencia
 	_delay_us(1);
 	
 	UDR0 = (uni + 48);					//Envio por puerto serie primer decimal
