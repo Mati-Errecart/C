@@ -47,9 +47,9 @@ void Mostrar_Tensiones(void);
 
 int main(void)
 {	
-	DDRD |=(1<<DDD5)|(0<<DDD7)|(0<<DDD6);			// PD5 como salida PWM (OC0B) y PD7(7) como entrada (On/Off_PWM en modo local) y PD6(6) como entrada "MODO_CONTROL"
+	DDRD |=(1<<DDD4)|(1<<DDD5)|(0<<DDD7)|(0<<DDD6);			// PD5 como salida PWM (OC0B) y PD7(7) como entrada (On/Off_PWM en modo local) y PD6(6) como entrada "MODO_CONTROL"
 	DDRB |=(1<<DDB5)|(1<<DDB3)|(1<<DDB2)|(1<<DDB1)|(1<<DDB0);	// Config como salida PB5(13,CSK), PB3(11,MOSI), PB2(10,SS), PB0(8)semiciclo positivo, PB1(9) semiciclo negativo
-	PORTD |= (1<<PORTD2)|(1<<PORTD3)|(1<<PORTD7)|(1<<PORTD6);			// Configuro Restistencias pull up INT0, INT1, On_Off_PWM
+	PORTD |= (1<<PORTD2)|(1<<PORTD3)|(1<<PORTD7)|(1<<PORTD6);	// Configuro Restistencias pull up INT0, INT1, On_Off_PWM
 	PORTB |= (1<<PORTB2);									// Resistencia Pull-UP
 
 	TCCR0A= (0<<COM0B1)|(0<<COM0B0)|(0<<WGM01)|(1<<WGM00);	// PWM fase correcta,
@@ -68,13 +68,13 @@ int main(void)
 
 	UCSR0A=0;
 	UBRR0=103;												// Velociadad de transmicion en 9600
-	UCSR0C=(0<<UMSEL01)|(0<<UMSEL00)|(1<<UCSZ01)|(1<<UCSZ00)|(0<<USBS0)|(0<<UPM01)|(0<<UPM00);	// Modo Asincrono, size caracter 8-bit, 1-bit de stop, paridad OFF
+	UCSR0C=(0<<UMSEL01)|(0<<UMSEL00)|(1<<UCSZ01)|(1<<UCSZ00)|(0<<USBS0)|(0<<UPM01)|(0<<UPM00);	// Modo Asincrono, size caracter 8-bit
+																								//1-bit de stop, paridad OFF
 	UCSR0B=(1<<RXEN0) | (1<<TXEN0) | (1<<RXCIE0);			// Habilito receptor y transceptor, interrupcion recepcion completa
 
 	ADMUX= (1<<REFS0);										// Tension de referencia con capacitor externo
-	ADCSRA=(1<<ADEN)|(1<<ADSC)|(1<<ADPS1)|(1<<ADPS0)|(1<<ADATE)|(1<<ADIE);		// Habilito el ADC, Configuro prescaler en 8
-	ADCSRB=(1<<ADTS2)|(1<<ADTS1);							//Autodisparo por desbordamiento del timer 1
-	
+	ADCSRA=(1<<ADEN)|(1<<ADSC)|(1<<ADPS1)|(1<<ADPS0)|(1<<ADATE)|(1<<ADIE);	// Habilito el ADC, Configuro prescaler en 8, 
+																			//Fuente de activacion modo libre
 	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);					// Configuracion del SPI Modo Maestro, frecuencia SCK 1Mhz
 	SPI_initial();
 	
@@ -228,9 +228,10 @@ ISR (INT1_vect) // PD3(pin3)
 }
 
 ISR (INT0_vect) // PD2(pin2)
-{
+{	
 	PORTB &= ~ (1<<PORTB1); // En 0 PB1
 	_delay_us(100);
+	PORTD^=(1<<PORTD4);
 	PORTB |= (1<<PORTB0); // En 1 PB0(8) Semiciclo positivo
 }
 
@@ -259,8 +260,8 @@ ISR(TIMER1_OVF_vect)
 	
 	if (modo==0)
 	{
-		Tension_Deseada = ADC_Pote*100/1023;	 // Guardamos el valor del ADC0 	
-		OCR0B = Tension_Deseada*199/100;			// PD5 salida PWM OC0B
+		Tension_Deseada = (ADC_Pote*100)/1023;	 // Guardamos el valor del ADC0 	
+		OCR0B = (Tension_Deseada*199)/100;			// PD5 salida PWM OC0B
 	}
 	if (modo==1)
 	{

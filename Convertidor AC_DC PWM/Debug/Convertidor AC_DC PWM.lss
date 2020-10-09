@@ -3,29 +3,29 @@ Convertidor AC_DC PWM.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000052  00800100  00000d20  00000db4  2**0
+  0 .data         00000052  00800100  00000d28  00000dbc  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000d20  00000000  00000000  00000094  2**1
+  1 .text         00000d28  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000021  00800152  00800152  00000e06  2**0
+  2 .bss          00000021  00800152  00800152  00000e0e  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000e06  2**0
+  3 .comment      00000030  00000000  00000000  00000e0e  2**0
                   CONTENTS, READONLY
-  4 .debug_aranges 00000080  00000000  00000000  00000e36  2**0
+  4 .debug_aranges 00000080  00000000  00000000  00000e3e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000fe4  00000000  00000000  00000eb6  2**0
+  5 .debug_info   00000fe4  00000000  00000000  00000ebe  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00000282  00000000  00000000  00001e9a  2**0
+  6 .debug_abbrev 00000282  00000000  00000000  00001ea2  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000004ee  00000000  00000000  0000211c  2**0
+  7 .debug_line   000004ee  00000000  00000000  00002124  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  000001fc  00000000  00000000  0000260c  2**2
+  8 .debug_frame  000001fc  00000000  00000000  00002614  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000332  00000000  00000000  00002808  2**0
+  9 .debug_str    00000332  00000000  00000000  00002810  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000005b4  00000000  00000000  00002b3a  2**0
+ 10 .debug_loc    000005b4  00000000  00000000  00002b42  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000070  00000000  00000000  000030ee  2**0
+ 11 .debug_ranges 00000070  00000000  00000000  000030f6  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -44,7 +44,7 @@ Disassembly of section .text:
   28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-  34:	0c 94 dc 01 	jmp	0x3b8	; 0x3b8 <__vector_13>
+  34:	0c 94 e0 01 	jmp	0x3c0	; 0x3c0 <__vector_13>
   38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
@@ -52,7 +52,7 @@ Disassembly of section .text:
   48:	0c 94 2f 01 	jmp	0x25e	; 0x25e <__vector_18>
   4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-  54:	0c 94 94 01 	jmp	0x328	; 0x328 <__vector_21>
+  54:	0c 94 98 01 	jmp	0x330	; 0x330 <__vector_21>
   58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
@@ -70,7 +70,7 @@ Disassembly of section .text:
   74:	11 e0       	ldi	r17, 0x01	; 1
   76:	a0 e0       	ldi	r26, 0x00	; 0
   78:	b1 e0       	ldi	r27, 0x01	; 1
-  7a:	e0 e2       	ldi	r30, 0x20	; 32
+  7a:	e8 e2       	ldi	r30, 0x28	; 40
   7c:	fd e0       	ldi	r31, 0x0D	; 13
   7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
   80:	05 90       	lpm	r0, Z+
@@ -92,8 +92,8 @@ Disassembly of section .text:
   94:	a3 37       	cpi	r26, 0x73	; 115
   96:	b2 07       	cpc	r27, r18
   98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
-  9a:	0e 94 7e 05 	call	0xafc	; 0xafc <main>
-  9e:	0c 94 8e 06 	jmp	0xd1c	; 0xd1c <_exit>
+  9a:	0e 94 82 05 	call	0xb04	; 0xb04 <main>
+  9e:	0c 94 92 06 	jmp	0xd24	; 0xd24 <_exit>
 
 000000a2 <__bad_interrupt>:
   a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -533,7 +533,7 @@ ISR (INT1_vect) // PD3(pin3)
 000002fc <__vector_1>:
 
 ISR (INT0_vect) // PD2(pin2)
-{
+{	
  2fc:	1f 92       	push	r1
  2fe:	0f 92       	push	r0
  300:	0f b6       	in	r0, 0x3f	; 63
@@ -550,1566 +550,1572 @@ ISR (INT0_vect) // PD2(pin2)
  314:	00 c0       	rjmp	.+0      	; 0x316 <__vector_1+0x1a>
  316:	00 00       	nop
 	_delay_us(100);
+	PORTD^=(1<<PORTD4);
+ 318:	9b b1       	in	r25, 0x0b	; 11
+ 31a:	80 e1       	ldi	r24, 0x10	; 16
+ 31c:	89 27       	eor	r24, r25
+ 31e:	8b b9       	out	0x0b, r24	; 11
 	PORTB |= (1<<PORTB0); // En 1 PB0(8) Semiciclo positivo
- 318:	28 9a       	sbi	0x05, 0	; 5
+ 320:	28 9a       	sbi	0x05, 0	; 5
 }
- 31a:	9f 91       	pop	r25
- 31c:	8f 91       	pop	r24
- 31e:	0f 90       	pop	r0
- 320:	0f be       	out	0x3f, r0	; 63
- 322:	0f 90       	pop	r0
- 324:	1f 90       	pop	r1
- 326:	18 95       	reti
+ 322:	9f 91       	pop	r25
+ 324:	8f 91       	pop	r24
+ 326:	0f 90       	pop	r0
+ 328:	0f be       	out	0x3f, r0	; 63
+ 32a:	0f 90       	pop	r0
+ 32c:	1f 90       	pop	r1
+ 32e:	18 95       	reti
 
-00000328 <__vector_21>:
+00000330 <__vector_21>:
 
 //######################################################### RUTINA DE TRATAMIENTO DE INTERRUPCION DEL CAD ##################################################################################################################
 
 ISR(ADC_vect)
 {	
- 328:	1f 92       	push	r1
- 32a:	0f 92       	push	r0
- 32c:	0f b6       	in	r0, 0x3f	; 63
- 32e:	0f 92       	push	r0
- 330:	11 24       	eor	r1, r1
- 332:	8f 93       	push	r24
- 334:	9f 93       	push	r25
- 336:	af 93       	push	r26
- 338:	bf 93       	push	r27
+ 330:	1f 92       	push	r1
+ 332:	0f 92       	push	r0
+ 334:	0f b6       	in	r0, 0x3f	; 63
+ 336:	0f 92       	push	r0
+ 338:	11 24       	eor	r1, r1
+ 33a:	8f 93       	push	r24
+ 33c:	9f 93       	push	r25
+ 33e:	af 93       	push	r26
+ 340:	bf 93       	push	r27
 	if(CANAL==0)
- 33a:	80 91 54 01 	lds	r24, 0x0154
- 33e:	90 91 55 01 	lds	r25, 0x0155
- 342:	89 2b       	or	r24, r25
- 344:	d1 f4       	brne	.+52     	; 0x37a <__vector_21+0x52>
+ 342:	80 91 54 01 	lds	r24, 0x0154
+ 346:	90 91 55 01 	lds	r25, 0x0155
+ 34a:	89 2b       	or	r24, r25
+ 34c:	d1 f4       	brne	.+52     	; 0x382 <__vector_21+0x52>
 	{
 		ADC_Pote = ADC;
- 346:	80 91 78 00 	lds	r24, 0x0078
- 34a:	90 91 79 00 	lds	r25, 0x0079
- 34e:	a0 e0       	ldi	r26, 0x00	; 0
- 350:	b0 e0       	ldi	r27, 0x00	; 0
- 352:	80 93 60 01 	sts	0x0160, r24
- 356:	90 93 61 01 	sts	0x0161, r25
- 35a:	a0 93 62 01 	sts	0x0162, r26
- 35e:	b0 93 63 01 	sts	0x0163, r27
+ 34e:	80 91 78 00 	lds	r24, 0x0078
+ 352:	90 91 79 00 	lds	r25, 0x0079
+ 356:	a0 e0       	ldi	r26, 0x00	; 0
+ 358:	b0 e0       	ldi	r27, 0x00	; 0
+ 35a:	80 93 60 01 	sts	0x0160, r24
+ 35e:	90 93 61 01 	sts	0x0161, r25
+ 362:	a0 93 62 01 	sts	0x0162, r26
+ 366:	b0 93 63 01 	sts	0x0163, r27
 		ADMUX = CONFIG+1;		//Config para leer ADC1 
- 362:	80 91 05 01 	lds	r24, 0x0105
- 366:	8f 5f       	subi	r24, 0xFF	; 255
- 368:	80 93 7c 00 	sts	0x007C, r24
+ 36a:	80 91 05 01 	lds	r24, 0x0105
+ 36e:	8f 5f       	subi	r24, 0xFF	; 255
+ 370:	80 93 7c 00 	sts	0x007C, r24
 		CANAL = 1;
- 36c:	81 e0       	ldi	r24, 0x01	; 1
- 36e:	90 e0       	ldi	r25, 0x00	; 0
- 370:	90 93 55 01 	sts	0x0155, r25
- 374:	80 93 54 01 	sts	0x0154, r24
- 378:	16 c0       	rjmp	.+44     	; 0x3a6 <__vector_21+0x7e>
+ 374:	81 e0       	ldi	r24, 0x01	; 1
+ 376:	90 e0       	ldi	r25, 0x00	; 0
+ 378:	90 93 55 01 	sts	0x0155, r25
+ 37c:	80 93 54 01 	sts	0x0154, r24
+ 380:	16 c0       	rjmp	.+44     	; 0x3ae <__vector_21+0x7e>
 	}
 	else 
 	{	
 		ADC_Volt = ADC;
- 37a:	80 91 78 00 	lds	r24, 0x0078
- 37e:	90 91 79 00 	lds	r25, 0x0079
- 382:	a0 e0       	ldi	r26, 0x00	; 0
- 384:	b0 e0       	ldi	r27, 0x00	; 0
- 386:	80 93 5a 01 	sts	0x015A, r24
- 38a:	90 93 5b 01 	sts	0x015B, r25
- 38e:	a0 93 5c 01 	sts	0x015C, r26
- 392:	b0 93 5d 01 	sts	0x015D, r27
+ 382:	80 91 78 00 	lds	r24, 0x0078
+ 386:	90 91 79 00 	lds	r25, 0x0079
+ 38a:	a0 e0       	ldi	r26, 0x00	; 0
+ 38c:	b0 e0       	ldi	r27, 0x00	; 0
+ 38e:	80 93 5a 01 	sts	0x015A, r24
+ 392:	90 93 5b 01 	sts	0x015B, r25
+ 396:	a0 93 5c 01 	sts	0x015C, r26
+ 39a:	b0 93 5d 01 	sts	0x015D, r27
 		ADMUX = CONFIG;		//Config para leer ADC0
- 396:	80 91 05 01 	lds	r24, 0x0105
- 39a:	80 93 7c 00 	sts	0x007C, r24
+ 39e:	80 91 05 01 	lds	r24, 0x0105
+ 3a2:	80 93 7c 00 	sts	0x007C, r24
 		CANAL = 0;
- 39e:	10 92 55 01 	sts	0x0155, r1
- 3a2:	10 92 54 01 	sts	0x0154, r1
+ 3a6:	10 92 55 01 	sts	0x0155, r1
+ 3aa:	10 92 54 01 	sts	0x0154, r1
 	}
 }
- 3a6:	bf 91       	pop	r27
- 3a8:	af 91       	pop	r26
- 3aa:	9f 91       	pop	r25
- 3ac:	8f 91       	pop	r24
- 3ae:	0f 90       	pop	r0
- 3b0:	0f be       	out	0x3f, r0	; 63
- 3b2:	0f 90       	pop	r0
- 3b4:	1f 90       	pop	r1
- 3b6:	18 95       	reti
+ 3ae:	bf 91       	pop	r27
+ 3b0:	af 91       	pop	r26
+ 3b2:	9f 91       	pop	r25
+ 3b4:	8f 91       	pop	r24
+ 3b6:	0f 90       	pop	r0
+ 3b8:	0f be       	out	0x3f, r0	; 63
+ 3ba:	0f 90       	pop	r0
+ 3bc:	1f 90       	pop	r1
+ 3be:	18 95       	reti
 
-000003b8 <__vector_13>:
+000003c0 <__vector_13>:
 //######################################################### RUTINA DE TRATAMIENTO DE INTERRUPCION DEL TIMER1_OVF ##################################################################################################################
 
 ISR(TIMER1_OVF_vect)
 {
- 3b8:	1f 92       	push	r1
- 3ba:	0f 92       	push	r0
- 3bc:	0f b6       	in	r0, 0x3f	; 63
- 3be:	0f 92       	push	r0
- 3c0:	11 24       	eor	r1, r1
- 3c2:	2f 93       	push	r18
- 3c4:	3f 93       	push	r19
- 3c6:	4f 93       	push	r20
- 3c8:	5f 93       	push	r21
- 3ca:	6f 93       	push	r22
- 3cc:	7f 93       	push	r23
- 3ce:	8f 93       	push	r24
- 3d0:	9f 93       	push	r25
- 3d2:	af 93       	push	r26
- 3d4:	bf 93       	push	r27
- 3d6:	ef 93       	push	r30
- 3d8:	ff 93       	push	r31
+ 3c0:	1f 92       	push	r1
+ 3c2:	0f 92       	push	r0
+ 3c4:	0f b6       	in	r0, 0x3f	; 63
+ 3c6:	0f 92       	push	r0
+ 3c8:	11 24       	eor	r1, r1
+ 3ca:	2f 93       	push	r18
+ 3cc:	3f 93       	push	r19
+ 3ce:	4f 93       	push	r20
+ 3d0:	5f 93       	push	r21
+ 3d2:	6f 93       	push	r22
+ 3d4:	7f 93       	push	r23
+ 3d6:	8f 93       	push	r24
+ 3d8:	9f 93       	push	r25
+ 3da:	af 93       	push	r26
+ 3dc:	bf 93       	push	r27
+ 3de:	ef 93       	push	r30
+ 3e0:	ff 93       	push	r31
 	numero++;
- 3da:	80 91 52 01 	lds	r24, 0x0152
- 3de:	90 91 53 01 	lds	r25, 0x0153
- 3e2:	01 96       	adiw	r24, 0x01	; 1
- 3e4:	90 93 53 01 	sts	0x0153, r25
- 3e8:	80 93 52 01 	sts	0x0152, r24
+ 3e2:	80 91 52 01 	lds	r24, 0x0152
+ 3e6:	90 91 53 01 	lds	r25, 0x0153
+ 3ea:	01 96       	adiw	r24, 0x01	; 1
+ 3ec:	90 93 53 01 	sts	0x0153, r25
+ 3f0:	80 93 52 01 	sts	0x0152, r24
 	
 	if (modo==0)
- 3ec:	80 91 71 01 	lds	r24, 0x0171
- 3f0:	90 91 72 01 	lds	r25, 0x0172
- 3f4:	89 2b       	or	r24, r25
- 3f6:	09 f5       	brne	.+66     	; 0x43a <__vector_13+0x82>
+ 3f4:	80 91 71 01 	lds	r24, 0x0171
+ 3f8:	90 91 72 01 	lds	r25, 0x0172
+ 3fc:	89 2b       	or	r24, r25
+ 3fe:	09 f5       	brne	.+66     	; 0x442 <__vector_13+0x82>
 	{
-		Tension_Deseada = ADC_Pote*100/1023;	 // Guardamos el valor del ADC0 	
- 3f8:	20 91 60 01 	lds	r18, 0x0160
- 3fc:	30 91 61 01 	lds	r19, 0x0161
- 400:	40 91 62 01 	lds	r20, 0x0162
- 404:	50 91 63 01 	lds	r21, 0x0163
- 408:	a4 e6       	ldi	r26, 0x64	; 100
- 40a:	b0 e0       	ldi	r27, 0x00	; 0
- 40c:	0e 94 3e 06 	call	0xc7c	; 0xc7c <__muluhisi3>
- 410:	2f ef       	ldi	r18, 0xFF	; 255
- 412:	33 e0       	ldi	r19, 0x03	; 3
- 414:	40 e0       	ldi	r20, 0x00	; 0
- 416:	50 e0       	ldi	r21, 0x00	; 0
- 418:	0e 94 1f 06 	call	0xc3e	; 0xc3e <__divmodsi4>
- 41c:	30 93 67 01 	sts	0x0167, r19
- 420:	20 93 66 01 	sts	0x0166, r18
-		OCR0B = Tension_Deseada*199/100;			// PD5 salida PWM OC0B
- 424:	67 ec       	ldi	r22, 0xC7	; 199
- 426:	62 9f       	mul	r22, r18
- 428:	c0 01       	movw	r24, r0
- 42a:	63 9f       	mul	r22, r19
- 42c:	90 0d       	add	r25, r0
- 42e:	11 24       	eor	r1, r1
- 430:	64 e6       	ldi	r22, 0x64	; 100
- 432:	70 e0       	ldi	r23, 0x00	; 0
- 434:	0e 94 0b 06 	call	0xc16	; 0xc16 <__divmodhi4>
- 438:	68 bd       	out	0x28, r22	; 40
+		Tension_Deseada = (ADC_Pote*100)/1023;	 // Guardamos el valor del ADC0 	
+ 400:	20 91 60 01 	lds	r18, 0x0160
+ 404:	30 91 61 01 	lds	r19, 0x0161
+ 408:	40 91 62 01 	lds	r20, 0x0162
+ 40c:	50 91 63 01 	lds	r21, 0x0163
+ 410:	a4 e6       	ldi	r26, 0x64	; 100
+ 412:	b0 e0       	ldi	r27, 0x00	; 0
+ 414:	0e 94 42 06 	call	0xc84	; 0xc84 <__muluhisi3>
+ 418:	2f ef       	ldi	r18, 0xFF	; 255
+ 41a:	33 e0       	ldi	r19, 0x03	; 3
+ 41c:	40 e0       	ldi	r20, 0x00	; 0
+ 41e:	50 e0       	ldi	r21, 0x00	; 0
+ 420:	0e 94 23 06 	call	0xc46	; 0xc46 <__divmodsi4>
+ 424:	30 93 67 01 	sts	0x0167, r19
+ 428:	20 93 66 01 	sts	0x0166, r18
+		OCR0B = (Tension_Deseada*199)/100;			// PD5 salida PWM OC0B
+ 42c:	67 ec       	ldi	r22, 0xC7	; 199
+ 42e:	62 9f       	mul	r22, r18
+ 430:	c0 01       	movw	r24, r0
+ 432:	63 9f       	mul	r22, r19
+ 434:	90 0d       	add	r25, r0
+ 436:	11 24       	eor	r1, r1
+ 438:	64 e6       	ldi	r22, 0x64	; 100
+ 43a:	70 e0       	ldi	r23, 0x00	; 0
+ 43c:	0e 94 0f 06 	call	0xc1e	; 0xc1e <__divmodhi4>
+ 440:	68 bd       	out	0x28, r22	; 40
 	}
 	if (modo==1)
- 43a:	80 91 71 01 	lds	r24, 0x0171
- 43e:	90 91 72 01 	lds	r25, 0x0172
- 442:	01 97       	sbiw	r24, 0x01	; 1
- 444:	79 f4       	brne	.+30     	; 0x464 <__vector_13+0xac>
+ 442:	80 91 71 01 	lds	r24, 0x0171
+ 446:	90 91 72 01 	lds	r25, 0x0172
+ 44a:	01 97       	sbiw	r24, 0x01	; 1
+ 44c:	79 f4       	brne	.+30     	; 0x46c <__vector_13+0xac>
 	{
 		OCR0B = Tension_Deseada*199/150;			// PD5 salida PWM OC0B
- 446:	20 91 66 01 	lds	r18, 0x0166
- 44a:	30 91 67 01 	lds	r19, 0x0167
- 44e:	47 ec       	ldi	r20, 0xC7	; 199
- 450:	42 9f       	mul	r20, r18
- 452:	c0 01       	movw	r24, r0
- 454:	43 9f       	mul	r20, r19
- 456:	90 0d       	add	r25, r0
- 458:	11 24       	eor	r1, r1
- 45a:	66 e9       	ldi	r22, 0x96	; 150
- 45c:	70 e0       	ldi	r23, 0x00	; 0
- 45e:	0e 94 0b 06 	call	0xc16	; 0xc16 <__divmodhi4>
- 462:	68 bd       	out	0x28, r22	; 40
+ 44e:	20 91 66 01 	lds	r18, 0x0166
+ 452:	30 91 67 01 	lds	r19, 0x0167
+ 456:	47 ec       	ldi	r20, 0xC7	; 199
+ 458:	42 9f       	mul	r20, r18
+ 45a:	c0 01       	movw	r24, r0
+ 45c:	43 9f       	mul	r20, r19
+ 45e:	90 0d       	add	r25, r0
+ 460:	11 24       	eor	r1, r1
+ 462:	66 e9       	ldi	r22, 0x96	; 150
+ 464:	70 e0       	ldi	r23, 0x00	; 0
+ 466:	0e 94 0f 06 	call	0xc1e	; 0xc1e <__divmodhi4>
+ 46a:	68 bd       	out	0x28, r22	; 40
 	}
 	
 	
 }
- 464:	ff 91       	pop	r31
- 466:	ef 91       	pop	r30
- 468:	bf 91       	pop	r27
- 46a:	af 91       	pop	r26
- 46c:	9f 91       	pop	r25
- 46e:	8f 91       	pop	r24
- 470:	7f 91       	pop	r23
- 472:	6f 91       	pop	r22
- 474:	5f 91       	pop	r21
- 476:	4f 91       	pop	r20
- 478:	3f 91       	pop	r19
- 47a:	2f 91       	pop	r18
- 47c:	0f 90       	pop	r0
- 47e:	0f be       	out	0x3f, r0	; 63
- 480:	0f 90       	pop	r0
- 482:	1f 90       	pop	r1
- 484:	18 95       	reti
+ 46c:	ff 91       	pop	r31
+ 46e:	ef 91       	pop	r30
+ 470:	bf 91       	pop	r27
+ 472:	af 91       	pop	r26
+ 474:	9f 91       	pop	r25
+ 476:	8f 91       	pop	r24
+ 478:	7f 91       	pop	r23
+ 47a:	6f 91       	pop	r22
+ 47c:	5f 91       	pop	r21
+ 47e:	4f 91       	pop	r20
+ 480:	3f 91       	pop	r19
+ 482:	2f 91       	pop	r18
+ 484:	0f 90       	pop	r0
+ 486:	0f be       	out	0x3f, r0	; 63
+ 488:	0f 90       	pop	r0
+ 48a:	1f 90       	pop	r1
+ 48c:	18 95       	reti
 
-00000486 <SPI_MasterTransmit>:
+0000048e <SPI_MasterTransmit>:
 }
 //######################################################### SPI_MasterTransmit ##################################################################################################################
 
 void SPI_MasterTransmit(int cData)
 {
 	SPDR = cData;
- 486:	8e bd       	out	0x2e, r24	; 46
+ 48e:	8e bd       	out	0x2e, r24	; 46
 	while(!(SPSR & (1<<SPIF)))
- 488:	0d b4       	in	r0, 0x2d	; 45
- 48a:	07 fe       	sbrs	r0, 7
- 48c:	fd cf       	rjmp	.-6      	; 0x488 <SPI_MasterTransmit+0x2>
+ 490:	0d b4       	in	r0, 0x2d	; 45
+ 492:	07 fe       	sbrs	r0, 7
+ 494:	fd cf       	rjmp	.-6      	; 0x490 <SPI_MasterTransmit+0x2>
 	;
 }
- 48e:	08 95       	ret
+ 496:	08 95       	ret
 
-00000490 <SPI_initial>:
+00000498 <SPI_initial>:
 
 void SPI_initial()
 {
 	////////////////////////////////////////// Intensidad de brillo /////////////////////////////////////////
 	
 	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
- 490:	15 b8       	out	0x05, r1	; 5
- 492:	85 e0       	ldi	r24, 0x05	; 5
- 494:	8a 95       	dec	r24
- 496:	f1 f7       	brne	.-4      	; 0x494 <SPI_initial+0x4>
- 498:	00 00       	nop
+ 498:	15 b8       	out	0x05, r1	; 5
+ 49a:	85 e0       	ldi	r24, 0x05	; 5
+ 49c:	8a 95       	dec	r24
+ 49e:	f1 f7       	brne	.-4      	; 0x49c <SPI_initial+0x4>
+ 4a0:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0x0A;						//Intensidad minima
- 49a:	8a e0       	ldi	r24, 0x0A	; 10
- 49c:	90 e0       	ldi	r25, 0x00	; 0
- 49e:	90 93 5f 01 	sts	0x015F, r25
- 4a2:	80 93 5e 01 	sts	0x015E, r24
+ 4a2:	8a e0       	ldi	r24, 0x0A	; 10
+ 4a4:	90 e0       	ldi	r25, 0x00	; 0
+ 4a6:	90 93 5f 01 	sts	0x015F, r25
+ 4aa:	80 93 5e 01 	sts	0x015E, r24
 	SPI_MasterTransmit(DSPI);
- 4a6:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
- 4aa:	85 e0       	ldi	r24, 0x05	; 5
- 4ac:	8a 95       	dec	r24
- 4ae:	f1 f7       	brne	.-4      	; 0x4ac <SPI_initial+0x1c>
- 4b0:	00 00       	nop
+ 4ae:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
+ 4b2:	85 e0       	ldi	r24, 0x05	; 5
+ 4b4:	8a 95       	dec	r24
+ 4b6:	f1 f7       	brne	.-4      	; 0x4b4 <SPI_initial+0x1c>
+ 4b8:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0x00;						//Decodificación de código B para dígitos 7-0
- 4b2:	10 92 5f 01 	sts	0x015F, r1
- 4b6:	10 92 5e 01 	sts	0x015E, r1
+ 4ba:	10 92 5f 01 	sts	0x015F, r1
+ 4be:	10 92 5e 01 	sts	0x015E, r1
 	SPI_MasterTransmit(DSPI);
- 4ba:	80 e0       	ldi	r24, 0x00	; 0
- 4bc:	90 e0       	ldi	r25, 0x00	; 0
- 4be:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
+ 4c2:	80 e0       	ldi	r24, 0x00	; 0
+ 4c4:	90 e0       	ldi	r25, 0x00	; 0
+ 4c6:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
 	PORTB = (1<<PORTB2);				//Indico fin de transferencia
- 4c2:	84 e0       	ldi	r24, 0x04	; 4
- 4c4:	85 b9       	out	0x05, r24	; 5
- 4c6:	85 e0       	ldi	r24, 0x05	; 5
- 4c8:	8a 95       	dec	r24
- 4ca:	f1 f7       	brne	.-4      	; 0x4c8 <SPI_initial+0x38>
- 4cc:	00 00       	nop
+ 4ca:	84 e0       	ldi	r24, 0x04	; 4
+ 4cc:	85 b9       	out	0x05, r24	; 5
+ 4ce:	85 e0       	ldi	r24, 0x05	; 5
+ 4d0:	8a 95       	dec	r24
+ 4d2:	f1 f7       	brne	.-4      	; 0x4d0 <SPI_initial+0x38>
+ 4d4:	00 00       	nop
 	_delay_us(1);
 	
 	//////////////////////////////////////// Modo de decodificacion /////////////////////////////////////////
 	
 	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
- 4ce:	15 b8       	out	0x05, r1	; 5
- 4d0:	85 e0       	ldi	r24, 0x05	; 5
- 4d2:	8a 95       	dec	r24
- 4d4:	f1 f7       	brne	.-4      	; 0x4d2 <SPI_initial+0x42>
- 4d6:	00 00       	nop
+ 4d6:	15 b8       	out	0x05, r1	; 5
+ 4d8:	85 e0       	ldi	r24, 0x05	; 5
+ 4da:	8a 95       	dec	r24
+ 4dc:	f1 f7       	brne	.-4      	; 0x4da <SPI_initial+0x42>
+ 4de:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0x09;						//Decodificación de código B para dígitos 7-0
- 4d8:	89 e0       	ldi	r24, 0x09	; 9
- 4da:	90 e0       	ldi	r25, 0x00	; 0
- 4dc:	90 93 5f 01 	sts	0x015F, r25
- 4e0:	80 93 5e 01 	sts	0x015E, r24
+ 4e0:	89 e0       	ldi	r24, 0x09	; 9
+ 4e2:	90 e0       	ldi	r25, 0x00	; 0
+ 4e4:	90 93 5f 01 	sts	0x015F, r25
+ 4e8:	80 93 5e 01 	sts	0x015E, r24
 	SPI_MasterTransmit(DSPI);
- 4e4:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
- 4e8:	85 e0       	ldi	r24, 0x05	; 5
- 4ea:	8a 95       	dec	r24
- 4ec:	f1 f7       	brne	.-4      	; 0x4ea <SPI_initial+0x5a>
- 4ee:	00 00       	nop
+ 4ec:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
+ 4f0:	85 e0       	ldi	r24, 0x05	; 5
+ 4f2:	8a 95       	dec	r24
+ 4f4:	f1 f7       	brne	.-4      	; 0x4f2 <SPI_initial+0x5a>
+ 4f6:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0xFF;						//Decodificación de código B para dígitos 7-0
- 4f0:	8f ef       	ldi	r24, 0xFF	; 255
- 4f2:	90 e0       	ldi	r25, 0x00	; 0
- 4f4:	90 93 5f 01 	sts	0x015F, r25
- 4f8:	80 93 5e 01 	sts	0x015E, r24
+ 4f8:	8f ef       	ldi	r24, 0xFF	; 255
+ 4fa:	90 e0       	ldi	r25, 0x00	; 0
+ 4fc:	90 93 5f 01 	sts	0x015F, r25
+ 500:	80 93 5e 01 	sts	0x015E, r24
 	SPI_MasterTransmit(DSPI);
- 4fc:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
+ 504:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
 	PORTB = (1<<PORTB2);				//Indico fin de transferencia
- 500:	84 e0       	ldi	r24, 0x04	; 4
- 502:	85 b9       	out	0x05, r24	; 5
- 504:	85 e0       	ldi	r24, 0x05	; 5
- 506:	8a 95       	dec	r24
- 508:	f1 f7       	brne	.-4      	; 0x506 <SPI_initial+0x76>
- 50a:	00 00       	nop
+ 508:	84 e0       	ldi	r24, 0x04	; 4
+ 50a:	85 b9       	out	0x05, r24	; 5
+ 50c:	85 e0       	ldi	r24, 0x05	; 5
+ 50e:	8a 95       	dec	r24
+ 510:	f1 f7       	brne	.-4      	; 0x50e <SPI_initial+0x76>
+ 512:	00 00       	nop
 	_delay_us(1);
 	
 	////////////////////////////////////////// Cantidad de digitos /////////////////////////////////////////
 	
 	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
- 50c:	15 b8       	out	0x05, r1	; 5
- 50e:	85 e0       	ldi	r24, 0x05	; 5
- 510:	8a 95       	dec	r24
- 512:	f1 f7       	brne	.-4      	; 0x510 <SPI_initial+0x80>
- 514:	00 00       	nop
+ 514:	15 b8       	out	0x05, r1	; 5
+ 516:	85 e0       	ldi	r24, 0x05	; 5
+ 518:	8a 95       	dec	r24
+ 51a:	f1 f7       	brne	.-4      	; 0x518 <SPI_initial+0x80>
+ 51c:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0x0B;						//Mostrar 3 digitos
- 516:	8b e0       	ldi	r24, 0x0B	; 11
- 518:	90 e0       	ldi	r25, 0x00	; 0
- 51a:	90 93 5f 01 	sts	0x015F, r25
- 51e:	80 93 5e 01 	sts	0x015E, r24
+ 51e:	8b e0       	ldi	r24, 0x0B	; 11
+ 520:	90 e0       	ldi	r25, 0x00	; 0
+ 522:	90 93 5f 01 	sts	0x015F, r25
+ 526:	80 93 5e 01 	sts	0x015E, r24
 	SPI_MasterTransmit(DSPI);
- 522:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
- 526:	85 e0       	ldi	r24, 0x05	; 5
- 528:	8a 95       	dec	r24
- 52a:	f1 f7       	brne	.-4      	; 0x528 <SPI_initial+0x98>
- 52c:	00 00       	nop
+ 52a:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
+ 52e:	85 e0       	ldi	r24, 0x05	; 5
+ 530:	8a 95       	dec	r24
+ 532:	f1 f7       	brne	.-4      	; 0x530 <SPI_initial+0x98>
+ 534:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0x02;						//Decodificación de código B para dígitos 7-0
- 52e:	82 e0       	ldi	r24, 0x02	; 2
- 530:	90 e0       	ldi	r25, 0x00	; 0
- 532:	90 93 5f 01 	sts	0x015F, r25
- 536:	80 93 5e 01 	sts	0x015E, r24
+ 536:	82 e0       	ldi	r24, 0x02	; 2
+ 538:	90 e0       	ldi	r25, 0x00	; 0
+ 53a:	90 93 5f 01 	sts	0x015F, r25
+ 53e:	80 93 5e 01 	sts	0x015E, r24
 	SPI_MasterTransmit(DSPI);
- 53a:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
+ 542:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
 	PORTB = (1<<PORTB2);				//Indico fin de transferencia
- 53e:	84 e0       	ldi	r24, 0x04	; 4
- 540:	85 b9       	out	0x05, r24	; 5
- 542:	85 e0       	ldi	r24, 0x05	; 5
- 544:	8a 95       	dec	r24
- 546:	f1 f7       	brne	.-4      	; 0x544 <SPI_initial+0xb4>
- 548:	00 00       	nop
+ 546:	84 e0       	ldi	r24, 0x04	; 4
+ 548:	85 b9       	out	0x05, r24	; 5
+ 54a:	85 e0       	ldi	r24, 0x05	; 5
+ 54c:	8a 95       	dec	r24
+ 54e:	f1 f7       	brne	.-4      	; 0x54c <SPI_initial+0xb4>
+ 550:	00 00       	nop
 	_delay_us(1);
 	
 	////////////////////////////////////////// Modo de operacion /////////////////////////////////////////
 	
 	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
- 54a:	15 b8       	out	0x05, r1	; 5
- 54c:	85 e0       	ldi	r24, 0x05	; 5
- 54e:	8a 95       	dec	r24
- 550:	f1 f7       	brne	.-4      	; 0x54e <SPI_initial+0xbe>
- 552:	00 00       	nop
+ 552:	15 b8       	out	0x05, r1	; 5
+ 554:	85 e0       	ldi	r24, 0x05	; 5
+ 556:	8a 95       	dec	r24
+ 558:	f1 f7       	brne	.-4      	; 0x556 <SPI_initial+0xbe>
+ 55a:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0x0C;						//Opercion normal
- 554:	8c e0       	ldi	r24, 0x0C	; 12
- 556:	90 e0       	ldi	r25, 0x00	; 0
- 558:	90 93 5f 01 	sts	0x015F, r25
- 55c:	80 93 5e 01 	sts	0x015E, r24
+ 55c:	8c e0       	ldi	r24, 0x0C	; 12
+ 55e:	90 e0       	ldi	r25, 0x00	; 0
+ 560:	90 93 5f 01 	sts	0x015F, r25
+ 564:	80 93 5e 01 	sts	0x015E, r24
 	SPI_MasterTransmit(DSPI);
- 560:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
- 564:	85 e0       	ldi	r24, 0x05	; 5
- 566:	8a 95       	dec	r24
- 568:	f1 f7       	brne	.-4      	; 0x566 <SPI_initial+0xd6>
- 56a:	00 00       	nop
+ 568:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
+ 56c:	85 e0       	ldi	r24, 0x05	; 5
+ 56e:	8a 95       	dec	r24
+ 570:	f1 f7       	brne	.-4      	; 0x56e <SPI_initial+0xd6>
+ 572:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0x01;						//Decodificación de código B para dígitos 7-0
- 56c:	81 e0       	ldi	r24, 0x01	; 1
- 56e:	90 e0       	ldi	r25, 0x00	; 0
- 570:	90 93 5f 01 	sts	0x015F, r25
- 574:	80 93 5e 01 	sts	0x015E, r24
+ 574:	81 e0       	ldi	r24, 0x01	; 1
+ 576:	90 e0       	ldi	r25, 0x00	; 0
+ 578:	90 93 5f 01 	sts	0x015F, r25
+ 57c:	80 93 5e 01 	sts	0x015E, r24
 	SPI_MasterTransmit(DSPI);
- 578:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
+ 580:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
 	PORTB = (1<<PORTB2);				//Indico fin de transferencia
- 57c:	84 e0       	ldi	r24, 0x04	; 4
- 57e:	85 b9       	out	0x05, r24	; 5
- 580:	85 e0       	ldi	r24, 0x05	; 5
- 582:	8a 95       	dec	r24
- 584:	f1 f7       	brne	.-4      	; 0x582 <SPI_initial+0xf2>
- 586:	00 00       	nop
+ 584:	84 e0       	ldi	r24, 0x04	; 4
+ 586:	85 b9       	out	0x05, r24	; 5
+ 588:	85 e0       	ldi	r24, 0x05	; 5
+ 58a:	8a 95       	dec	r24
+ 58c:	f1 f7       	brne	.-4      	; 0x58a <SPI_initial+0xf2>
+ 58e:	00 00       	nop
 	_delay_us(1);
 	
 	////////////////////////////////////////// Modo de testeo /////////////////////////////////////////
 	
 	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
- 588:	15 b8       	out	0x05, r1	; 5
- 58a:	85 e0       	ldi	r24, 0x05	; 5
- 58c:	8a 95       	dec	r24
- 58e:	f1 f7       	brne	.-4      	; 0x58c <SPI_initial+0xfc>
- 590:	00 00       	nop
+ 590:	15 b8       	out	0x05, r1	; 5
+ 592:	85 e0       	ldi	r24, 0x05	; 5
+ 594:	8a 95       	dec	r24
+ 596:	f1 f7       	brne	.-4      	; 0x594 <SPI_initial+0xfc>
+ 598:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0x0F;						//Opercion normal
- 592:	8f e0       	ldi	r24, 0x0F	; 15
- 594:	90 e0       	ldi	r25, 0x00	; 0
- 596:	90 93 5f 01 	sts	0x015F, r25
- 59a:	80 93 5e 01 	sts	0x015E, r24
+ 59a:	8f e0       	ldi	r24, 0x0F	; 15
+ 59c:	90 e0       	ldi	r25, 0x00	; 0
+ 59e:	90 93 5f 01 	sts	0x015F, r25
+ 5a2:	80 93 5e 01 	sts	0x015E, r24
 	SPI_MasterTransmit(DSPI);
- 59e:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
- 5a2:	85 e0       	ldi	r24, 0x05	; 5
- 5a4:	8a 95       	dec	r24
- 5a6:	f1 f7       	brne	.-4      	; 0x5a4 <SPI_initial+0x114>
- 5a8:	00 00       	nop
+ 5a6:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
+ 5aa:	85 e0       	ldi	r24, 0x05	; 5
+ 5ac:	8a 95       	dec	r24
+ 5ae:	f1 f7       	brne	.-4      	; 0x5ac <SPI_initial+0x114>
+ 5b0:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0x00;						//Decodificación de código B para dígitos 7-0
- 5aa:	10 92 5f 01 	sts	0x015F, r1
- 5ae:	10 92 5e 01 	sts	0x015E, r1
+ 5b2:	10 92 5f 01 	sts	0x015F, r1
+ 5b6:	10 92 5e 01 	sts	0x015E, r1
 	SPI_MasterTransmit(DSPI);
- 5b2:	80 e0       	ldi	r24, 0x00	; 0
- 5b4:	90 e0       	ldi	r25, 0x00	; 0
- 5b6:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
+ 5ba:	80 e0       	ldi	r24, 0x00	; 0
+ 5bc:	90 e0       	ldi	r25, 0x00	; 0
+ 5be:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
 	PORTB = (1<<PORTB2);				//Indico fin de transferencia
- 5ba:	84 e0       	ldi	r24, 0x04	; 4
- 5bc:	85 b9       	out	0x05, r24	; 5
- 5be:	85 e0       	ldi	r24, 0x05	; 5
- 5c0:	8a 95       	dec	r24
- 5c2:	f1 f7       	brne	.-4      	; 0x5c0 <SPI_initial+0x130>
- 5c4:	00 00       	nop
+ 5c2:	84 e0       	ldi	r24, 0x04	; 4
+ 5c4:	85 b9       	out	0x05, r24	; 5
+ 5c6:	85 e0       	ldi	r24, 0x05	; 5
+ 5c8:	8a 95       	dec	r24
+ 5ca:	f1 f7       	brne	.-4      	; 0x5c8 <SPI_initial+0x130>
+ 5cc:	00 00       	nop
 	_delay_us(1);
 	
 	////////////////////////////////////////// Inician todos apagados /////////////////////////////////////////
 	
 	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
- 5c6:	15 b8       	out	0x05, r1	; 5
- 5c8:	85 e0       	ldi	r24, 0x05	; 5
- 5ca:	8a 95       	dec	r24
- 5cc:	f1 f7       	brne	.-4      	; 0x5ca <SPI_initial+0x13a>
- 5ce:	00 00       	nop
+ 5ce:	15 b8       	out	0x05, r1	; 5
+ 5d0:	85 e0       	ldi	r24, 0x05	; 5
+ 5d2:	8a 95       	dec	r24
+ 5d4:	f1 f7       	brne	.-4      	; 0x5d2 <SPI_initial+0x13a>
+ 5d6:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0x01;						//Bit 0
- 5d0:	81 e0       	ldi	r24, 0x01	; 1
- 5d2:	90 e0       	ldi	r25, 0x00	; 0
- 5d4:	90 93 5f 01 	sts	0x015F, r25
- 5d8:	80 93 5e 01 	sts	0x015E, r24
+ 5d8:	81 e0       	ldi	r24, 0x01	; 1
+ 5da:	90 e0       	ldi	r25, 0x00	; 0
+ 5dc:	90 93 5f 01 	sts	0x015F, r25
+ 5e0:	80 93 5e 01 	sts	0x015E, r24
 	SPI_MasterTransmit(DSPI);
- 5dc:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
- 5e0:	85 e0       	ldi	r24, 0x05	; 5
- 5e2:	8a 95       	dec	r24
- 5e4:	f1 f7       	brne	.-4      	; 0x5e2 <SPI_initial+0x152>
- 5e6:	00 00       	nop
+ 5e4:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
+ 5e8:	85 e0       	ldi	r24, 0x05	; 5
+ 5ea:	8a 95       	dec	r24
+ 5ec:	f1 f7       	brne	.-4      	; 0x5ea <SPI_initial+0x152>
+ 5ee:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0xFF;
- 5e8:	8f ef       	ldi	r24, 0xFF	; 255
- 5ea:	90 e0       	ldi	r25, 0x00	; 0
- 5ec:	90 93 5f 01 	sts	0x015F, r25
- 5f0:	80 93 5e 01 	sts	0x015E, r24
+ 5f0:	8f ef       	ldi	r24, 0xFF	; 255
+ 5f2:	90 e0       	ldi	r25, 0x00	; 0
+ 5f4:	90 93 5f 01 	sts	0x015F, r25
+ 5f8:	80 93 5e 01 	sts	0x015E, r24
 	SPI_MasterTransmit(DSPI);
- 5f4:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
+ 5fc:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
 	PORTB = (1<<PORTB2);				//Indico fin de transferencia
- 5f8:	84 e0       	ldi	r24, 0x04	; 4
- 5fa:	85 b9       	out	0x05, r24	; 5
- 5fc:	85 e0       	ldi	r24, 0x05	; 5
- 5fe:	8a 95       	dec	r24
- 600:	f1 f7       	brne	.-4      	; 0x5fe <SPI_initial+0x16e>
- 602:	00 00       	nop
+ 600:	84 e0       	ldi	r24, 0x04	; 4
+ 602:	85 b9       	out	0x05, r24	; 5
+ 604:	85 e0       	ldi	r24, 0x05	; 5
+ 606:	8a 95       	dec	r24
+ 608:	f1 f7       	brne	.-4      	; 0x606 <SPI_initial+0x16e>
+ 60a:	00 00       	nop
 	_delay_us(1);
 	
 	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
- 604:	15 b8       	out	0x05, r1	; 5
- 606:	85 e0       	ldi	r24, 0x05	; 5
- 608:	8a 95       	dec	r24
- 60a:	f1 f7       	brne	.-4      	; 0x608 <SPI_initial+0x178>
- 60c:	00 00       	nop
+ 60c:	15 b8       	out	0x05, r1	; 5
+ 60e:	85 e0       	ldi	r24, 0x05	; 5
+ 610:	8a 95       	dec	r24
+ 612:	f1 f7       	brne	.-4      	; 0x610 <SPI_initial+0x178>
+ 614:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0x02;						//Bit 1
- 60e:	82 e0       	ldi	r24, 0x02	; 2
- 610:	90 e0       	ldi	r25, 0x00	; 0
- 612:	90 93 5f 01 	sts	0x015F, r25
- 616:	80 93 5e 01 	sts	0x015E, r24
+ 616:	82 e0       	ldi	r24, 0x02	; 2
+ 618:	90 e0       	ldi	r25, 0x00	; 0
+ 61a:	90 93 5f 01 	sts	0x015F, r25
+ 61e:	80 93 5e 01 	sts	0x015E, r24
 	SPI_MasterTransmit(DSPI);
- 61a:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
- 61e:	85 e0       	ldi	r24, 0x05	; 5
- 620:	8a 95       	dec	r24
- 622:	f1 f7       	brne	.-4      	; 0x620 <SPI_initial+0x190>
- 624:	00 00       	nop
+ 622:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
+ 626:	85 e0       	ldi	r24, 0x05	; 5
+ 628:	8a 95       	dec	r24
+ 62a:	f1 f7       	brne	.-4      	; 0x628 <SPI_initial+0x190>
+ 62c:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0xFF;
- 626:	8f ef       	ldi	r24, 0xFF	; 255
- 628:	90 e0       	ldi	r25, 0x00	; 0
- 62a:	90 93 5f 01 	sts	0x015F, r25
- 62e:	80 93 5e 01 	sts	0x015E, r24
+ 62e:	8f ef       	ldi	r24, 0xFF	; 255
+ 630:	90 e0       	ldi	r25, 0x00	; 0
+ 632:	90 93 5f 01 	sts	0x015F, r25
+ 636:	80 93 5e 01 	sts	0x015E, r24
 	SPI_MasterTransmit(DSPI);
- 632:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
+ 63a:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
 	PORTB = (1<<PORTB2);				//Indico fin de transferencia
- 636:	84 e0       	ldi	r24, 0x04	; 4
- 638:	85 b9       	out	0x05, r24	; 5
- 63a:	85 e0       	ldi	r24, 0x05	; 5
- 63c:	8a 95       	dec	r24
- 63e:	f1 f7       	brne	.-4      	; 0x63c <SPI_initial+0x1ac>
- 640:	00 00       	nop
+ 63e:	84 e0       	ldi	r24, 0x04	; 4
+ 640:	85 b9       	out	0x05, r24	; 5
+ 642:	85 e0       	ldi	r24, 0x05	; 5
+ 644:	8a 95       	dec	r24
+ 646:	f1 f7       	brne	.-4      	; 0x644 <SPI_initial+0x1ac>
+ 648:	00 00       	nop
 	_delay_us(1);
 	
 	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
- 642:	15 b8       	out	0x05, r1	; 5
- 644:	85 e0       	ldi	r24, 0x05	; 5
- 646:	8a 95       	dec	r24
- 648:	f1 f7       	brne	.-4      	; 0x646 <SPI_initial+0x1b6>
- 64a:	00 00       	nop
+ 64a:	15 b8       	out	0x05, r1	; 5
+ 64c:	85 e0       	ldi	r24, 0x05	; 5
+ 64e:	8a 95       	dec	r24
+ 650:	f1 f7       	brne	.-4      	; 0x64e <SPI_initial+0x1b6>
+ 652:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0x03;						//Bit 2
- 64c:	83 e0       	ldi	r24, 0x03	; 3
- 64e:	90 e0       	ldi	r25, 0x00	; 0
- 650:	90 93 5f 01 	sts	0x015F, r25
- 654:	80 93 5e 01 	sts	0x015E, r24
+ 654:	83 e0       	ldi	r24, 0x03	; 3
+ 656:	90 e0       	ldi	r25, 0x00	; 0
+ 658:	90 93 5f 01 	sts	0x015F, r25
+ 65c:	80 93 5e 01 	sts	0x015E, r24
 	SPI_MasterTransmit(DSPI);
- 658:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
- 65c:	85 e0       	ldi	r24, 0x05	; 5
- 65e:	8a 95       	dec	r24
- 660:	f1 f7       	brne	.-4      	; 0x65e <SPI_initial+0x1ce>
- 662:	00 00       	nop
+ 660:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
+ 664:	85 e0       	ldi	r24, 0x05	; 5
+ 666:	8a 95       	dec	r24
+ 668:	f1 f7       	brne	.-4      	; 0x666 <SPI_initial+0x1ce>
+ 66a:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0xFF;
- 664:	8f ef       	ldi	r24, 0xFF	; 255
- 666:	90 e0       	ldi	r25, 0x00	; 0
- 668:	90 93 5f 01 	sts	0x015F, r25
- 66c:	80 93 5e 01 	sts	0x015E, r24
+ 66c:	8f ef       	ldi	r24, 0xFF	; 255
+ 66e:	90 e0       	ldi	r25, 0x00	; 0
+ 670:	90 93 5f 01 	sts	0x015F, r25
+ 674:	80 93 5e 01 	sts	0x015E, r24
 	SPI_MasterTransmit(DSPI);
- 670:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
+ 678:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
 	PORTB = (1<<PORTB2);				//Indico fin de transferencia
- 674:	84 e0       	ldi	r24, 0x04	; 4
- 676:	85 b9       	out	0x05, r24	; 5
- 678:	85 e0       	ldi	r24, 0x05	; 5
- 67a:	8a 95       	dec	r24
- 67c:	f1 f7       	brne	.-4      	; 0x67a <SPI_initial+0x1ea>
- 67e:	00 00       	nop
- 680:	08 95       	ret
+ 67c:	84 e0       	ldi	r24, 0x04	; 4
+ 67e:	85 b9       	out	0x05, r24	; 5
+ 680:	85 e0       	ldi	r24, 0x05	; 5
+ 682:	8a 95       	dec	r24
+ 684:	f1 f7       	brne	.-4      	; 0x682 <SPI_initial+0x1ea>
+ 686:	00 00       	nop
+ 688:	08 95       	ret
 
-00000682 <onoff>:
+0000068a <onoff>:
 	
 }
 //######################################################### FUNCION DE MOSTRAR ON/OFF ##################################################################################################################
 
 void onoff ()
 {
- 682:	cf 92       	push	r12
- 684:	df 92       	push	r13
- 686:	ef 92       	push	r14
- 688:	ff 92       	push	r15
- 68a:	0f 93       	push	r16
- 68c:	1f 93       	push	r17
- 68e:	cf 93       	push	r28
- 690:	df 93       	push	r29
- 692:	cd b7       	in	r28, 0x3d	; 61
- 694:	de b7       	in	r29, 0x3e	; 62
- 696:	61 97       	sbiw	r28, 0x11	; 17
- 698:	0f b6       	in	r0, 0x3f	; 63
- 69a:	f8 94       	cli
- 69c:	de bf       	out	0x3e, r29	; 62
- 69e:	0f be       	out	0x3f, r0	; 63
- 6a0:	cd bf       	out	0x3d, r28	; 61
+ 68a:	cf 92       	push	r12
+ 68c:	df 92       	push	r13
+ 68e:	ef 92       	push	r14
+ 690:	ff 92       	push	r15
+ 692:	0f 93       	push	r16
+ 694:	1f 93       	push	r17
+ 696:	cf 93       	push	r28
+ 698:	df 93       	push	r29
+ 69a:	cd b7       	in	r28, 0x3d	; 61
+ 69c:	de b7       	in	r29, 0x3e	; 62
+ 69e:	61 97       	sbiw	r28, 0x11	; 17
+ 6a0:	0f b6       	in	r0, 0x3f	; 63
+ 6a2:	f8 94       	cli
+ 6a4:	de bf       	out	0x3e, r29	; 62
+ 6a6:	0f be       	out	0x3f, r0	; 63
+ 6a8:	cd bf       	out	0x3d, r28	; 61
 	char on[]="PWM on\n";
- 6a2:	88 e0       	ldi	r24, 0x08	; 8
- 6a4:	e0 e2       	ldi	r30, 0x20	; 32
- 6a6:	f1 e0       	ldi	r31, 0x01	; 1
- 6a8:	de 01       	movw	r26, r28
- 6aa:	11 96       	adiw	r26, 0x01	; 1
- 6ac:	01 90       	ld	r0, Z+
- 6ae:	0d 92       	st	X+, r0
- 6b0:	8a 95       	dec	r24
- 6b2:	e1 f7       	brne	.-8      	; 0x6ac <onoff+0x2a>
+ 6aa:	88 e0       	ldi	r24, 0x08	; 8
+ 6ac:	e0 e2       	ldi	r30, 0x20	; 32
+ 6ae:	f1 e0       	ldi	r31, 0x01	; 1
+ 6b0:	de 01       	movw	r26, r28
+ 6b2:	11 96       	adiw	r26, 0x01	; 1
+ 6b4:	01 90       	ld	r0, Z+
+ 6b6:	0d 92       	st	X+, r0
+ 6b8:	8a 95       	dec	r24
+ 6ba:	e1 f7       	brne	.-8      	; 0x6b4 <onoff+0x2a>
 	char off[]="PWM off\n";
- 6b4:	89 e0       	ldi	r24, 0x09	; 9
- 6b6:	e8 e2       	ldi	r30, 0x28	; 40
- 6b8:	f1 e0       	ldi	r31, 0x01	; 1
- 6ba:	de 01       	movw	r26, r28
- 6bc:	19 96       	adiw	r26, 0x09	; 9
- 6be:	01 90       	ld	r0, Z+
- 6c0:	0d 92       	st	X+, r0
- 6c2:	8a 95       	dec	r24
- 6c4:	e1 f7       	brne	.-8      	; 0x6be <onoff+0x3c>
+ 6bc:	89 e0       	ldi	r24, 0x09	; 9
+ 6be:	e8 e2       	ldi	r30, 0x28	; 40
+ 6c0:	f1 e0       	ldi	r31, 0x01	; 1
+ 6c2:	de 01       	movw	r26, r28
+ 6c4:	19 96       	adiw	r26, 0x09	; 9
+ 6c6:	01 90       	ld	r0, Z+
+ 6c8:	0d 92       	st	X+, r0
+ 6ca:	8a 95       	dec	r24
+ 6cc:	e1 f7       	brne	.-8      	; 0x6c6 <onoff+0x3c>
 	
 	Contoff++;
- 6c6:	80 91 58 01 	lds	r24, 0x0158
- 6ca:	90 91 59 01 	lds	r25, 0x0159
- 6ce:	01 96       	adiw	r24, 0x01	; 1
- 6d0:	90 93 59 01 	sts	0x0159, r25
- 6d4:	80 93 58 01 	sts	0x0158, r24
+ 6ce:	80 91 58 01 	lds	r24, 0x0158
+ 6d2:	90 91 59 01 	lds	r25, 0x0159
+ 6d6:	01 96       	adiw	r24, 0x01	; 1
+ 6d8:	90 93 59 01 	sts	0x0159, r25
+ 6dc:	80 93 58 01 	sts	0x0158, r24
 	
 	if ((Contoff>1))
- 6d8:	82 30       	cpi	r24, 0x02	; 2
- 6da:	91 05       	cpc	r25, r1
- 6dc:	2c f0       	brlt	.+10     	; 0x6e8 <onoff+0x66>
+ 6e0:	82 30       	cpi	r24, 0x02	; 2
+ 6e2:	91 05       	cpc	r25, r1
+ 6e4:	2c f0       	brlt	.+10     	; 0x6f0 <onoff+0x66>
 	{
 		Contoff=0;
- 6de:	10 92 59 01 	sts	0x0159, r1
- 6e2:	10 92 58 01 	sts	0x0158, r1
- 6e6:	38 c0       	rjmp	.+112    	; 0x758 <onoff+0xd6>
+ 6e6:	10 92 59 01 	sts	0x0159, r1
+ 6ea:	10 92 58 01 	sts	0x0158, r1
+ 6ee:	38 c0       	rjmp	.+112    	; 0x760 <onoff+0xd6>
 	}
 	
 	if ((Contoff == 1))
- 6e8:	01 97       	sbiw	r24, 0x01	; 1
- 6ea:	81 f5       	brne	.+96     	; 0x74c <onoff+0xca>
+ 6f0:	01 97       	sbiw	r24, 0x01	; 1
+ 6f2:	81 f5       	brne	.+96     	; 0x754 <onoff+0xca>
 	{
 		for (i=0;i<=strlen(on);i++)
- 6ec:	10 92 6d 01 	sts	0x016D, r1
- 6f0:	10 92 6c 01 	sts	0x016C, r1
- 6f4:	80 e0       	ldi	r24, 0x00	; 0
- 6f6:	90 e0       	ldi	r25, 0x00	; 0
+ 6f4:	10 92 6d 01 	sts	0x016D, r1
+ 6f8:	10 92 6c 01 	sts	0x016C, r1
+ 6fc:	80 e0       	ldi	r24, 0x00	; 0
+ 6fe:	90 e0       	ldi	r25, 0x00	; 0
 		{
 			while ( !(UCSR0A &(1<<UDRE0)));
- 6f8:	00 ec       	ldi	r16, 0xC0	; 192
- 6fa:	10 e0       	ldi	r17, 0x00	; 0
+ 700:	00 ec       	ldi	r16, 0xC0	; 192
+ 702:	10 e0       	ldi	r17, 0x00	; 0
 			UDR0=on[i];
- 6fc:	9e 01       	movw	r18, r28
- 6fe:	2f 5f       	subi	r18, 0xFF	; 255
- 700:	3f 4f       	sbci	r19, 0xFF	; 255
- 702:	79 01       	movw	r14, r18
- 704:	0f 2e       	mov	r0, r31
- 706:	f6 ec       	ldi	r31, 0xC6	; 198
- 708:	cf 2e       	mov	r12, r31
- 70a:	d1 2c       	mov	r13, r1
- 70c:	f0 2d       	mov	r31, r0
+ 704:	9e 01       	movw	r18, r28
+ 706:	2f 5f       	subi	r18, 0xFF	; 255
+ 708:	3f 4f       	sbci	r19, 0xFF	; 255
+ 70a:	79 01       	movw	r14, r18
+ 70c:	0f 2e       	mov	r0, r31
+ 70e:	f6 ec       	ldi	r31, 0xC6	; 198
+ 710:	cf 2e       	mov	r12, r31
+ 712:	d1 2c       	mov	r13, r1
+ 714:	f0 2d       	mov	r31, r0
 	
 	if ((Contoff == 1))
 	{
 		for (i=0;i<=strlen(on);i++)
 		{
 			while ( !(UCSR0A &(1<<UDRE0)));
- 70e:	d8 01       	movw	r26, r16
- 710:	2c 91       	ld	r18, X
- 712:	25 ff       	sbrs	r18, 5
- 714:	fc cf       	rjmp	.-8      	; 0x70e <onoff+0x8c>
+ 716:	d8 01       	movw	r26, r16
+ 718:	2c 91       	ld	r18, X
+ 71a:	25 ff       	sbrs	r18, 5
+ 71c:	fc cf       	rjmp	.-8      	; 0x716 <onoff+0x8c>
 			UDR0=on[i];
- 716:	f7 01       	movw	r30, r14
- 718:	e8 0f       	add	r30, r24
- 71a:	f9 1f       	adc	r31, r25
- 71c:	80 81       	ld	r24, Z
- 71e:	f6 01       	movw	r30, r12
- 720:	80 83       	st	Z, r24
+ 71e:	f7 01       	movw	r30, r14
+ 720:	e8 0f       	add	r30, r24
+ 722:	f9 1f       	adc	r31, r25
+ 724:	80 81       	ld	r24, Z
+ 726:	f6 01       	movw	r30, r12
+ 728:	80 83       	st	Z, r24
 			SPI_initial();
- 722:	0e 94 48 02 	call	0x490	; 0x490 <SPI_initial>
+ 72a:	0e 94 4c 02 	call	0x498	; 0x498 <SPI_initial>
 		Contoff=0;
 	}
 	
 	if ((Contoff == 1))
 	{
 		for (i=0;i<=strlen(on);i++)
- 726:	80 91 6c 01 	lds	r24, 0x016C
- 72a:	90 91 6d 01 	lds	r25, 0x016D
- 72e:	01 96       	adiw	r24, 0x01	; 1
- 730:	90 93 6d 01 	sts	0x016D, r25
- 734:	80 93 6c 01 	sts	0x016C, r24
- 738:	f7 01       	movw	r30, r14
- 73a:	01 90       	ld	r0, Z+
- 73c:	00 20       	and	r0, r0
- 73e:	e9 f7       	brne	.-6      	; 0x73a <onoff+0xb8>
- 740:	31 97       	sbiw	r30, 0x01	; 1
- 742:	ee 19       	sub	r30, r14
- 744:	ff 09       	sbc	r31, r15
- 746:	e8 17       	cp	r30, r24
- 748:	f9 07       	cpc	r31, r25
- 74a:	08 f7       	brcc	.-62     	; 0x70e <onoff+0x8c>
+ 72e:	80 91 6c 01 	lds	r24, 0x016C
+ 732:	90 91 6d 01 	lds	r25, 0x016D
+ 736:	01 96       	adiw	r24, 0x01	; 1
+ 738:	90 93 6d 01 	sts	0x016D, r25
+ 73c:	80 93 6c 01 	sts	0x016C, r24
+ 740:	f7 01       	movw	r30, r14
+ 742:	01 90       	ld	r0, Z+
+ 744:	00 20       	and	r0, r0
+ 746:	e9 f7       	brne	.-6      	; 0x742 <onoff+0xb8>
+ 748:	31 97       	sbiw	r30, 0x01	; 1
+ 74a:	ee 19       	sub	r30, r14
+ 74c:	ff 09       	sbc	r31, r15
+ 74e:	e8 17       	cp	r30, r24
+ 750:	f9 07       	cpc	r31, r25
+ 752:	08 f7       	brcc	.-62     	; 0x716 <onoff+0x8c>
 			UDR0=on[i];
 			SPI_initial();
 		}
 	}
 	
 	if ((Contoff == 0))
- 74c:	80 91 58 01 	lds	r24, 0x0158
- 750:	90 91 59 01 	lds	r25, 0x0159
- 754:	89 2b       	or	r24, r25
- 756:	51 f5       	brne	.+84     	; 0x7ac <onoff+0x12a>
+ 754:	80 91 58 01 	lds	r24, 0x0158
+ 758:	90 91 59 01 	lds	r25, 0x0159
+ 75c:	89 2b       	or	r24, r25
+ 75e:	51 f5       	brne	.+84     	; 0x7b4 <onoff+0x12a>
 	{
 		for (i=0;i<=strlen(off);i++)
- 758:	10 92 6d 01 	sts	0x016D, r1
- 75c:	10 92 6c 01 	sts	0x016C, r1
- 760:	a0 e0       	ldi	r26, 0x00	; 0
- 762:	b0 e0       	ldi	r27, 0x00	; 0
+ 760:	10 92 6d 01 	sts	0x016D, r1
+ 764:	10 92 6c 01 	sts	0x016C, r1
+ 768:	a0 e0       	ldi	r26, 0x00	; 0
+ 76a:	b0 e0       	ldi	r27, 0x00	; 0
 		{
 			while ( !(UCSR0A &(1<<UDRE0)));
- 764:	e0 ec       	ldi	r30, 0xC0	; 192
- 766:	f0 e0       	ldi	r31, 0x00	; 0
+ 76c:	e0 ec       	ldi	r30, 0xC0	; 192
+ 76e:	f0 e0       	ldi	r31, 0x00	; 0
 			UDR0=off[i];
- 768:	9e 01       	movw	r18, r28
- 76a:	27 5f       	subi	r18, 0xF7	; 247
- 76c:	3f 4f       	sbci	r19, 0xFF	; 255
- 76e:	46 ec       	ldi	r20, 0xC6	; 198
- 770:	50 e0       	ldi	r21, 0x00	; 0
- 772:	01 c0       	rjmp	.+2      	; 0x776 <onoff+0xf4>
+ 770:	9e 01       	movw	r18, r28
+ 772:	27 5f       	subi	r18, 0xF7	; 247
+ 774:	3f 4f       	sbci	r19, 0xFF	; 255
+ 776:	46 ec       	ldi	r20, 0xC6	; 198
+ 778:	50 e0       	ldi	r21, 0x00	; 0
+ 77a:	01 c0       	rjmp	.+2      	; 0x77e <onoff+0xf4>
 		}
 	}
 	
 	if ((Contoff == 0))
 	{
 		for (i=0;i<=strlen(off);i++)
- 774:	dc 01       	movw	r26, r24
+ 77c:	dc 01       	movw	r26, r24
 		{
 			while ( !(UCSR0A &(1<<UDRE0)));
- 776:	80 81       	ld	r24, Z
- 778:	85 ff       	sbrs	r24, 5
- 77a:	fd cf       	rjmp	.-6      	; 0x776 <onoff+0xf4>
+ 77e:	80 81       	ld	r24, Z
+ 780:	85 ff       	sbrs	r24, 5
+ 782:	fd cf       	rjmp	.-6      	; 0x77e <onoff+0xf4>
 			UDR0=off[i];
- 77c:	a2 0f       	add	r26, r18
- 77e:	b3 1f       	adc	r27, r19
- 780:	8c 91       	ld	r24, X
- 782:	da 01       	movw	r26, r20
- 784:	8c 93       	st	X, r24
+ 784:	a2 0f       	add	r26, r18
+ 786:	b3 1f       	adc	r27, r19
+ 788:	8c 91       	ld	r24, X
+ 78a:	da 01       	movw	r26, r20
+ 78c:	8c 93       	st	X, r24
 		}
 	}
 	
 	if ((Contoff == 0))
 	{
 		for (i=0;i<=strlen(off);i++)
- 786:	80 91 6c 01 	lds	r24, 0x016C
- 78a:	90 91 6d 01 	lds	r25, 0x016D
- 78e:	01 96       	adiw	r24, 0x01	; 1
- 790:	90 93 6d 01 	sts	0x016D, r25
- 794:	80 93 6c 01 	sts	0x016C, r24
- 798:	d9 01       	movw	r26, r18
- 79a:	0d 90       	ld	r0, X+
- 79c:	00 20       	and	r0, r0
- 79e:	e9 f7       	brne	.-6      	; 0x79a <onoff+0x118>
- 7a0:	11 97       	sbiw	r26, 0x01	; 1
- 7a2:	a2 1b       	sub	r26, r18
- 7a4:	b3 0b       	sbc	r27, r19
- 7a6:	a8 17       	cp	r26, r24
- 7a8:	b9 07       	cpc	r27, r25
- 7aa:	20 f7       	brcc	.-56     	; 0x774 <onoff+0xf2>
+ 78e:	80 91 6c 01 	lds	r24, 0x016C
+ 792:	90 91 6d 01 	lds	r25, 0x016D
+ 796:	01 96       	adiw	r24, 0x01	; 1
+ 798:	90 93 6d 01 	sts	0x016D, r25
+ 79c:	80 93 6c 01 	sts	0x016C, r24
+ 7a0:	d9 01       	movw	r26, r18
+ 7a2:	0d 90       	ld	r0, X+
+ 7a4:	00 20       	and	r0, r0
+ 7a6:	e9 f7       	brne	.-6      	; 0x7a2 <onoff+0x118>
+ 7a8:	11 97       	sbiw	r26, 0x01	; 1
+ 7aa:	a2 1b       	sub	r26, r18
+ 7ac:	b3 0b       	sbc	r27, r19
+ 7ae:	a8 17       	cp	r26, r24
+ 7b0:	b9 07       	cpc	r27, r25
+ 7b2:	20 f7       	brcc	.-56     	; 0x77c <onoff+0xf2>
 			UDR0=off[i];
 		}
 		
 	}
 	return;
 }
- 7ac:	61 96       	adiw	r28, 0x11	; 17
- 7ae:	0f b6       	in	r0, 0x3f	; 63
- 7b0:	f8 94       	cli
- 7b2:	de bf       	out	0x3e, r29	; 62
- 7b4:	0f be       	out	0x3f, r0	; 63
- 7b6:	cd bf       	out	0x3d, r28	; 61
- 7b8:	df 91       	pop	r29
- 7ba:	cf 91       	pop	r28
- 7bc:	1f 91       	pop	r17
- 7be:	0f 91       	pop	r16
- 7c0:	ff 90       	pop	r15
- 7c2:	ef 90       	pop	r14
- 7c4:	df 90       	pop	r13
- 7c6:	cf 90       	pop	r12
- 7c8:	08 95       	ret
+ 7b4:	61 96       	adiw	r28, 0x11	; 17
+ 7b6:	0f b6       	in	r0, 0x3f	; 63
+ 7b8:	f8 94       	cli
+ 7ba:	de bf       	out	0x3e, r29	; 62
+ 7bc:	0f be       	out	0x3f, r0	; 63
+ 7be:	cd bf       	out	0x3d, r28	; 61
+ 7c0:	df 91       	pop	r29
+ 7c2:	cf 91       	pop	r28
+ 7c4:	1f 91       	pop	r17
+ 7c6:	0f 91       	pop	r16
+ 7c8:	ff 90       	pop	r15
+ 7ca:	ef 90       	pop	r14
+ 7cc:	df 90       	pop	r13
+ 7ce:	cf 90       	pop	r12
+ 7d0:	08 95       	ret
 
-000007ca <Mostrar_Tensiones>:
+000007d2 <Mostrar_Tensiones>:
 	PORTB = (1<<PORTB2);				//Indico fin de transferencia
 	_delay_us(1);
 }
 
 void Mostrar_Tensiones()
 {
- 7ca:	ef 92       	push	r14
- 7cc:	ff 92       	push	r15
- 7ce:	0f 93       	push	r16
- 7d0:	1f 93       	push	r17
- 7d2:	cf 93       	push	r28
- 7d4:	df 93       	push	r29
- 7d6:	cd b7       	in	r28, 0x3d	; 61
- 7d8:	de b7       	in	r29, 0x3e	; 62
- 7da:	a1 97       	sbiw	r28, 0x21	; 33
- 7dc:	0f b6       	in	r0, 0x3f	; 63
- 7de:	f8 94       	cli
- 7e0:	de bf       	out	0x3e, r29	; 62
- 7e2:	0f be       	out	0x3f, r0	; 63
- 7e4:	cd bf       	out	0x3d, r28	; 61
+ 7d2:	ef 92       	push	r14
+ 7d4:	ff 92       	push	r15
+ 7d6:	0f 93       	push	r16
+ 7d8:	1f 93       	push	r17
+ 7da:	cf 93       	push	r28
+ 7dc:	df 93       	push	r29
+ 7de:	cd b7       	in	r28, 0x3d	; 61
+ 7e0:	de b7       	in	r29, 0x3e	; 62
+ 7e2:	a1 97       	sbiw	r28, 0x21	; 33
+ 7e4:	0f b6       	in	r0, 0x3f	; 63
+ 7e6:	f8 94       	cli
+ 7e8:	de bf       	out	0x3e, r29	; 62
+ 7ea:	0f be       	out	0x3f, r0	; 63
+ 7ec:	cd bf       	out	0x3d, r28	; 61
 	int cen = 0, dec = 0, uni = 0;
 	int cenD = 0, decD = 0, uniD = 0;
 	unsigned char Resto;
 	unsigned char RestoD;
 	
 	int Tension_Real = ADC_Volt*(10*10)/1023;
- 7e6:	20 91 5a 01 	lds	r18, 0x015A
- 7ea:	30 91 5b 01 	lds	r19, 0x015B
- 7ee:	40 91 5c 01 	lds	r20, 0x015C
- 7f2:	50 91 5d 01 	lds	r21, 0x015D
- 7f6:	a4 e6       	ldi	r26, 0x64	; 100
- 7f8:	b0 e0       	ldi	r27, 0x00	; 0
- 7fa:	0e 94 3e 06 	call	0xc7c	; 0xc7c <__muluhisi3>
- 7fe:	2f ef       	ldi	r18, 0xFF	; 255
- 800:	33 e0       	ldi	r19, 0x03	; 3
- 802:	40 e0       	ldi	r20, 0x00	; 0
- 804:	50 e0       	ldi	r21, 0x00	; 0
- 806:	0e 94 1f 06 	call	0xc3e	; 0xc3e <__divmodsi4>
- 80a:	89 01       	movw	r16, r18
+ 7ee:	20 91 5a 01 	lds	r18, 0x015A
+ 7f2:	30 91 5b 01 	lds	r19, 0x015B
+ 7f6:	40 91 5c 01 	lds	r20, 0x015C
+ 7fa:	50 91 5d 01 	lds	r21, 0x015D
+ 7fe:	a4 e6       	ldi	r26, 0x64	; 100
+ 800:	b0 e0       	ldi	r27, 0x00	; 0
+ 802:	0e 94 42 06 	call	0xc84	; 0xc84 <__muluhisi3>
+ 806:	2f ef       	ldi	r18, 0xFF	; 255
+ 808:	33 e0       	ldi	r19, 0x03	; 3
+ 80a:	40 e0       	ldi	r20, 0x00	; 0
+ 80c:	50 e0       	ldi	r21, 0x00	; 0
+ 80e:	0e 94 23 06 	call	0xc46	; 0xc46 <__divmodsi4>
+ 812:	89 01       	movw	r16, r18
 	char Medicion_msj[]="Tension Medida:";
- 80c:	80 e1       	ldi	r24, 0x10	; 16
- 80e:	e1 e3       	ldi	r30, 0x31	; 49
- 810:	f1 e0       	ldi	r31, 0x01	; 1
- 812:	de 01       	movw	r26, r28
- 814:	11 96       	adiw	r26, 0x01	; 1
- 816:	01 90       	ld	r0, Z+
- 818:	0d 92       	st	X+, r0
- 81a:	8a 95       	dec	r24
- 81c:	e1 f7       	brne	.-8      	; 0x816 <Mostrar_Tensiones+0x4c>
+ 814:	80 e1       	ldi	r24, 0x10	; 16
+ 816:	e1 e3       	ldi	r30, 0x31	; 49
+ 818:	f1 e0       	ldi	r31, 0x01	; 1
+ 81a:	de 01       	movw	r26, r28
+ 81c:	11 96       	adiw	r26, 0x01	; 1
+ 81e:	01 90       	ld	r0, Z+
+ 820:	0d 92       	st	X+, r0
+ 822:	8a 95       	dec	r24
+ 824:	e1 f7       	brne	.-8      	; 0x81e <Mostrar_Tensiones+0x4c>
 	char UDeseada_msj[]="Tension Deseada:";
- 81e:	81 e1       	ldi	r24, 0x11	; 17
- 820:	e1 e4       	ldi	r30, 0x41	; 65
- 822:	f1 e0       	ldi	r31, 0x01	; 1
- 824:	de 01       	movw	r26, r28
- 826:	51 96       	adiw	r26, 0x11	; 17
- 828:	01 90       	ld	r0, Z+
- 82a:	0d 92       	st	X+, r0
- 82c:	8a 95       	dec	r24
- 82e:	e1 f7       	brne	.-8      	; 0x828 <Mostrar_Tensiones+0x5e>
+ 826:	81 e1       	ldi	r24, 0x11	; 17
+ 828:	e1 e4       	ldi	r30, 0x41	; 65
+ 82a:	f1 e0       	ldi	r31, 0x01	; 1
+ 82c:	de 01       	movw	r26, r28
+ 82e:	51 96       	adiw	r26, 0x11	; 17
+ 830:	01 90       	ld	r0, Z+
+ 832:	0d 92       	st	X+, r0
+ 834:	8a 95       	dec	r24
+ 836:	e1 f7       	brne	.-8      	; 0x830 <Mostrar_Tensiones+0x5e>
 	
 	for (i=0;i<=strlen(Medicion_msj);i++)
- 830:	10 92 6d 01 	sts	0x016D, r1
- 834:	10 92 6c 01 	sts	0x016C, r1
- 838:	a0 e0       	ldi	r26, 0x00	; 0
- 83a:	b0 e0       	ldi	r27, 0x00	; 0
+ 838:	10 92 6d 01 	sts	0x016D, r1
+ 83c:	10 92 6c 01 	sts	0x016C, r1
+ 840:	a0 e0       	ldi	r26, 0x00	; 0
+ 842:	b0 e0       	ldi	r27, 0x00	; 0
 	{
 		while ( !(UCSR0A &(1<<UDRE0)));
- 83c:	e0 ec       	ldi	r30, 0xC0	; 192
- 83e:	f0 e0       	ldi	r31, 0x00	; 0
+ 844:	e0 ec       	ldi	r30, 0xC0	; 192
+ 846:	f0 e0       	ldi	r31, 0x00	; 0
 		UDR0=Medicion_msj[i];
- 840:	be 01       	movw	r22, r28
- 842:	6f 5f       	subi	r22, 0xFF	; 255
- 844:	7f 4f       	sbci	r23, 0xFF	; 255
- 846:	86 ec       	ldi	r24, 0xC6	; 198
- 848:	90 e0       	ldi	r25, 0x00	; 0
- 84a:	01 c0       	rjmp	.+2      	; 0x84e <Mostrar_Tensiones+0x84>
+ 848:	be 01       	movw	r22, r28
+ 84a:	6f 5f       	subi	r22, 0xFF	; 255
+ 84c:	7f 4f       	sbci	r23, 0xFF	; 255
+ 84e:	86 ec       	ldi	r24, 0xC6	; 198
+ 850:	90 e0       	ldi	r25, 0x00	; 0
+ 852:	01 c0       	rjmp	.+2      	; 0x856 <Mostrar_Tensiones+0x84>
 	
 	int Tension_Real = ADC_Volt*(10*10)/1023;
 	char Medicion_msj[]="Tension Medida:";
 	char UDeseada_msj[]="Tension Deseada:";
 	
 	for (i=0;i<=strlen(Medicion_msj);i++)
- 84c:	da 01       	movw	r26, r20
+ 854:	da 01       	movw	r26, r20
 	{
 		while ( !(UCSR0A &(1<<UDRE0)));
- 84e:	20 81       	ld	r18, Z
- 850:	25 ff       	sbrs	r18, 5
- 852:	fd cf       	rjmp	.-6      	; 0x84e <Mostrar_Tensiones+0x84>
+ 856:	20 81       	ld	r18, Z
+ 858:	25 ff       	sbrs	r18, 5
+ 85a:	fd cf       	rjmp	.-6      	; 0x856 <Mostrar_Tensiones+0x84>
 		UDR0=Medicion_msj[i];
- 854:	a6 0f       	add	r26, r22
- 856:	b7 1f       	adc	r27, r23
- 858:	2c 91       	ld	r18, X
- 85a:	dc 01       	movw	r26, r24
- 85c:	2c 93       	st	X, r18
+ 85c:	a6 0f       	add	r26, r22
+ 85e:	b7 1f       	adc	r27, r23
+ 860:	2c 91       	ld	r18, X
+ 862:	dc 01       	movw	r26, r24
+ 864:	2c 93       	st	X, r18
 	
 	int Tension_Real = ADC_Volt*(10*10)/1023;
 	char Medicion_msj[]="Tension Medida:";
 	char UDeseada_msj[]="Tension Deseada:";
 	
 	for (i=0;i<=strlen(Medicion_msj);i++)
- 85e:	40 91 6c 01 	lds	r20, 0x016C
- 862:	50 91 6d 01 	lds	r21, 0x016D
- 866:	4f 5f       	subi	r20, 0xFF	; 255
- 868:	5f 4f       	sbci	r21, 0xFF	; 255
- 86a:	50 93 6d 01 	sts	0x016D, r21
- 86e:	40 93 6c 01 	sts	0x016C, r20
- 872:	db 01       	movw	r26, r22
- 874:	0d 90       	ld	r0, X+
- 876:	00 20       	and	r0, r0
- 878:	e9 f7       	brne	.-6      	; 0x874 <Mostrar_Tensiones+0xaa>
- 87a:	11 97       	sbiw	r26, 0x01	; 1
- 87c:	a6 1b       	sub	r26, r22
- 87e:	b7 0b       	sbc	r27, r23
- 880:	a4 17       	cp	r26, r20
- 882:	b5 07       	cpc	r27, r21
- 884:	18 f7       	brcc	.-58     	; 0x84c <Mostrar_Tensiones+0x82>
+ 866:	40 91 6c 01 	lds	r20, 0x016C
+ 86a:	50 91 6d 01 	lds	r21, 0x016D
+ 86e:	4f 5f       	subi	r20, 0xFF	; 255
+ 870:	5f 4f       	sbci	r21, 0xFF	; 255
+ 872:	50 93 6d 01 	sts	0x016D, r21
+ 876:	40 93 6c 01 	sts	0x016C, r20
+ 87a:	db 01       	movw	r26, r22
+ 87c:	0d 90       	ld	r0, X+
+ 87e:	00 20       	and	r0, r0
+ 880:	e9 f7       	brne	.-6      	; 0x87c <Mostrar_Tensiones+0xaa>
+ 882:	11 97       	sbiw	r26, 0x01	; 1
+ 884:	a6 1b       	sub	r26, r22
+ 886:	b7 0b       	sbc	r27, r23
+ 888:	a4 17       	cp	r26, r20
+ 88a:	b5 07       	cpc	r27, r21
+ 88c:	18 f7       	brcc	.-58     	; 0x854 <Mostrar_Tensiones+0x82>
 	{
 		while ( !(UCSR0A &(1<<UDRE0)));
 		UDR0=Medicion_msj[i];
 	}
 	
 	cen = (Tension_Real/100);
- 886:	c8 01       	movw	r24, r16
- 888:	64 e6       	ldi	r22, 0x64	; 100
- 88a:	70 e0       	ldi	r23, 0x00	; 0
- 88c:	0e 94 0b 06 	call	0xc16	; 0xc16 <__divmodhi4>
- 890:	f6 2e       	mov	r15, r22
- 892:	e7 2e       	mov	r14, r23
+ 88e:	c8 01       	movw	r24, r16
+ 890:	64 e6       	ldi	r22, 0x64	; 100
+ 892:	70 e0       	ldi	r23, 0x00	; 0
+ 894:	0e 94 0f 06 	call	0xc1e	; 0xc1e <__divmodhi4>
+ 898:	f6 2e       	mov	r15, r22
+ 89a:	e7 2e       	mov	r14, r23
 	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
- 894:	15 b8       	out	0x05, r1	; 5
- 896:	b5 e0       	ldi	r27, 0x05	; 5
- 898:	ba 95       	dec	r27
- 89a:	f1 f7       	brne	.-4      	; 0x898 <Mostrar_Tensiones+0xce>
- 89c:	00 00       	nop
+ 89c:	15 b8       	out	0x05, r1	; 5
+ 89e:	b5 e0       	ldi	r27, 0x05	; 5
+ 8a0:	ba 95       	dec	r27
+ 8a2:	f1 f7       	brne	.-4      	; 0x8a0 <Mostrar_Tensiones+0xce>
+ 8a4:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0x03;						//Bit 2
- 89e:	23 e0       	ldi	r18, 0x03	; 3
- 8a0:	30 e0       	ldi	r19, 0x00	; 0
- 8a2:	30 93 5f 01 	sts	0x015F, r19
- 8a6:	20 93 5e 01 	sts	0x015E, r18
+ 8a6:	23 e0       	ldi	r18, 0x03	; 3
+ 8a8:	30 e0       	ldi	r19, 0x00	; 0
+ 8aa:	30 93 5f 01 	sts	0x015F, r19
+ 8ae:	20 93 5e 01 	sts	0x015E, r18
 	SPI_MasterTransmit(DSPI);
- 8aa:	83 e0       	ldi	r24, 0x03	; 3
- 8ac:	90 e0       	ldi	r25, 0x00	; 0
- 8ae:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
- 8b2:	85 e0       	ldi	r24, 0x05	; 5
- 8b4:	8a 95       	dec	r24
- 8b6:	f1 f7       	brne	.-4      	; 0x8b4 <Mostrar_Tensiones+0xea>
- 8b8:	00 00       	nop
+ 8b2:	83 e0       	ldi	r24, 0x03	; 3
+ 8b4:	90 e0       	ldi	r25, 0x00	; 0
+ 8b6:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
+ 8ba:	85 e0       	ldi	r24, 0x05	; 5
+ 8bc:	8a 95       	dec	r24
+ 8be:	f1 f7       	brne	.-4      	; 0x8bc <Mostrar_Tensiones+0xea>
+ 8c0:	00 00       	nop
 	_delay_us(1);
 	DSPI = (cen);						//Envio decena al MAX
- 8ba:	f0 92 5e 01 	sts	0x015E, r15
- 8be:	e0 92 5f 01 	sts	0x015F, r14
+ 8c2:	f0 92 5e 01 	sts	0x015E, r15
+ 8c6:	e0 92 5f 01 	sts	0x015F, r14
 	SPI_MasterTransmit(DSPI);
- 8c2:	8f 2d       	mov	r24, r15
- 8c4:	9e 2d       	mov	r25, r14
- 8c6:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
+ 8ca:	8f 2d       	mov	r24, r15
+ 8cc:	9e 2d       	mov	r25, r14
+ 8ce:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
 	PORTB = (1<<PORTB2);				//Indico fin de transferencia
- 8ca:	84 e0       	ldi	r24, 0x04	; 4
- 8cc:	85 b9       	out	0x05, r24	; 5
- 8ce:	a5 e0       	ldi	r26, 0x05	; 5
- 8d0:	aa 95       	dec	r26
- 8d2:	f1 f7       	brne	.-4      	; 0x8d0 <Mostrar_Tensiones+0x106>
- 8d4:	00 00       	nop
+ 8d2:	84 e0       	ldi	r24, 0x04	; 4
+ 8d4:	85 b9       	out	0x05, r24	; 5
+ 8d6:	a5 e0       	ldi	r26, 0x05	; 5
+ 8d8:	aa 95       	dec	r26
+ 8da:	f1 f7       	brne	.-4      	; 0x8d8 <Mostrar_Tensiones+0x106>
+ 8dc:	00 00       	nop
 	_delay_us(1);
 	
 	while(!(UCSR0A & (1<<UDRE0)));		// Espera a que se envíe el dato
- 8d6:	e0 ec       	ldi	r30, 0xC0	; 192
- 8d8:	f0 e0       	ldi	r31, 0x00	; 0
- 8da:	90 81       	ld	r25, Z
- 8dc:	95 ff       	sbrs	r25, 5
- 8de:	fd cf       	rjmp	.-6      	; 0x8da <Mostrar_Tensiones+0x110>
+ 8de:	e0 ec       	ldi	r30, 0xC0	; 192
+ 8e0:	f0 e0       	ldi	r31, 0x00	; 0
+ 8e2:	90 81       	ld	r25, Z
+ 8e4:	95 ff       	sbrs	r25, 5
+ 8e6:	fd cf       	rjmp	.-6      	; 0x8e2 <Mostrar_Tensiones+0x110>
 	UDR0 = cen + 48;					//Envio por puerto serie la decena
- 8e0:	80 e3       	ldi	r24, 0x30	; 48
- 8e2:	8f 0d       	add	r24, r15
- 8e4:	80 93 c6 00 	sts	0x00C6, r24
+ 8e8:	80 e3       	ldi	r24, 0x30	; 48
+ 8ea:	8f 0d       	add	r24, r15
+ 8ec:	80 93 c6 00 	sts	0x00C6, r24
 	while(!(UCSR0A & (1<<UDRE0)));		// Espera a que se envíe el dato
- 8e8:	e0 ec       	ldi	r30, 0xC0	; 192
- 8ea:	f0 e0       	ldi	r31, 0x00	; 0
- 8ec:	80 81       	ld	r24, Z
- 8ee:	85 ff       	sbrs	r24, 5
- 8f0:	fd cf       	rjmp	.-6      	; 0x8ec <Mostrar_Tensiones+0x122>
+ 8f0:	e0 ec       	ldi	r30, 0xC0	; 192
+ 8f2:	f0 e0       	ldi	r31, 0x00	; 0
+ 8f4:	80 81       	ld	r24, Z
+ 8f6:	85 ff       	sbrs	r24, 5
+ 8f8:	fd cf       	rjmp	.-6      	; 0x8f4 <Mostrar_Tensiones+0x122>
 	
 	Resto = (Tension_Real%100);
- 8f2:	c8 01       	movw	r24, r16
- 8f4:	64 e6       	ldi	r22, 0x64	; 100
- 8f6:	70 e0       	ldi	r23, 0x00	; 0
- 8f8:	0e 94 0b 06 	call	0xc16	; 0xc16 <__divmodhi4>
- 8fc:	18 2f       	mov	r17, r24
+ 8fa:	c8 01       	movw	r24, r16
+ 8fc:	64 e6       	ldi	r22, 0x64	; 100
+ 8fe:	70 e0       	ldi	r23, 0x00	; 0
+ 900:	0e 94 0f 06 	call	0xc1e	; 0xc1e <__divmodhi4>
+ 904:	18 2f       	mov	r17, r24
 	dec = (Resto/10);
- 8fe:	0d ec       	ldi	r16, 0xCD	; 205
- 900:	80 9f       	mul	r24, r16
- 902:	01 2d       	mov	r16, r1
- 904:	11 24       	eor	r1, r1
- 906:	06 95       	lsr	r16
- 908:	06 95       	lsr	r16
- 90a:	06 95       	lsr	r16
+ 906:	0d ec       	ldi	r16, 0xCD	; 205
+ 908:	80 9f       	mul	r24, r16
+ 90a:	01 2d       	mov	r16, r1
+ 90c:	11 24       	eor	r1, r1
+ 90e:	06 95       	lsr	r16
+ 910:	06 95       	lsr	r16
+ 912:	06 95       	lsr	r16
 	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
- 90c:	15 b8       	out	0x05, r1	; 5
- 90e:	b5 e0       	ldi	r27, 0x05	; 5
- 910:	ba 95       	dec	r27
- 912:	f1 f7       	brne	.-4      	; 0x910 <__stack+0x11>
- 914:	00 00       	nop
+ 914:	15 b8       	out	0x05, r1	; 5
+ 916:	b5 e0       	ldi	r27, 0x05	; 5
+ 918:	ba 95       	dec	r27
+ 91a:	f1 f7       	brne	.-4      	; 0x918 <__stack+0x19>
+ 91c:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0x02;						//Bit 1
- 916:	22 e0       	ldi	r18, 0x02	; 2
- 918:	30 e0       	ldi	r19, 0x00	; 0
- 91a:	30 93 5f 01 	sts	0x015F, r19
- 91e:	20 93 5e 01 	sts	0x015E, r18
+ 91e:	22 e0       	ldi	r18, 0x02	; 2
+ 920:	30 e0       	ldi	r19, 0x00	; 0
+ 922:	30 93 5f 01 	sts	0x015F, r19
+ 926:	20 93 5e 01 	sts	0x015E, r18
 	SPI_MasterTransmit(DSPI);
- 922:	82 e0       	ldi	r24, 0x02	; 2
- 924:	90 e0       	ldi	r25, 0x00	; 0
- 926:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
- 92a:	85 e0       	ldi	r24, 0x05	; 5
- 92c:	8a 95       	dec	r24
- 92e:	f1 f7       	brne	.-4      	; 0x92c <__stack+0x2d>
- 930:	00 00       	nop
+ 92a:	82 e0       	ldi	r24, 0x02	; 2
+ 92c:	90 e0       	ldi	r25, 0x00	; 0
+ 92e:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
+ 932:	85 e0       	ldi	r24, 0x05	; 5
+ 934:	8a 95       	dec	r24
+ 936:	f1 f7       	brne	.-4      	; 0x934 <__stack+0x35>
+ 938:	00 00       	nop
 	while(!(UCSR0A & (1<<UDRE0)));		// Espera a que se envíe el dato
 	UDR0 = cen + 48;					//Envio por puerto serie la decena
 	while(!(UCSR0A & (1<<UDRE0)));		// Espera a que se envíe el dato
 	
 	Resto = (Tension_Real%100);
 	dec = (Resto/10);
- 932:	20 2f       	mov	r18, r16
- 934:	30 e0       	ldi	r19, 0x00	; 0
+ 93a:	20 2f       	mov	r18, r16
+ 93c:	30 e0       	ldi	r19, 0x00	; 0
 	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
 	_delay_us(1);
 	DSPI = 0x02;						//Bit 1
 	SPI_MasterTransmit(DSPI);
 	_delay_us(1);
 	DSPI = (0xF0 + dec);						//Envio la unidad al MAX
- 936:	c9 01       	movw	r24, r18
- 938:	80 51       	subi	r24, 0x10	; 16
- 93a:	9f 4f       	sbci	r25, 0xFF	; 255
- 93c:	90 93 5f 01 	sts	0x015F, r25
- 940:	80 93 5e 01 	sts	0x015E, r24
+ 93e:	c9 01       	movw	r24, r18
+ 940:	80 51       	subi	r24, 0x10	; 16
+ 942:	9f 4f       	sbci	r25, 0xFF	; 255
+ 944:	90 93 5f 01 	sts	0x015F, r25
+ 948:	80 93 5e 01 	sts	0x015E, r24
 	SPI_MasterTransmit(DSPI);
- 944:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
+ 94c:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
 	PORTB = (1<<PORTB2);				//Indico fin de transferencia
- 948:	84 e0       	ldi	r24, 0x04	; 4
- 94a:	85 b9       	out	0x05, r24	; 5
- 94c:	a5 e0       	ldi	r26, 0x05	; 5
- 94e:	aa 95       	dec	r26
- 950:	f1 f7       	brne	.-4      	; 0x94e <__stack+0x4f>
- 952:	00 00       	nop
+ 950:	84 e0       	ldi	r24, 0x04	; 4
+ 952:	85 b9       	out	0x05, r24	; 5
+ 954:	a5 e0       	ldi	r26, 0x05	; 5
+ 956:	aa 95       	dec	r26
+ 958:	f1 f7       	brne	.-4      	; 0x956 <__stack+0x57>
+ 95a:	00 00       	nop
 	_delay_us(1);
 	
 	UDR0 = dec + 48;					//Envio por puerto serie la unidad
- 954:	00 5d       	subi	r16, 0xD0	; 208
- 956:	00 93 c6 00 	sts	0x00C6, r16
+ 95c:	00 5d       	subi	r16, 0xD0	; 208
+ 95e:	00 93 c6 00 	sts	0x00C6, r16
 	while(!(UCSR0A & (1<<UDRE0)));
- 95a:	e0 ec       	ldi	r30, 0xC0	; 192
- 95c:	f0 e0       	ldi	r31, 0x00	; 0
- 95e:	90 81       	ld	r25, Z
- 960:	95 ff       	sbrs	r25, 5
- 962:	fd cf       	rjmp	.-6      	; 0x95e <__stack+0x5f>
+ 962:	e0 ec       	ldi	r30, 0xC0	; 192
+ 964:	f0 e0       	ldi	r31, 0x00	; 0
+ 966:	90 81       	ld	r25, Z
+ 968:	95 ff       	sbrs	r25, 5
+ 96a:	fd cf       	rjmp	.-6      	; 0x966 <__stack+0x67>
 	
 	UDR0 = 0x2C;						//Envio ","
- 964:	8c e2       	ldi	r24, 0x2C	; 44
- 966:	80 93 c6 00 	sts	0x00C6, r24
+ 96c:	8c e2       	ldi	r24, 0x2C	; 44
+ 96e:	80 93 c6 00 	sts	0x00C6, r24
 	while(!(UCSR0A & (1<<UDRE0)));
- 96a:	e0 ec       	ldi	r30, 0xC0	; 192
- 96c:	f0 e0       	ldi	r31, 0x00	; 0
- 96e:	90 81       	ld	r25, Z
- 970:	95 ff       	sbrs	r25, 5
- 972:	fd cf       	rjmp	.-6      	; 0x96e <__stack+0x6f>
+ 972:	e0 ec       	ldi	r30, 0xC0	; 192
+ 974:	f0 e0       	ldi	r31, 0x00	; 0
+ 976:	90 81       	ld	r25, Z
+ 978:	95 ff       	sbrs	r25, 5
+ 97a:	fd cf       	rjmp	.-6      	; 0x976 <__stack+0x77>
 	
 	uni = (Resto%10);
- 974:	8d ec       	ldi	r24, 0xCD	; 205
- 976:	18 9f       	mul	r17, r24
- 978:	f1 2c       	mov	r15, r1
- 97a:	11 24       	eor	r1, r1
- 97c:	f6 94       	lsr	r15
- 97e:	f6 94       	lsr	r15
- 980:	f6 94       	lsr	r15
- 982:	ff 0c       	add	r15, r15
- 984:	8f 2d       	mov	r24, r15
- 986:	88 0f       	add	r24, r24
- 988:	88 0f       	add	r24, r24
- 98a:	f8 0e       	add	r15, r24
- 98c:	1f 19       	sub	r17, r15
- 98e:	f1 2e       	mov	r15, r17
- 990:	01 2f       	mov	r16, r17
- 992:	10 e0       	ldi	r17, 0x00	; 0
+ 97c:	8d ec       	ldi	r24, 0xCD	; 205
+ 97e:	18 9f       	mul	r17, r24
+ 980:	f1 2c       	mov	r15, r1
+ 982:	11 24       	eor	r1, r1
+ 984:	f6 94       	lsr	r15
+ 986:	f6 94       	lsr	r15
+ 988:	f6 94       	lsr	r15
+ 98a:	ff 0c       	add	r15, r15
+ 98c:	8f 2d       	mov	r24, r15
+ 98e:	88 0f       	add	r24, r24
+ 990:	88 0f       	add	r24, r24
+ 992:	f8 0e       	add	r15, r24
+ 994:	1f 19       	sub	r17, r15
+ 996:	f1 2e       	mov	r15, r17
+ 998:	01 2f       	mov	r16, r17
+ 99a:	10 e0       	ldi	r17, 0x00	; 0
 	PORTB = (0<<PORTB2);				//Indico inicio de transferencia
- 994:	15 b8       	out	0x05, r1	; 5
- 996:	b5 e0       	ldi	r27, 0x05	; 5
- 998:	ba 95       	dec	r27
- 99a:	f1 f7       	brne	.-4      	; 0x998 <__stack+0x99>
- 99c:	00 00       	nop
+ 99c:	15 b8       	out	0x05, r1	; 5
+ 99e:	b5 e0       	ldi	r27, 0x05	; 5
+ 9a0:	ba 95       	dec	r27
+ 9a2:	f1 f7       	brne	.-4      	; 0x9a0 <__stack+0xa1>
+ 9a4:	00 00       	nop
 	_delay_us(1);
 	DSPI = 0x01;						//Bit 0
- 99e:	81 e0       	ldi	r24, 0x01	; 1
- 9a0:	90 e0       	ldi	r25, 0x00	; 0
- 9a2:	90 93 5f 01 	sts	0x015F, r25
- 9a6:	80 93 5e 01 	sts	0x015E, r24
+ 9a6:	81 e0       	ldi	r24, 0x01	; 1
+ 9a8:	90 e0       	ldi	r25, 0x00	; 0
+ 9aa:	90 93 5f 01 	sts	0x015F, r25
+ 9ae:	80 93 5e 01 	sts	0x015E, r24
 	SPI_MasterTransmit(DSPI);
- 9aa:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
- 9ae:	85 e0       	ldi	r24, 0x05	; 5
- 9b0:	8a 95       	dec	r24
- 9b2:	f1 f7       	brne	.-4      	; 0x9b0 <__stack+0xb1>
- 9b4:	00 00       	nop
+ 9b2:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
+ 9b6:	85 e0       	ldi	r24, 0x05	; 5
+ 9b8:	8a 95       	dec	r24
+ 9ba:	f1 f7       	brne	.-4      	; 0x9b8 <__stack+0xb9>
+ 9bc:	00 00       	nop
 	_delay_us(1);
 	DSPI = (uni);						//Envio primer decimal al MAX
- 9b6:	10 93 5f 01 	sts	0x015F, r17
- 9ba:	00 93 5e 01 	sts	0x015E, r16
+ 9be:	10 93 5f 01 	sts	0x015F, r17
+ 9c2:	00 93 5e 01 	sts	0x015E, r16
 	SPI_MasterTransmit(DSPI);
- 9be:	c8 01       	movw	r24, r16
- 9c0:	0e 94 43 02 	call	0x486	; 0x486 <SPI_MasterTransmit>
+ 9c6:	c8 01       	movw	r24, r16
+ 9c8:	0e 94 47 02 	call	0x48e	; 0x48e <SPI_MasterTransmit>
 	PORTB = (1<<PORTB2);				//Indico fin de transferencia
- 9c4:	84 e0       	ldi	r24, 0x04	; 4
- 9c6:	85 b9       	out	0x05, r24	; 5
- 9c8:	a5 e0       	ldi	r26, 0x05	; 5
- 9ca:	aa 95       	dec	r26
- 9cc:	f1 f7       	brne	.-4      	; 0x9ca <__stack+0xcb>
- 9ce:	00 00       	nop
+ 9cc:	84 e0       	ldi	r24, 0x04	; 4
+ 9ce:	85 b9       	out	0x05, r24	; 5
+ 9d0:	a5 e0       	ldi	r26, 0x05	; 5
+ 9d2:	aa 95       	dec	r26
+ 9d4:	f1 f7       	brne	.-4      	; 0x9d2 <__stack+0xd3>
+ 9d6:	00 00       	nop
 	_delay_us(1);
 	
 	UDR0 = (uni + 48);					//Envio por puerto serie primer decimal
- 9d0:	80 e3       	ldi	r24, 0x30	; 48
- 9d2:	8f 0d       	add	r24, r15
- 9d4:	80 93 c6 00 	sts	0x00C6, r24
+ 9d8:	80 e3       	ldi	r24, 0x30	; 48
+ 9da:	8f 0d       	add	r24, r15
+ 9dc:	80 93 c6 00 	sts	0x00C6, r24
 	while(!(UCSR0A & (1<<UDRE0)));
- 9d8:	e0 ec       	ldi	r30, 0xC0	; 192
- 9da:	f0 e0       	ldi	r31, 0x00	; 0
- 9dc:	80 81       	ld	r24, Z
- 9de:	85 ff       	sbrs	r24, 5
- 9e0:	fd cf       	rjmp	.-6      	; 0x9dc <__stack+0xdd>
+ 9e0:	e0 ec       	ldi	r30, 0xC0	; 192
+ 9e2:	f0 e0       	ldi	r31, 0x00	; 0
+ 9e4:	80 81       	ld	r24, Z
+ 9e6:	85 ff       	sbrs	r24, 5
+ 9e8:	fd cf       	rjmp	.-6      	; 0x9e4 <__stack+0xe5>
 	UDR0 = 10;
- 9e2:	8a e0       	ldi	r24, 0x0A	; 10
- 9e4:	80 93 c6 00 	sts	0x00C6, r24
+ 9ea:	8a e0       	ldi	r24, 0x0A	; 10
+ 9ec:	80 93 c6 00 	sts	0x00C6, r24
 	while(!(UCSR0A & (1<<UDRE0)));
- 9e8:	e0 ec       	ldi	r30, 0xC0	; 192
- 9ea:	f0 e0       	ldi	r31, 0x00	; 0
- 9ec:	80 81       	ld	r24, Z
- 9ee:	85 ff       	sbrs	r24, 5
- 9f0:	fd cf       	rjmp	.-6      	; 0x9ec <__stack+0xed>
+ 9f0:	e0 ec       	ldi	r30, 0xC0	; 192
+ 9f2:	f0 e0       	ldi	r31, 0x00	; 0
+ 9f4:	80 81       	ld	r24, Z
+ 9f6:	85 ff       	sbrs	r24, 5
+ 9f8:	fd cf       	rjmp	.-6      	; 0x9f4 <__stack+0xf5>
 	
 	for (i=0;i<=strlen(UDeseada_msj);i++)
- 9f2:	10 92 6d 01 	sts	0x016D, r1
- 9f6:	10 92 6c 01 	sts	0x016C, r1
- 9fa:	a0 e0       	ldi	r26, 0x00	; 0
- 9fc:	b0 e0       	ldi	r27, 0x00	; 0
+ 9fa:	10 92 6d 01 	sts	0x016D, r1
+ 9fe:	10 92 6c 01 	sts	0x016C, r1
+ a02:	a0 e0       	ldi	r26, 0x00	; 0
+ a04:	b0 e0       	ldi	r27, 0x00	; 0
 	{
 		while ( !(UCSR0A &(1<<UDRE0)));
- 9fe:	e0 ec       	ldi	r30, 0xC0	; 192
- a00:	f0 e0       	ldi	r31, 0x00	; 0
+ a06:	e0 ec       	ldi	r30, 0xC0	; 192
+ a08:	f0 e0       	ldi	r31, 0x00	; 0
 		UDR0=UDeseada_msj[i];
- a02:	9e 01       	movw	r18, r28
- a04:	2f 5e       	subi	r18, 0xEF	; 239
- a06:	3f 4f       	sbci	r19, 0xFF	; 255
- a08:	46 ec       	ldi	r20, 0xC6	; 198
- a0a:	50 e0       	ldi	r21, 0x00	; 0
- a0c:	01 c0       	rjmp	.+2      	; 0xa10 <__stack+0x111>
+ a0a:	9e 01       	movw	r18, r28
+ a0c:	2f 5e       	subi	r18, 0xEF	; 239
+ a0e:	3f 4f       	sbci	r19, 0xFF	; 255
+ a10:	46 ec       	ldi	r20, 0xC6	; 198
+ a12:	50 e0       	ldi	r21, 0x00	; 0
+ a14:	01 c0       	rjmp	.+2      	; 0xa18 <__stack+0x119>
 	UDR0 = (uni + 48);					//Envio por puerto serie primer decimal
 	while(!(UCSR0A & (1<<UDRE0)));
 	UDR0 = 10;
 	while(!(UCSR0A & (1<<UDRE0)));
 	
 	for (i=0;i<=strlen(UDeseada_msj);i++)
- a0e:	dc 01       	movw	r26, r24
+ a16:	dc 01       	movw	r26, r24
 	{
 		while ( !(UCSR0A &(1<<UDRE0)));
- a10:	80 81       	ld	r24, Z
- a12:	85 ff       	sbrs	r24, 5
- a14:	fd cf       	rjmp	.-6      	; 0xa10 <__stack+0x111>
+ a18:	80 81       	ld	r24, Z
+ a1a:	85 ff       	sbrs	r24, 5
+ a1c:	fd cf       	rjmp	.-6      	; 0xa18 <__stack+0x119>
 		UDR0=UDeseada_msj[i];
- a16:	a2 0f       	add	r26, r18
- a18:	b3 1f       	adc	r27, r19
- a1a:	8c 91       	ld	r24, X
- a1c:	da 01       	movw	r26, r20
- a1e:	8c 93       	st	X, r24
+ a1e:	a2 0f       	add	r26, r18
+ a20:	b3 1f       	adc	r27, r19
+ a22:	8c 91       	ld	r24, X
+ a24:	da 01       	movw	r26, r20
+ a26:	8c 93       	st	X, r24
 	UDR0 = (uni + 48);					//Envio por puerto serie primer decimal
 	while(!(UCSR0A & (1<<UDRE0)));
 	UDR0 = 10;
 	while(!(UCSR0A & (1<<UDRE0)));
 	
 	for (i=0;i<=strlen(UDeseada_msj);i++)
- a20:	80 91 6c 01 	lds	r24, 0x016C
- a24:	90 91 6d 01 	lds	r25, 0x016D
- a28:	01 96       	adiw	r24, 0x01	; 1
- a2a:	90 93 6d 01 	sts	0x016D, r25
- a2e:	80 93 6c 01 	sts	0x016C, r24
- a32:	d9 01       	movw	r26, r18
- a34:	0d 90       	ld	r0, X+
- a36:	00 20       	and	r0, r0
- a38:	e9 f7       	brne	.-6      	; 0xa34 <__stack+0x135>
- a3a:	11 97       	sbiw	r26, 0x01	; 1
- a3c:	a2 1b       	sub	r26, r18
- a3e:	b3 0b       	sbc	r27, r19
- a40:	a8 17       	cp	r26, r24
- a42:	b9 07       	cpc	r27, r25
- a44:	20 f7       	brcc	.-56     	; 0xa0e <__stack+0x10f>
+ a28:	80 91 6c 01 	lds	r24, 0x016C
+ a2c:	90 91 6d 01 	lds	r25, 0x016D
+ a30:	01 96       	adiw	r24, 0x01	; 1
+ a32:	90 93 6d 01 	sts	0x016D, r25
+ a36:	80 93 6c 01 	sts	0x016C, r24
+ a3a:	d9 01       	movw	r26, r18
+ a3c:	0d 90       	ld	r0, X+
+ a3e:	00 20       	and	r0, r0
+ a40:	e9 f7       	brne	.-6      	; 0xa3c <__stack+0x13d>
+ a42:	11 97       	sbiw	r26, 0x01	; 1
+ a44:	a2 1b       	sub	r26, r18
+ a46:	b3 0b       	sbc	r27, r19
+ a48:	a8 17       	cp	r26, r24
+ a4a:	b9 07       	cpc	r27, r25
+ a4c:	20 f7       	brcc	.-56     	; 0xa16 <__stack+0x117>
 	{
 		while ( !(UCSR0A &(1<<UDRE0)));
 		UDR0=UDeseada_msj[i];
 	}
 	
 	cenD = (Tension_Deseada/100);
- a46:	80 91 66 01 	lds	r24, 0x0166
- a4a:	90 91 67 01 	lds	r25, 0x0167
- a4e:	64 e6       	ldi	r22, 0x64	; 100
- a50:	70 e0       	ldi	r23, 0x00	; 0
- a52:	0e 94 0b 06 	call	0xc16	; 0xc16 <__divmodhi4>
+ a4e:	80 91 66 01 	lds	r24, 0x0166
+ a52:	90 91 67 01 	lds	r25, 0x0167
+ a56:	64 e6       	ldi	r22, 0x64	; 100
+ a58:	70 e0       	ldi	r23, 0x00	; 0
+ a5a:	0e 94 0f 06 	call	0xc1e	; 0xc1e <__divmodhi4>
 	while(!(UCSR0A & (1<<UDRE0)));		// Espera a que se envíe el dato
- a56:	e0 ec       	ldi	r30, 0xC0	; 192
- a58:	f0 e0       	ldi	r31, 0x00	; 0
- a5a:	80 81       	ld	r24, Z
- a5c:	85 ff       	sbrs	r24, 5
- a5e:	fd cf       	rjmp	.-6      	; 0xa5a <__stack+0x15b>
+ a5e:	e0 ec       	ldi	r30, 0xC0	; 192
+ a60:	f0 e0       	ldi	r31, 0x00	; 0
+ a62:	80 81       	ld	r24, Z
+ a64:	85 ff       	sbrs	r24, 5
+ a66:	fd cf       	rjmp	.-6      	; 0xa62 <__stack+0x163>
 	UDR0 = cenD + 48;					//Envio por puerto serie la decena
- a60:	60 5d       	subi	r22, 0xD0	; 208
- a62:	60 93 c6 00 	sts	0x00C6, r22
+ a68:	60 5d       	subi	r22, 0xD0	; 208
+ a6a:	60 93 c6 00 	sts	0x00C6, r22
 	
 	RestoD = (Tension_Deseada%100);
- a66:	80 91 66 01 	lds	r24, 0x0166
- a6a:	90 91 67 01 	lds	r25, 0x0167
- a6e:	64 e6       	ldi	r22, 0x64	; 100
- a70:	70 e0       	ldi	r23, 0x00	; 0
- a72:	0e 94 0b 06 	call	0xc16	; 0xc16 <__divmodhi4>
+ a6e:	80 91 66 01 	lds	r24, 0x0166
+ a72:	90 91 67 01 	lds	r25, 0x0167
+ a76:	64 e6       	ldi	r22, 0x64	; 100
+ a78:	70 e0       	ldi	r23, 0x00	; 0
+ a7a:	0e 94 0f 06 	call	0xc1e	; 0xc1e <__divmodhi4>
 	decD = (RestoD/10);
- a76:	2d ec       	ldi	r18, 0xCD	; 205
- a78:	82 9f       	mul	r24, r18
- a7a:	21 2d       	mov	r18, r1
- a7c:	11 24       	eor	r1, r1
- a7e:	26 95       	lsr	r18
- a80:	26 95       	lsr	r18
- a82:	26 95       	lsr	r18
+ a7e:	2d ec       	ldi	r18, 0xCD	; 205
+ a80:	82 9f       	mul	r24, r18
+ a82:	21 2d       	mov	r18, r1
+ a84:	11 24       	eor	r1, r1
+ a86:	26 95       	lsr	r18
+ a88:	26 95       	lsr	r18
+ a8a:	26 95       	lsr	r18
 	while(!(UCSR0A & (1<<UDRE0)));		// Espera a que se envíe el dato
- a84:	e0 ec       	ldi	r30, 0xC0	; 192
- a86:	f0 e0       	ldi	r31, 0x00	; 0
- a88:	90 81       	ld	r25, Z
- a8a:	95 ff       	sbrs	r25, 5
- a8c:	fd cf       	rjmp	.-6      	; 0xa88 <__stack+0x189>
+ a8c:	e0 ec       	ldi	r30, 0xC0	; 192
+ a8e:	f0 e0       	ldi	r31, 0x00	; 0
+ a90:	90 81       	ld	r25, Z
+ a92:	95 ff       	sbrs	r25, 5
+ a94:	fd cf       	rjmp	.-6      	; 0xa90 <__stack+0x191>
 	UDR0 = decD + 48;					//Envio por puerto serie la unidad
- a8e:	90 e3       	ldi	r25, 0x30	; 48
- a90:	92 0f       	add	r25, r18
- a92:	90 93 c6 00 	sts	0x00C6, r25
+ a96:	90 e3       	ldi	r25, 0x30	; 48
+ a98:	92 0f       	add	r25, r18
+ a9a:	90 93 c6 00 	sts	0x00C6, r25
 	
 	while(!(UCSR0A & (1<<UDRE0)));
- a96:	e0 ec       	ldi	r30, 0xC0	; 192
- a98:	f0 e0       	ldi	r31, 0x00	; 0
- a9a:	90 81       	ld	r25, Z
- a9c:	95 ff       	sbrs	r25, 5
- a9e:	fd cf       	rjmp	.-6      	; 0xa9a <__stack+0x19b>
+ a9e:	e0 ec       	ldi	r30, 0xC0	; 192
+ aa0:	f0 e0       	ldi	r31, 0x00	; 0
+ aa2:	90 81       	ld	r25, Z
+ aa4:	95 ff       	sbrs	r25, 5
+ aa6:	fd cf       	rjmp	.-6      	; 0xaa2 <__stack+0x1a3>
 	UDR0 = 0x2C;						//Envio ","
- aa0:	9c e2       	ldi	r25, 0x2C	; 44
- aa2:	90 93 c6 00 	sts	0x00C6, r25
+ aa8:	9c e2       	ldi	r25, 0x2C	; 44
+ aaa:	90 93 c6 00 	sts	0x00C6, r25
 	
 	uniD = (RestoD%10);
- aa6:	9d ec       	ldi	r25, 0xCD	; 205
- aa8:	89 9f       	mul	r24, r25
- aaa:	91 2d       	mov	r25, r1
- aac:	11 24       	eor	r1, r1
- aae:	96 95       	lsr	r25
- ab0:	96 95       	lsr	r25
- ab2:	96 95       	lsr	r25
- ab4:	99 0f       	add	r25, r25
- ab6:	29 2f       	mov	r18, r25
- ab8:	22 0f       	add	r18, r18
- aba:	22 0f       	add	r18, r18
- abc:	92 0f       	add	r25, r18
- abe:	89 1b       	sub	r24, r25
- ac0:	98 2f       	mov	r25, r24
+ aae:	9d ec       	ldi	r25, 0xCD	; 205
+ ab0:	89 9f       	mul	r24, r25
+ ab2:	91 2d       	mov	r25, r1
+ ab4:	11 24       	eor	r1, r1
+ ab6:	96 95       	lsr	r25
+ ab8:	96 95       	lsr	r25
+ aba:	96 95       	lsr	r25
+ abc:	99 0f       	add	r25, r25
+ abe:	29 2f       	mov	r18, r25
+ ac0:	22 0f       	add	r18, r18
+ ac2:	22 0f       	add	r18, r18
+ ac4:	92 0f       	add	r25, r18
+ ac6:	89 1b       	sub	r24, r25
+ ac8:	98 2f       	mov	r25, r24
 	while(!(UCSR0A & (1<<UDRE0)));
- ac2:	e0 ec       	ldi	r30, 0xC0	; 192
- ac4:	f0 e0       	ldi	r31, 0x00	; 0
- ac6:	80 81       	ld	r24, Z
- ac8:	85 ff       	sbrs	r24, 5
- aca:	fd cf       	rjmp	.-6      	; 0xac6 <__stack+0x1c7>
+ aca:	e0 ec       	ldi	r30, 0xC0	; 192
+ acc:	f0 e0       	ldi	r31, 0x00	; 0
+ ace:	80 81       	ld	r24, Z
+ ad0:	85 ff       	sbrs	r24, 5
+ ad2:	fd cf       	rjmp	.-6      	; 0xace <__stack+0x1cf>
 	UDR0 = (uniD + 48);					//Envio por puerto serie primer decimal
- acc:	90 5d       	subi	r25, 0xD0	; 208
- ace:	90 93 c6 00 	sts	0x00C6, r25
+ ad4:	90 5d       	subi	r25, 0xD0	; 208
+ ad6:	90 93 c6 00 	sts	0x00C6, r25
 	
 	while(!(UCSR0A & (1<<UDRE0)));
- ad2:	e0 ec       	ldi	r30, 0xC0	; 192
- ad4:	f0 e0       	ldi	r31, 0x00	; 0
- ad6:	80 81       	ld	r24, Z
- ad8:	85 ff       	sbrs	r24, 5
- ada:	fd cf       	rjmp	.-6      	; 0xad6 <__stack+0x1d7>
+ ada:	e0 ec       	ldi	r30, 0xC0	; 192
+ adc:	f0 e0       	ldi	r31, 0x00	; 0
+ ade:	80 81       	ld	r24, Z
+ ae0:	85 ff       	sbrs	r24, 5
+ ae2:	fd cf       	rjmp	.-6      	; 0xade <__stack+0x1df>
 	UDR0 = 10;
- adc:	8a e0       	ldi	r24, 0x0A	; 10
- ade:	80 93 c6 00 	sts	0x00C6, r24
+ ae4:	8a e0       	ldi	r24, 0x0A	; 10
+ ae6:	80 93 c6 00 	sts	0x00C6, r24
 	
- ae2:	a1 96       	adiw	r28, 0x21	; 33
- ae4:	0f b6       	in	r0, 0x3f	; 63
- ae6:	f8 94       	cli
- ae8:	de bf       	out	0x3e, r29	; 62
- aea:	0f be       	out	0x3f, r0	; 63
- aec:	cd bf       	out	0x3d, r28	; 61
- aee:	df 91       	pop	r29
- af0:	cf 91       	pop	r28
- af2:	1f 91       	pop	r17
- af4:	0f 91       	pop	r16
- af6:	ff 90       	pop	r15
- af8:	ef 90       	pop	r14
- afa:	08 95       	ret
+ aea:	a1 96       	adiw	r28, 0x21	; 33
+ aec:	0f b6       	in	r0, 0x3f	; 63
+ aee:	f8 94       	cli
+ af0:	de bf       	out	0x3e, r29	; 62
+ af2:	0f be       	out	0x3f, r0	; 63
+ af4:	cd bf       	out	0x3d, r28	; 61
+ af6:	df 91       	pop	r29
+ af8:	cf 91       	pop	r28
+ afa:	1f 91       	pop	r17
+ afc:	0f 91       	pop	r16
+ afe:	ff 90       	pop	r15
+ b00:	ef 90       	pop	r14
+ b02:	08 95       	ret
 
-00000afc <main>:
+00000b04 <main>:
 void dato_recibido(char);
 void Mostrar_Tensiones(void);
 
 int main(void)
 {	
-	DDRD |=(1<<DDD5)|(0<<DDD7)|(0<<DDD6);			// PD5 como salida PWM (OC0B) y PD7(7) como entrada (On/Off_PWM en modo local) y PD6(6) como entrada "MODO_CONTROL"
- afc:	55 9a       	sbi	0x0a, 5	; 10
+	DDRD |=(1<<DDD4)|(1<<DDD5)|(0<<DDD7)|(0<<DDD6);			// PD5 como salida PWM (OC0B) y PD7(7) como entrada (On/Off_PWM en modo local) y PD6(6) como entrada "MODO_CONTROL"
+ b04:	8a b1       	in	r24, 0x0a	; 10
+ b06:	80 63       	ori	r24, 0x30	; 48
+ b08:	8a b9       	out	0x0a, r24	; 10
 	DDRB |=(1<<DDB5)|(1<<DDB3)|(1<<DDB2)|(1<<DDB1)|(1<<DDB0);	// Config como salida PB5(13,CSK), PB3(11,MOSI), PB2(10,SS), PB0(8)semiciclo positivo, PB1(9) semiciclo negativo
- afe:	84 b1       	in	r24, 0x04	; 4
- b00:	8f 62       	ori	r24, 0x2F	; 47
- b02:	84 b9       	out	0x04, r24	; 4
-	PORTD |= (1<<PORTD2)|(1<<PORTD3)|(1<<PORTD7)|(1<<PORTD6);			// Configuro Restistencias pull up INT0, INT1, On_Off_PWM
- b04:	8b b1       	in	r24, 0x0b	; 11
- b06:	8c 6c       	ori	r24, 0xCC	; 204
- b08:	8b b9       	out	0x0b, r24	; 11
+ b0a:	84 b1       	in	r24, 0x04	; 4
+ b0c:	8f 62       	ori	r24, 0x2F	; 47
+ b0e:	84 b9       	out	0x04, r24	; 4
+	PORTD |= (1<<PORTD2)|(1<<PORTD3)|(1<<PORTD7)|(1<<PORTD6);	// Configuro Restistencias pull up INT0, INT1, On_Off_PWM
+ b10:	8b b1       	in	r24, 0x0b	; 11
+ b12:	8c 6c       	ori	r24, 0xCC	; 204
+ b14:	8b b9       	out	0x0b, r24	; 11
 	PORTB |= (1<<PORTB2);									// Resistencia Pull-UP
- b0a:	2a 9a       	sbi	0x05, 2	; 5
+ b16:	2a 9a       	sbi	0x05, 2	; 5
 
 	TCCR0A= (0<<COM0B1)|(0<<COM0B0)|(0<<WGM01)|(1<<WGM00);	// PWM fase correcta,
- b0c:	21 e0       	ldi	r18, 0x01	; 1
- b0e:	24 bd       	out	0x24, r18	; 36
+ b18:	21 e0       	ldi	r18, 0x01	; 1
+ b1a:	24 bd       	out	0x24, r18	; 36
 	TCCR0B= (0<<CS02)|(1<<CS01)|(0<<CS00)|(1<<WGM02);		// Selecciono prescaler en 8
- b10:	8a e0       	ldi	r24, 0x0A	; 10
- b12:	85 bd       	out	0x25, r24	; 37
+ b1c:	8a e0       	ldi	r24, 0x0A	; 10
+ b1e:	85 bd       	out	0x25, r24	; 37
 
 	OCR0A= 199;												// Define la frecuencia pwm 5KHz
- b14:	87 ec       	ldi	r24, 0xC7	; 199
- b16:	87 bd       	out	0x27, r24	; 39
+ b20:	87 ec       	ldi	r24, 0xC7	; 199
+ b22:	87 bd       	out	0x27, r24	; 39
 	OCR0B = 100;											// Define el ancho de pulso
- b18:	84 e6       	ldi	r24, 0x64	; 100
- b1a:	88 bd       	out	0x28, r24	; 40
+ b24:	84 e6       	ldi	r24, 0x64	; 100
+ b26:	88 bd       	out	0x28, r24	; 40
 
 	EIMSK= (1<<INT1)|(1<<INT0);								// Config INT0 INT1
- b1c:	83 e0       	ldi	r24, 0x03	; 3
- b1e:	8d bb       	out	0x1d, r24	; 29
+ b28:	83 e0       	ldi	r24, 0x03	; 3
+ b2a:	8d bb       	out	0x1d, r24	; 29
 	EICRA= (1<<ISC11)|(0<<ISC10)|(1<<ISC01)|(1<<ISC00);		// Config INT1 flanco descendente, INT0 flanco ascendente
- b20:	8b e0       	ldi	r24, 0x0B	; 11
- b22:	80 93 69 00 	sts	0x0069, r24
+ b2c:	8b e0       	ldi	r24, 0x0B	; 11
+ b2e:	80 93 69 00 	sts	0x0069, r24
 
 	TCCR1A=0;
- b26:	10 92 80 00 	sts	0x0080, r1
+ b32:	10 92 80 00 	sts	0x0080, r1
 	TCCR1B=4;												// Selector de reloj CKl/256
- b2a:	84 e0       	ldi	r24, 0x04	; 4
- b2c:	80 93 81 00 	sts	0x0081, r24
+ b36:	84 e0       	ldi	r24, 0x04	; 4
+ b38:	80 93 81 00 	sts	0x0081, r24
 	TCNT1=30360;											// 1s
- b30:	88 e9       	ldi	r24, 0x98	; 152
- b32:	96 e7       	ldi	r25, 0x76	; 118
- b34:	90 93 85 00 	sts	0x0085, r25
- b38:	80 93 84 00 	sts	0x0084, r24
+ b3c:	88 e9       	ldi	r24, 0x98	; 152
+ b3e:	96 e7       	ldi	r25, 0x76	; 118
+ b40:	90 93 85 00 	sts	0x0085, r25
+ b44:	80 93 84 00 	sts	0x0084, r24
 	TIMSK1=(1<<TOIE1);										// Habilitación de interrupción por desbordamiento
- b3c:	20 93 6f 00 	sts	0x006F, r18
+ b48:	20 93 6f 00 	sts	0x006F, r18
 
 	UCSR0A=0;
- b40:	10 92 c0 00 	sts	0x00C0, r1
+ b4c:	10 92 c0 00 	sts	0x00C0, r1
 	UBRR0=103;												// Velociadad de transmicion en 9600
- b44:	87 e6       	ldi	r24, 0x67	; 103
- b46:	90 e0       	ldi	r25, 0x00	; 0
- b48:	90 93 c5 00 	sts	0x00C5, r25
- b4c:	80 93 c4 00 	sts	0x00C4, r24
-	UCSR0C=(0<<UMSEL01)|(0<<UMSEL00)|(1<<UCSZ01)|(1<<UCSZ00)|(0<<USBS0)|(0<<UPM01)|(0<<UPM00);	// Modo Asincrono, size caracter 8-bit, 1-bit de stop, paridad OFF
- b50:	86 e0       	ldi	r24, 0x06	; 6
- b52:	80 93 c2 00 	sts	0x00C2, r24
+ b50:	87 e6       	ldi	r24, 0x67	; 103
+ b52:	90 e0       	ldi	r25, 0x00	; 0
+ b54:	90 93 c5 00 	sts	0x00C5, r25
+ b58:	80 93 c4 00 	sts	0x00C4, r24
+	UCSR0C=(0<<UMSEL01)|(0<<UMSEL00)|(1<<UCSZ01)|(1<<UCSZ00)|(0<<USBS0)|(0<<UPM01)|(0<<UPM00);	// Modo Asincrono, size caracter 8-bit
+ b5c:	86 e0       	ldi	r24, 0x06	; 6
+ b5e:	80 93 c2 00 	sts	0x00C2, r24
+																								//1-bit de stop, paridad OFF
 	UCSR0B=(1<<RXEN0) | (1<<TXEN0) | (1<<RXCIE0);			// Habilito receptor y transceptor, interrupcion recepcion completa
- b56:	98 e9       	ldi	r25, 0x98	; 152
- b58:	90 93 c1 00 	sts	0x00C1, r25
+ b62:	88 e9       	ldi	r24, 0x98	; 152
+ b64:	80 93 c1 00 	sts	0x00C1, r24
 
 	ADMUX= (1<<REFS0);										// Tension de referencia con capacitor externo
- b5c:	90 e4       	ldi	r25, 0x40	; 64
- b5e:	90 93 7c 00 	sts	0x007C, r25
-	ADCSRA=(1<<ADEN)|(1<<ADSC)|(1<<ADPS1)|(1<<ADPS0)|(1<<ADATE)|(1<<ADIE);		// Habilito el ADC, Configuro prescaler en 8
- b62:	9b ee       	ldi	r25, 0xEB	; 235
- b64:	90 93 7a 00 	sts	0x007A, r25
-	ADCSRB=(1<<ADTS2)|(1<<ADTS1);							//Autodisparo por desbordamiento del timer 1
- b68:	80 93 7b 00 	sts	0x007B, r24
-	
+ b68:	80 e4       	ldi	r24, 0x40	; 64
+ b6a:	80 93 7c 00 	sts	0x007C, r24
+	ADCSRA=(1<<ADEN)|(1<<ADSC)|(1<<ADPS1)|(1<<ADPS0)|(1<<ADATE)|(1<<ADIE);	// Habilito el ADC, Configuro prescaler en 8, 
+ b6e:	8b ee       	ldi	r24, 0xEB	; 235
+ b70:	80 93 7a 00 	sts	0x007A, r24
+																			//Fuente de activacion modo libre
 	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);					// Configuracion del SPI Modo Maestro, frecuencia SCK 1Mhz
- b6c:	81 e5       	ldi	r24, 0x51	; 81
- b6e:	8c bd       	out	0x2c, r24	; 44
+ b74:	81 e5       	ldi	r24, 0x51	; 81
+ b76:	8c bd       	out	0x2c, r24	; 44
 	SPI_initial();
- b70:	0e 94 48 02 	call	0x490	; 0x490 <SPI_initial>
+ b78:	0e 94 4c 02 	call	0x498	; 0x498 <SPI_initial>
 	
 	sei();
- b74:	78 94       	sei
+ b7c:	78 94       	sei
 			onoff();
 		}
 	
 		if ((modo==1)&&(estado==1))							//Pregunto por "MODO REMOTO" y si estado es "O"
 		{
 			TCCR0A ^= (1<<COM0B1);							//Cambio de estado la salida PWM OC0B (PD5)
- b76:	10 e2       	ldi	r17, 0x20	; 32
+ b7e:	10 e2       	ldi	r17, 0x20	; 32
 		{
 			modo = 0;			//Modo Local
 		}
 		if(SwitchModo() == 1)
 			{
 				modo = 1;		//Modo remoto
- b78:	c1 e0       	ldi	r28, 0x01	; 1
- b7a:	d0 e0       	ldi	r29, 0x00	; 0
+ b80:	c1 e0       	ldi	r28, 0x01	; 1
+ b82:	d0 e0       	ldi	r29, 0x00	; 0
 	
 	sei();
 	
 	while(1)
 	{	
 		if(SwitchModo() == 0)
- b7c:	0e 94 2a 01 	call	0x254	; 0x254 <SwitchModo>
- b80:	81 11       	cpse	r24, r1
- b82:	04 c0       	rjmp	.+8      	; 0xb8c <main+0x90>
+ b84:	0e 94 2a 01 	call	0x254	; 0x254 <SwitchModo>
+ b88:	81 11       	cpse	r24, r1
+ b8a:	04 c0       	rjmp	.+8      	; 0xb94 <main+0x90>
 		{
 			modo = 0;			//Modo Local
- b84:	10 92 72 01 	sts	0x0172, r1
- b88:	10 92 71 01 	sts	0x0171, r1
+ b8c:	10 92 72 01 	sts	0x0172, r1
+ b90:	10 92 71 01 	sts	0x0171, r1
 		}
 		if(SwitchModo() == 1)
- b8c:	0e 94 2a 01 	call	0x254	; 0x254 <SwitchModo>
- b90:	81 30       	cpi	r24, 0x01	; 1
- b92:	29 f4       	brne	.+10     	; 0xb9e <main+0xa2>
+ b94:	0e 94 2a 01 	call	0x254	; 0x254 <SwitchModo>
+ b98:	81 30       	cpi	r24, 0x01	; 1
+ b9a:	29 f4       	brne	.+10     	; 0xba6 <main+0xa2>
 			{
 				modo = 1;		//Modo remoto
- b94:	d0 93 72 01 	sts	0x0172, r29
- b98:	c0 93 71 01 	sts	0x0171, r28
- b9c:	15 c0       	rjmp	.+42     	; 0xbc8 <main+0xcc>
+ b9c:	d0 93 72 01 	sts	0x0172, r29
+ ba0:	c0 93 71 01 	sts	0x0171, r28
+ ba4:	15 c0       	rjmp	.+42     	; 0xbd0 <main+0xcc>
 			}											
 	
 		if ((modo==0)&&(OnOffSwitch()==1))					//Pregunto por "MODO LOCAL" y si el PIN7 fue pulsado
- b9e:	80 91 71 01 	lds	r24, 0x0171
- ba2:	90 91 72 01 	lds	r25, 0x0172
- ba6:	89 2b       	or	r24, r25
- ba8:	49 f4       	brne	.+18     	; 0xbbc <main+0xc0>
- baa:	0e 94 19 01 	call	0x232	; 0x232 <OnOffSwitch>
- bae:	81 30       	cpi	r24, 0x01	; 1
- bb0:	29 f4       	brne	.+10     	; 0xbbc <main+0xc0>
+ ba6:	80 91 71 01 	lds	r24, 0x0171
+ baa:	90 91 72 01 	lds	r25, 0x0172
+ bae:	89 2b       	or	r24, r25
+ bb0:	49 f4       	brne	.+18     	; 0xbc4 <main+0xc0>
+ bb2:	0e 94 19 01 	call	0x232	; 0x232 <OnOffSwitch>
+ bb6:	81 30       	cpi	r24, 0x01	; 1
+ bb8:	29 f4       	brne	.+10     	; 0xbc4 <main+0xc0>
 		{
 			TCCR0A ^= (1<<COM0B1);						   //Cambio de estado la salida PWM OC0B (PD5)
- bb2:	84 b5       	in	r24, 0x24	; 36
- bb4:	81 27       	eor	r24, r17
- bb6:	84 bd       	out	0x24, r24	; 36
+ bba:	84 b5       	in	r24, 0x24	; 36
+ bbc:	81 27       	eor	r24, r17
+ bbe:	84 bd       	out	0x24, r24	; 36
 			onoff();
- bb8:	0e 94 41 03 	call	0x682	; 0x682 <onoff>
+ bc0:	0e 94 45 03 	call	0x68a	; 0x68a <onoff>
 		}
 	
 		if ((modo==1)&&(estado==1))							//Pregunto por "MODO REMOTO" y si estado es "O"
- bbc:	80 91 71 01 	lds	r24, 0x0171
- bc0:	90 91 72 01 	lds	r25, 0x0172
- bc4:	01 97       	sbiw	r24, 0x01	; 1
- bc6:	79 f4       	brne	.+30     	; 0xbe6 <main+0xea>
- bc8:	80 91 64 01 	lds	r24, 0x0164
- bcc:	90 91 65 01 	lds	r25, 0x0165
- bd0:	01 97       	sbiw	r24, 0x01	; 1
- bd2:	49 f4       	brne	.+18     	; 0xbe6 <main+0xea>
+ bc4:	80 91 71 01 	lds	r24, 0x0171
+ bc8:	90 91 72 01 	lds	r25, 0x0172
+ bcc:	01 97       	sbiw	r24, 0x01	; 1
+ bce:	79 f4       	brne	.+30     	; 0xbee <main+0xea>
+ bd0:	80 91 64 01 	lds	r24, 0x0164
+ bd4:	90 91 65 01 	lds	r25, 0x0165
+ bd8:	01 97       	sbiw	r24, 0x01	; 1
+ bda:	49 f4       	brne	.+18     	; 0xbee <main+0xea>
 		{
 			TCCR0A ^= (1<<COM0B1);							//Cambio de estado la salida PWM OC0B (PD5)
- bd4:	84 b5       	in	r24, 0x24	; 36
- bd6:	81 27       	eor	r24, r17
- bd8:	84 bd       	out	0x24, r24	; 36
+ bdc:	84 b5       	in	r24, 0x24	; 36
+ bde:	81 27       	eor	r24, r17
+ be0:	84 bd       	out	0x24, r24	; 36
 			estado=0;										//Cambio el estado para que no vuelva a ingresar
- bda:	10 92 65 01 	sts	0x0165, r1
- bde:	10 92 64 01 	sts	0x0164, r1
+ be2:	10 92 65 01 	sts	0x0165, r1
+ be6:	10 92 64 01 	sts	0x0164, r1
 			onoff();										//Llama a funcion para mostrar estado por puerto serial y OFF en el MAX
- be2:	0e 94 41 03 	call	0x682	; 0x682 <onoff>
+ bea:	0e 94 45 03 	call	0x68a	; 0x68a <onoff>
 		}
 
 	CONTROL();
- be6:	0e 94 53 00 	call	0xa6	; 0xa6 <CONTROL>
+ bee:	0e 94 53 00 	call	0xa6	; 0xa6 <CONTROL>
 		
 		if (numero==5)
- bea:	80 91 52 01 	lds	r24, 0x0152
- bee:	90 91 53 01 	lds	r25, 0x0153
- bf2:	05 97       	sbiw	r24, 0x05	; 5
- bf4:	31 f4       	brne	.+12     	; 0xc02 <main+0x106>
+ bf2:	80 91 52 01 	lds	r24, 0x0152
+ bf6:	90 91 53 01 	lds	r25, 0x0153
+ bfa:	05 97       	sbiw	r24, 0x05	; 5
+ bfc:	31 f4       	brne	.+12     	; 0xc0a <main+0x106>
 		{	
 			Mostrar_Tensiones();
- bf6:	0e 94 e5 03 	call	0x7ca	; 0x7ca <Mostrar_Tensiones>
+ bfe:	0e 94 e9 03 	call	0x7d2	; 0x7d2 <Mostrar_Tensiones>
 			numero=0;				
- bfa:	10 92 53 01 	sts	0x0153, r1
- bfe:	10 92 52 01 	sts	0x0152, r1
+ c02:	10 92 53 01 	sts	0x0153, r1
+ c06:	10 92 52 01 	sts	0x0152, r1
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- c02:	2f e7       	ldi	r18, 0x7F	; 127
- c04:	88 e3       	ldi	r24, 0x38	; 56
- c06:	91 e0       	ldi	r25, 0x01	; 1
- c08:	21 50       	subi	r18, 0x01	; 1
- c0a:	80 40       	sbci	r24, 0x00	; 0
- c0c:	90 40       	sbci	r25, 0x00	; 0
- c0e:	e1 f7       	brne	.-8      	; 0xc08 <main+0x10c>
- c10:	00 c0       	rjmp	.+0      	; 0xc12 <main+0x116>
- c12:	00 00       	nop
- c14:	b3 cf       	rjmp	.-154    	; 0xb7c <main+0x80>
+ c0a:	2f e7       	ldi	r18, 0x7F	; 127
+ c0c:	88 e3       	ldi	r24, 0x38	; 56
+ c0e:	91 e0       	ldi	r25, 0x01	; 1
+ c10:	21 50       	subi	r18, 0x01	; 1
+ c12:	80 40       	sbci	r24, 0x00	; 0
+ c14:	90 40       	sbci	r25, 0x00	; 0
+ c16:	e1 f7       	brne	.-8      	; 0xc10 <main+0x10c>
+ c18:	00 c0       	rjmp	.+0      	; 0xc1a <main+0x116>
+ c1a:	00 00       	nop
+ c1c:	b3 cf       	rjmp	.-154    	; 0xb84 <main+0x80>
 
-00000c16 <__divmodhi4>:
- c16:	97 fb       	bst	r25, 7
- c18:	07 2e       	mov	r0, r23
- c1a:	16 f4       	brtc	.+4      	; 0xc20 <__divmodhi4+0xa>
- c1c:	00 94       	com	r0
- c1e:	07 d0       	rcall	.+14     	; 0xc2e <__divmodhi4_neg1>
- c20:	77 fd       	sbrc	r23, 7
- c22:	09 d0       	rcall	.+18     	; 0xc36 <__divmodhi4_neg2>
- c24:	0e 94 49 06 	call	0xc92	; 0xc92 <__udivmodhi4>
- c28:	07 fc       	sbrc	r0, 7
- c2a:	05 d0       	rcall	.+10     	; 0xc36 <__divmodhi4_neg2>
- c2c:	3e f4       	brtc	.+14     	; 0xc3c <__divmodhi4_exit>
+00000c1e <__divmodhi4>:
+ c1e:	97 fb       	bst	r25, 7
+ c20:	07 2e       	mov	r0, r23
+ c22:	16 f4       	brtc	.+4      	; 0xc28 <__divmodhi4+0xa>
+ c24:	00 94       	com	r0
+ c26:	07 d0       	rcall	.+14     	; 0xc36 <__divmodhi4_neg1>
+ c28:	77 fd       	sbrc	r23, 7
+ c2a:	09 d0       	rcall	.+18     	; 0xc3e <__divmodhi4_neg2>
+ c2c:	0e 94 4d 06 	call	0xc9a	; 0xc9a <__udivmodhi4>
+ c30:	07 fc       	sbrc	r0, 7
+ c32:	05 d0       	rcall	.+10     	; 0xc3e <__divmodhi4_neg2>
+ c34:	3e f4       	brtc	.+14     	; 0xc44 <__divmodhi4_exit>
 
-00000c2e <__divmodhi4_neg1>:
- c2e:	90 95       	com	r25
- c30:	81 95       	neg	r24
- c32:	9f 4f       	sbci	r25, 0xFF	; 255
- c34:	08 95       	ret
-
-00000c36 <__divmodhi4_neg2>:
- c36:	70 95       	com	r23
- c38:	61 95       	neg	r22
- c3a:	7f 4f       	sbci	r23, 0xFF	; 255
-
-00000c3c <__divmodhi4_exit>:
+00000c36 <__divmodhi4_neg1>:
+ c36:	90 95       	com	r25
+ c38:	81 95       	neg	r24
+ c3a:	9f 4f       	sbci	r25, 0xFF	; 255
  c3c:	08 95       	ret
 
-00000c3e <__divmodsi4>:
- c3e:	05 2e       	mov	r0, r21
- c40:	97 fb       	bst	r25, 7
- c42:	1e f4       	brtc	.+6      	; 0xc4a <__divmodsi4+0xc>
- c44:	00 94       	com	r0
- c46:	0e 94 36 06 	call	0xc6c	; 0xc6c <__negsi2>
- c4a:	57 fd       	sbrc	r21, 7
- c4c:	07 d0       	rcall	.+14     	; 0xc5c <__divmodsi4_neg2>
- c4e:	0e 94 5d 06 	call	0xcba	; 0xcba <__udivmodsi4>
- c52:	07 fc       	sbrc	r0, 7
- c54:	03 d0       	rcall	.+6      	; 0xc5c <__divmodsi4_neg2>
- c56:	4e f4       	brtc	.+18     	; 0xc6a <__divmodsi4_exit>
- c58:	0c 94 36 06 	jmp	0xc6c	; 0xc6c <__negsi2>
+00000c3e <__divmodhi4_neg2>:
+ c3e:	70 95       	com	r23
+ c40:	61 95       	neg	r22
+ c42:	7f 4f       	sbci	r23, 0xFF	; 255
 
-00000c5c <__divmodsi4_neg2>:
- c5c:	50 95       	com	r21
- c5e:	40 95       	com	r20
- c60:	30 95       	com	r19
- c62:	21 95       	neg	r18
- c64:	3f 4f       	sbci	r19, 0xFF	; 255
- c66:	4f 4f       	sbci	r20, 0xFF	; 255
- c68:	5f 4f       	sbci	r21, 0xFF	; 255
+00000c44 <__divmodhi4_exit>:
+ c44:	08 95       	ret
 
-00000c6a <__divmodsi4_exit>:
- c6a:	08 95       	ret
+00000c46 <__divmodsi4>:
+ c46:	05 2e       	mov	r0, r21
+ c48:	97 fb       	bst	r25, 7
+ c4a:	1e f4       	brtc	.+6      	; 0xc52 <__divmodsi4+0xc>
+ c4c:	00 94       	com	r0
+ c4e:	0e 94 3a 06 	call	0xc74	; 0xc74 <__negsi2>
+ c52:	57 fd       	sbrc	r21, 7
+ c54:	07 d0       	rcall	.+14     	; 0xc64 <__divmodsi4_neg2>
+ c56:	0e 94 61 06 	call	0xcc2	; 0xcc2 <__udivmodsi4>
+ c5a:	07 fc       	sbrc	r0, 7
+ c5c:	03 d0       	rcall	.+6      	; 0xc64 <__divmodsi4_neg2>
+ c5e:	4e f4       	brtc	.+18     	; 0xc72 <__divmodsi4_exit>
+ c60:	0c 94 3a 06 	jmp	0xc74	; 0xc74 <__negsi2>
 
-00000c6c <__negsi2>:
- c6c:	90 95       	com	r25
- c6e:	80 95       	com	r24
- c70:	70 95       	com	r23
- c72:	61 95       	neg	r22
- c74:	7f 4f       	sbci	r23, 0xFF	; 255
- c76:	8f 4f       	sbci	r24, 0xFF	; 255
- c78:	9f 4f       	sbci	r25, 0xFF	; 255
- c7a:	08 95       	ret
+00000c64 <__divmodsi4_neg2>:
+ c64:	50 95       	com	r21
+ c66:	40 95       	com	r20
+ c68:	30 95       	com	r19
+ c6a:	21 95       	neg	r18
+ c6c:	3f 4f       	sbci	r19, 0xFF	; 255
+ c6e:	4f 4f       	sbci	r20, 0xFF	; 255
+ c70:	5f 4f       	sbci	r21, 0xFF	; 255
 
-00000c7c <__muluhisi3>:
- c7c:	0e 94 7f 06 	call	0xcfe	; 0xcfe <__umulhisi3>
- c80:	a5 9f       	mul	r26, r21
- c82:	90 0d       	add	r25, r0
- c84:	b4 9f       	mul	r27, r20
- c86:	90 0d       	add	r25, r0
- c88:	a4 9f       	mul	r26, r20
- c8a:	80 0d       	add	r24, r0
- c8c:	91 1d       	adc	r25, r1
- c8e:	11 24       	eor	r1, r1
- c90:	08 95       	ret
+00000c72 <__divmodsi4_exit>:
+ c72:	08 95       	ret
 
-00000c92 <__udivmodhi4>:
- c92:	aa 1b       	sub	r26, r26
- c94:	bb 1b       	sub	r27, r27
- c96:	51 e1       	ldi	r21, 0x11	; 17
- c98:	07 c0       	rjmp	.+14     	; 0xca8 <__udivmodhi4_ep>
+00000c74 <__negsi2>:
+ c74:	90 95       	com	r25
+ c76:	80 95       	com	r24
+ c78:	70 95       	com	r23
+ c7a:	61 95       	neg	r22
+ c7c:	7f 4f       	sbci	r23, 0xFF	; 255
+ c7e:	8f 4f       	sbci	r24, 0xFF	; 255
+ c80:	9f 4f       	sbci	r25, 0xFF	; 255
+ c82:	08 95       	ret
 
-00000c9a <__udivmodhi4_loop>:
- c9a:	aa 1f       	adc	r26, r26
- c9c:	bb 1f       	adc	r27, r27
- c9e:	a6 17       	cp	r26, r22
- ca0:	b7 07       	cpc	r27, r23
- ca2:	10 f0       	brcs	.+4      	; 0xca8 <__udivmodhi4_ep>
- ca4:	a6 1b       	sub	r26, r22
- ca6:	b7 0b       	sbc	r27, r23
+00000c84 <__muluhisi3>:
+ c84:	0e 94 83 06 	call	0xd06	; 0xd06 <__umulhisi3>
+ c88:	a5 9f       	mul	r26, r21
+ c8a:	90 0d       	add	r25, r0
+ c8c:	b4 9f       	mul	r27, r20
+ c8e:	90 0d       	add	r25, r0
+ c90:	a4 9f       	mul	r26, r20
+ c92:	80 0d       	add	r24, r0
+ c94:	91 1d       	adc	r25, r1
+ c96:	11 24       	eor	r1, r1
+ c98:	08 95       	ret
 
-00000ca8 <__udivmodhi4_ep>:
- ca8:	88 1f       	adc	r24, r24
- caa:	99 1f       	adc	r25, r25
- cac:	5a 95       	dec	r21
- cae:	a9 f7       	brne	.-22     	; 0xc9a <__udivmodhi4_loop>
- cb0:	80 95       	com	r24
- cb2:	90 95       	com	r25
- cb4:	bc 01       	movw	r22, r24
- cb6:	cd 01       	movw	r24, r26
- cb8:	08 95       	ret
+00000c9a <__udivmodhi4>:
+ c9a:	aa 1b       	sub	r26, r26
+ c9c:	bb 1b       	sub	r27, r27
+ c9e:	51 e1       	ldi	r21, 0x11	; 17
+ ca0:	07 c0       	rjmp	.+14     	; 0xcb0 <__udivmodhi4_ep>
 
-00000cba <__udivmodsi4>:
- cba:	a1 e2       	ldi	r26, 0x21	; 33
- cbc:	1a 2e       	mov	r1, r26
- cbe:	aa 1b       	sub	r26, r26
- cc0:	bb 1b       	sub	r27, r27
- cc2:	fd 01       	movw	r30, r26
- cc4:	0d c0       	rjmp	.+26     	; 0xce0 <__udivmodsi4_ep>
+00000ca2 <__udivmodhi4_loop>:
+ ca2:	aa 1f       	adc	r26, r26
+ ca4:	bb 1f       	adc	r27, r27
+ ca6:	a6 17       	cp	r26, r22
+ ca8:	b7 07       	cpc	r27, r23
+ caa:	10 f0       	brcs	.+4      	; 0xcb0 <__udivmodhi4_ep>
+ cac:	a6 1b       	sub	r26, r22
+ cae:	b7 0b       	sbc	r27, r23
 
-00000cc6 <__udivmodsi4_loop>:
- cc6:	aa 1f       	adc	r26, r26
- cc8:	bb 1f       	adc	r27, r27
- cca:	ee 1f       	adc	r30, r30
- ccc:	ff 1f       	adc	r31, r31
- cce:	a2 17       	cp	r26, r18
- cd0:	b3 07       	cpc	r27, r19
- cd2:	e4 07       	cpc	r30, r20
- cd4:	f5 07       	cpc	r31, r21
- cd6:	20 f0       	brcs	.+8      	; 0xce0 <__udivmodsi4_ep>
- cd8:	a2 1b       	sub	r26, r18
- cda:	b3 0b       	sbc	r27, r19
- cdc:	e4 0b       	sbc	r30, r20
- cde:	f5 0b       	sbc	r31, r21
+00000cb0 <__udivmodhi4_ep>:
+ cb0:	88 1f       	adc	r24, r24
+ cb2:	99 1f       	adc	r25, r25
+ cb4:	5a 95       	dec	r21
+ cb6:	a9 f7       	brne	.-22     	; 0xca2 <__udivmodhi4_loop>
+ cb8:	80 95       	com	r24
+ cba:	90 95       	com	r25
+ cbc:	bc 01       	movw	r22, r24
+ cbe:	cd 01       	movw	r24, r26
+ cc0:	08 95       	ret
 
-00000ce0 <__udivmodsi4_ep>:
- ce0:	66 1f       	adc	r22, r22
- ce2:	77 1f       	adc	r23, r23
- ce4:	88 1f       	adc	r24, r24
- ce6:	99 1f       	adc	r25, r25
- ce8:	1a 94       	dec	r1
- cea:	69 f7       	brne	.-38     	; 0xcc6 <__udivmodsi4_loop>
- cec:	60 95       	com	r22
- cee:	70 95       	com	r23
- cf0:	80 95       	com	r24
- cf2:	90 95       	com	r25
- cf4:	9b 01       	movw	r18, r22
- cf6:	ac 01       	movw	r20, r24
- cf8:	bd 01       	movw	r22, r26
- cfa:	cf 01       	movw	r24, r30
- cfc:	08 95       	ret
+00000cc2 <__udivmodsi4>:
+ cc2:	a1 e2       	ldi	r26, 0x21	; 33
+ cc4:	1a 2e       	mov	r1, r26
+ cc6:	aa 1b       	sub	r26, r26
+ cc8:	bb 1b       	sub	r27, r27
+ cca:	fd 01       	movw	r30, r26
+ ccc:	0d c0       	rjmp	.+26     	; 0xce8 <__udivmodsi4_ep>
 
-00000cfe <__umulhisi3>:
- cfe:	a2 9f       	mul	r26, r18
- d00:	b0 01       	movw	r22, r0
- d02:	b3 9f       	mul	r27, r19
- d04:	c0 01       	movw	r24, r0
- d06:	a3 9f       	mul	r26, r19
- d08:	70 0d       	add	r23, r0
- d0a:	81 1d       	adc	r24, r1
- d0c:	11 24       	eor	r1, r1
- d0e:	91 1d       	adc	r25, r1
- d10:	b2 9f       	mul	r27, r18
- d12:	70 0d       	add	r23, r0
- d14:	81 1d       	adc	r24, r1
- d16:	11 24       	eor	r1, r1
- d18:	91 1d       	adc	r25, r1
- d1a:	08 95       	ret
+00000cce <__udivmodsi4_loop>:
+ cce:	aa 1f       	adc	r26, r26
+ cd0:	bb 1f       	adc	r27, r27
+ cd2:	ee 1f       	adc	r30, r30
+ cd4:	ff 1f       	adc	r31, r31
+ cd6:	a2 17       	cp	r26, r18
+ cd8:	b3 07       	cpc	r27, r19
+ cda:	e4 07       	cpc	r30, r20
+ cdc:	f5 07       	cpc	r31, r21
+ cde:	20 f0       	brcs	.+8      	; 0xce8 <__udivmodsi4_ep>
+ ce0:	a2 1b       	sub	r26, r18
+ ce2:	b3 0b       	sbc	r27, r19
+ ce4:	e4 0b       	sbc	r30, r20
+ ce6:	f5 0b       	sbc	r31, r21
 
-00000d1c <_exit>:
- d1c:	f8 94       	cli
+00000ce8 <__udivmodsi4_ep>:
+ ce8:	66 1f       	adc	r22, r22
+ cea:	77 1f       	adc	r23, r23
+ cec:	88 1f       	adc	r24, r24
+ cee:	99 1f       	adc	r25, r25
+ cf0:	1a 94       	dec	r1
+ cf2:	69 f7       	brne	.-38     	; 0xcce <__udivmodsi4_loop>
+ cf4:	60 95       	com	r22
+ cf6:	70 95       	com	r23
+ cf8:	80 95       	com	r24
+ cfa:	90 95       	com	r25
+ cfc:	9b 01       	movw	r18, r22
+ cfe:	ac 01       	movw	r20, r24
+ d00:	bd 01       	movw	r22, r26
+ d02:	cf 01       	movw	r24, r30
+ d04:	08 95       	ret
 
-00000d1e <__stop_program>:
- d1e:	ff cf       	rjmp	.-2      	; 0xd1e <__stop_program>
+00000d06 <__umulhisi3>:
+ d06:	a2 9f       	mul	r26, r18
+ d08:	b0 01       	movw	r22, r0
+ d0a:	b3 9f       	mul	r27, r19
+ d0c:	c0 01       	movw	r24, r0
+ d0e:	a3 9f       	mul	r26, r19
+ d10:	70 0d       	add	r23, r0
+ d12:	81 1d       	adc	r24, r1
+ d14:	11 24       	eor	r1, r1
+ d16:	91 1d       	adc	r25, r1
+ d18:	b2 9f       	mul	r27, r18
+ d1a:	70 0d       	add	r23, r0
+ d1c:	81 1d       	adc	r24, r1
+ d1e:	11 24       	eor	r1, r1
+ d20:	91 1d       	adc	r25, r1
+ d22:	08 95       	ret
+
+00000d24 <_exit>:
+ d24:	f8 94       	cli
+
+00000d26 <__stop_program>:
+ d26:	ff cf       	rjmp	.-2      	; 0xd26 <__stop_program>
